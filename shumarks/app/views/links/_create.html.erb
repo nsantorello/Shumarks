@@ -1,0 +1,17 @@
+<h2>Add New Link</h2>
+<%= error_messages_for :link %>
+<% form_for :link, :url => user_create_link_path do |f| %>
+  <p>
+    <%= f.label :name, "Name" %>
+    <br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :url, "URL" %>
+    <br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.submit "Add Link" %>
+  </p>
+<% end %>

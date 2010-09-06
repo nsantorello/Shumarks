@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<%= render 'layouts/header.html' %>
+
+<body class="renderLink">
+  <table id="viewLink">
+    <tr>
+      <td>
+        <%= link_to('Back to Queue', user_queue_path) %> |
+        <%= link_to('Next Link &gt;', @next_link) %> |
+        <%= @link.name %>
+      </td>
+    </tr>
+    <tr>
+      <td id="renderingArea">
+          <iframe src="<%= @link.url %>" id="viewLinkIFrame" scrolling="auto" frameborder="0" allowtransparency="true"/>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
