@@ -55,7 +55,8 @@ class UsersController < ApplicationController
   # Get salt for remote request
   def remote_get_salt
     @user = login_from_username_and_password
-    render :xml => @user.salt 
+    
+    render :text => @user.salt 
   end
   
   # Get the queue for remote request
@@ -65,15 +66,27 @@ class UsersController < ApplicationController
   end
   
   def remote_create
+    @user = login_from_salt
     
+    url = params[:url]
+    name = params[:name]
+    if url and name
+      @link = @user.links.build({:url => url, :name => name, :is_viewed => false})
+      @link.save()
+    end
+      
+    if @link.errors.empty?()
+      render :text => 'Success'
+    else
+      render :text => "Failed"
+    end
   end
   
   protected
   def set_user
     @user = current_user
     if @user
-      @links = @user.links.find_all_by_is_viewed(false)
-      @past_links = @user.links.find_all_by_is_viewed(true)
+      @links = @user.links.find_all
     end
   end
   

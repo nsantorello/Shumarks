@@ -52,9 +52,9 @@ ActionController::Routing::Routes.draw do |map|
   # User pages
   map.user_queue '/queue', :controller => 'users', :action => 'queue'
   map.edit_user '/account', :controller => 'users', :action => 'edit'
-  map.remote_login '/remote-login', :controller => 'users', :action => 'remote_get_salt'
-  map.remote_login '/remote-queue', :controller => 'users', :action => 'remote_get_queue'
-  map.remote_create '/remote-create', :controller => 'users', :action => 'remote_create'
+  map.remote_login '/remote-login/', :controller => 'users', :action => 'remote_get_salt'
+  map.remote_queue '/remote-queue/', :controller => 'users', :action => 'remote_get_queue'
+  map.remote_create '/remote-create/', :controller => 'users', :action => 'remote_create'
   
   map.create_user '/user',
     :controller => 'users', 

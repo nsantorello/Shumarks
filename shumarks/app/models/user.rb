@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   
   has_many :links
+  has_many :users
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
