@@ -70,8 +70,9 @@ class UsersController < ApplicationController
     
     url = params[:url]
     name = params[:name]
+    blurb = params[:b]
     if url and name
-      @link = @user.links.build({:url => url, :name => name, :is_viewed => false})
+      @link = @user.links.build({:url => url, :name => name, :is_viewed => false, :blurb => blurb})
       @link.save()
     end
       

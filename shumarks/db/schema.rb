@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100128043206) do
+ActiveRecord::Schema.define(:version => 20100911194803) do
 
   create_table "links", :force => true do |t|
     t.integer  "user_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20100128043206) do
     t.datetime "updated_at"
     t.string   "name"
     t.boolean  "is_viewed"
+    t.string   "blurb"
   end
 
   create_table "users", :force => true do |t|
