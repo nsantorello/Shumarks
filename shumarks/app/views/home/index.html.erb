@@ -4,7 +4,7 @@
 
 <% if logged_in? then -%>
 <div class="rightBar">
-	<a href="javascript:b='http://<%=request.host%>:<%=request.port%>/remote-create';key='<%=current_user.salt%>';location.href=b+'?s='+key+'&url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title);">Add Shu Print</a> 
+	<a href="javascript:var%20desc=document.getElementsByName('description')[0].getAttribute('content');b='http://<%=request.host%>:<%=request.port%>/remote-create';key='<%=current_user.salt%>';location.href=b+'?s='+key+'&url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title)+'&b='+encodeURIComponent(desc);">Add Shu Print</a> 
 	<br /> 
 </div>
 <%end -%>

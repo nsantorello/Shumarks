@@ -4,10 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <%= render 'layouts/header.html' %>
 <body>
-
 <div id="header">
-  <div class="left">
-  </div>
+  <div id="logo" class="left">Shu Marks Logo Goes Here</div>
   <div class="right">
         <% if logged_in? then -%>
 		  <%= current_user.login %> |
@@ -23,8 +21,8 @@
 </div>
 
 <div id="notifications">
-  <p style="color: green"><%= flash[:notice] %></p>
-  <p style="color: red"><%= flash[:error] %></p>
+  <% if flash[:notice] then %><div class="ui-state-highlight ui-corner-all"><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span><%= flash[:notice] %></div><% end %>
+  <% if flash[:error] then %><div class="ui-state-error ui-state-error ui-corner-all"><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span><%= flash[:error] %></div><% end %>
 </div>
 
 <div id="body">
@@ -64,6 +62,5 @@
     <%= yield %>
   </div>
 </div>
-
 </body>
 </html>
