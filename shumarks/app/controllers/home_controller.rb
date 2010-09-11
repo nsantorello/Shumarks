@@ -1,6 +1,5 @@
 # This controller handles the login/logout function of the site.  
 class HomeController < ApplicationController
-  before_filter :login_required, :only => [:view_link]
   def index
   end
   
@@ -12,10 +11,17 @@ class HomeController < ApplicationController
     @page_title = "Browser Addons"
   end
   
+  def queue
+    @user = User.find_by_id(params[:id])
+    @links = @user.links.find_all()
+    @page_title = "#{@user.login}"
+  end
+  
   def view_link
-    if @link = current_user.links.find_by_id(params[:id])
+    if @link = Link.find_by_id(params[:id])
       @link.update_attribute(:is_viewed, true)
-      @next_link = current_user.get_next_link()
+      @user = User.find_by_id(@link.user_id)
+      @next_link = @user.get_next_link()
       
       render 'view_link', :layout => false
     else

@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     @user.password = params[:user][:password]
     @user.password = params[:user][:passord_confirmation]
     if @user.update
-      flash[:notice] = 'User was successfully updated.'
+      flash[:notice] = "#{@user.login} was successfully updated."
       redirect_to user_queue_path                               
     else
       render :action => 'edit'
@@ -75,11 +75,7 @@ class UsersController < ApplicationController
       @link.save()
     end
       
-    if @link.errors.empty?()
-      render :text => 'Success'
-    else
-      render :text => "Failed"
-    end
+    redirect_to url
   end
   
   protected

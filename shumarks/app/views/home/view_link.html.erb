@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <%= render 'layouts/header.html' %>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <body class="renderLink">
   <table id="viewLink">
@@ -10,8 +10,9 @@
       <td>
         <%= link_to('Back to Queue', user_queue_path) %> |
         <%= link_to('Next Link &gt;', @next_link) %> |
-        <%= @link.name %>
-      </td>
+        <%= @link.name %> | 
+		Viewing <%= @user.login %>'s Shumarks
+	  </td>
     </tr>
     <tr>
       <td id="renderingArea">
