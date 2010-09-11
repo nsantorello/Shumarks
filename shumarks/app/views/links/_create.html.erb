@@ -1,5 +1,7 @@
-<h2>Add New Link</h2>
-<%= error_messages_for :link %>
+<div id="createlink" class="ui-widget">
+<h2 class="ui-widget-header ui-state-default ui-state-active ui-corner-top pad">Add New Link</h2>
+<% if error_messages_for then %><div class=""><%= error_messages_for :link %></div><% end %>
+<div id="queue" class="ui-widget">
 <% form_for :link, :url => user_create_link_path do |f| %>
   <p>
     <%= f.label :name, "Name" %>
@@ -15,3 +17,5 @@
     <%= f.submit "Add Link" %>
   </p>
 <% end %>
+</div>
+</div>

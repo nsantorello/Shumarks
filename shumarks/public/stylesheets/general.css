@@ -47,6 +47,8 @@ a.link { color: #999;}
 .linksTable td.delete {text-align: center; }
 .linksTable td#pastLinks {text-align: center; font-weight:bold; }
 
+.pad{padding:5px;}
+
 body.renderLink {margin:0; width: 100%; height: 100%; overflow:hidden;}
 
 #viewLink {width:100%; height:100%}
@@ -54,3 +56,4 @@ body.renderLink {margin:0; width: 100%; height: 100%; overflow:hidden;}
 #viewLink td#renderingArea {height:100%}
 #viewLinkIFrame {width:100%; height:100%}
 
+#header{min-height:50px;border-bottom:1px solid #e3e3e3;}
