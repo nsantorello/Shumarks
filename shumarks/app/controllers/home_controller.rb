@@ -43,8 +43,7 @@ class HomeController < ApplicationController
     
     print @is_following
 
-    @links = @user.links.find_all().sort_by {|mark| mark.created_at}
-	  @links = @links.reverse()
+    @links = @user.links.all(:order => 'created_at DESC')
 	
     @page_title = "#{@user.login}"
     @header_text = "#{@user.login}'s Shumarks"
