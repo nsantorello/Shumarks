@@ -9,13 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100912015217) do
+ActiveRecord::Schema.define(:version => 20100912073919) do
 
-  create_table "follows", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "follow_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "follows", :id => true, :force => true do |t|
+    t.integer "follower_id", :null => false
+    t.integer "follow_id",   :null => false
   end
 
   create_table "links", :force => true do |t|

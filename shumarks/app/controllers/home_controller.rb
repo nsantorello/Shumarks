@@ -2,6 +2,7 @@
 class HomeController < ApplicationController
   def index
     if logged_in?
+      @links = Link.all(['user_id in ?', current_user.user_ids], :order => 'created_at DESC');
       render "index_loggedin"
     else
       render "index_loggedout"

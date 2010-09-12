@@ -1,59 +1,17 @@
-<h1>
-  Welcome <% if logged_in? then -%><%= current_user.login %><% else -%>to Shumarks<%end -%>! 
-</h1>
-
-<% if logged_in? then -%>
-<div class="rightBar">
-	<a href="javascript:(function(){var%20desc=document.getElementsByName('description')[0];if(desc){desc=desc.getAttribute('content');}else{desc='';};b='http://<%=request.host%>:<%=request.port%>/remote-create';key='<%=current_user.salt%>';location.href=b+'?s='+key+'&url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title)+'&b='+encodeURIComponent(desc);})()">Shumark it!</a> 
-	<br /> 
-</div>
-<% end -%>
-
-<div>
-  Ever come upon a link that you wish you could save for later? Bookmarks were designed for sites you frequent. Most of 
-  the time, you will only look at these links once and never had to worry about it. Introducing Shumarks! Our goal is to
-  simplify this process. Imagine: just right-click a link, click "Shumark it!", now you can access the link from any
-  computer, and once you've looked at the link, it goes away from your active queue.
+<div style="float:left; width:80%;">
+	<%= render '/links/index' %>
 </div>
 
-<div><span class="sm-twitter"></span><div id="login_with_twitter"></div></div><div><span class="sm-facebook"></span>Login with Facebook</div>
+<h2></h2>
+<div style="float:right; width:20%; text-align:right;">
+	<h2>Following <%= current_user.users.length %> people</h2>
+	<% for following in current_user.users -%>
+		<div>
+			<%= link_to "#{following.login} (#{following.links.length})", queue_path(following.login)%>
+		</div>
+	<% end -%>
+</div>
 
-<div id="dlgLogin" style="display:none;"></div>
+<div style="clear:both"></div>
 
-<script type="text/javascript">
-	// increase the default animation speed to exaggerate the effect
-	$.fx.speeds._default = 1000;
-	$(function() {
-		$('#dlgLogin').dialog({
-			autoOpen: false,
-			show: 'blind',
-			hide: 'explode'
-		});
-		
-		$('#login').click(function() {
-            $.get('<%= login_path %>', function(data) {
-            $('#dlgLogin').html(data);
-        });
-           $('#dlgLogin').dialog('open');
-			//return false;
-		});
-	});
-	</script>
-<script type="text/javascript">
-	function parseResponse(data)
-{
-  if (!data[0])
-{
-	$("#login_with_twitter").html('<a href="http://localhost:3001/login">Login with Twitter</a>');
-}
-else
-{
-	$("#login_with_twitter").html('<img alt="Default_profile_6_normal" height="24" src="' + data[1] + '" width="24" /> Logged in as <strong>@' + data[2] + '</strong>. <a href="http://localhost:3001/logout">Log out</a> ');
-
-}
-}
-
-	</script>
- <script type="text/javascript" 
-         src="http://localhost:3001/account">
- </script>
+<div><span class="sm-twitter"></span>Login with Twitter</div><div><span class="sm-facebook"></span>Login with Facebook</div>

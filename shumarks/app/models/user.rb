@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :links
   has_and_belongs_to_many(:users,
     :join_table => "follows",
-    :foreign_key => "user_id",
+    :foreign_key => "follower_id",
     :association_foreign_key => "follow_id"
   )
   

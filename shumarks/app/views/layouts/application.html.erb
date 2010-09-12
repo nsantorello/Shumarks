@@ -14,9 +14,9 @@
           <div id="logo" class="left"></div>
           <div class="right">
             <% if logged_in? then -%>
-		    <%= current_user.login %> |
-            <%= link_to 'Account', edit_user_path %> |
-            <%= link_to 'Logout', logout_path %>
+		    			<%= current_user.login %> |
+            	<%= link_to 'Account', edit_user_path %> |
+            	<%= link_to 'Logout', logout_path %>
             <% end -%>
           </div>
         </div>
@@ -30,6 +30,9 @@
 	              <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
 	                <%= link_to 'My Shumarks', :controller => 'home', :action => 'queue', :user_name => current_user.login %>
 	              </td>
+								<td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
+	                <%= render '/home/bookmarklet' %>
+	              </td>
               <% end -%>
               <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
                 <%= link_to 'About', "/about" %>
@@ -37,10 +40,20 @@
             </tr>
           </table>
         </div>        
-        <div id="notifications" style="padding-bottom: 10px; padding-left:20px">
-          <% if flash[:notice] then %><div style="width:300px;">&nbsp;</div><div style="width:300px" class="ui-state-highlight ui-corner-all"><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span><%= flash[:notice] %></div><% end %>
-          <% if flash[:error] then %><div style="width:300px;">&nbsp;</div><div style="width:300px" class="ui-state-error ui-state-error ui-corner-all"><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span><%= flash[:error] %></div><% end %>
-        </div>
+        <% if flash[:notice] or flash[:error] then %>
+          <div id="notifications" style="padding-bottom: 10px; padding-left:20px">
+						<div style="width:300px;">&nbsp;</div>
+						<div style="width:300px" class="ui-state-highlight ui-corner-all">
+							<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
+							<%= flash[:notice] %>
+					</div>
+					<div style="width:300px;">&nbsp;</div>
+						<div style="width:300px" class="ui-state-error ui-state-error ui-corner-all">
+							<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span>
+							<%= flash[:error] %>
+					  </div>
+          </div>
+			  <% end %>
         <div id="content" style="padding-left:20px; padding-right:20px">
           <%= yield %>
         </div>

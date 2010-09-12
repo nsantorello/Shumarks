@@ -56,12 +56,14 @@ class UsersController < ApplicationController
   
   # Follow the user id give. You must be logged in
   def follow
-    current_user.users.add(@user)
+    @user = User.find_by_id(params[:id])
+    current_user.users << @user
     current_user.save()
     
     if current_user.errors.empty?
-      
+      flash[:notice] = "I WIN MOTHERFUCKERS"
     else
+      flash[:error] = "fml"
     end
     
   end
