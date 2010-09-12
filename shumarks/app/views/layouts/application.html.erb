@@ -4,63 +4,65 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <%= render 'layouts/header.html' %>
 <body>
-<div id="header">
-  <div id="logo" class="left">Shu Marks Logo Goes Here</div>
-  <div class="right">
+  <div id="container">
+    <div id="header">
+      <div id="logo" class="left">Shu Marks Logo Goes Here</div>
+      <div class="right">
         <% if logged_in? then -%>
 		  <%= current_user.login %> |
           <%= link_to 'Account', edit_user_path %> |
           <%= link_to 'Logout', logout_path %>
         <% else -%>
-          <%= link_to 'Login', login_path %>
+        <a href="javascript:void(0);" id="login">Login</a>
         <% end -%>
-      <% if not logged_in? then -%>
-          | <%= link_to 'Sign up', signup_path %>
-      <% end -%>
-  </div>
-</div>
+        <% if not logged_in? then -%>
+        | <%= link_to 'Sign up', signup_path %>
+        <% end -%>
+      </div>
+    </div>
 
-<div id="notifications">
-  <% if flash[:notice] then %><div class="ui-state-highlight ui-corner-all"><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span><%= flash[:notice] %></div><% end %>
-  <% if flash[:error] then %><div class="ui-state-error ui-state-error ui-corner-all"><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span><%= flash[:error] %></div><% end %>
-</div>
-
-<div id="body">
-  <div id="leftNav">
-    <table>
-      <tr>
-        <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
-          <%= link_to 'Home', home_path %>
-        </td>
-      </tr>
-      <% if logged_in? then -%>
-      <tr>
-        <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
-          <%= link_to 'My Queue', user_queue_path%>
-        </td>
-      </tr>
-      <% end -%>
-      <tr>
-        <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
-          <%= link_to 'Addons', addons_path %>
-        </td>
-      </tr>
-      <tr>
-        <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
-          <%= link_to 'Home', "/" %>
-        </td>
-      </tr>
-      <tr>
-        <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
-          <%= link_to 'About', "/about" %>
-        </td>
-      </tr>
-    </table>
-  </div>
-  
-  <div id="content">
-    <%= yield %>
-  </div>
-</div>
+    <div id="notifications" class="none">
+      <% if flash[:notice] then %><div class="ui-state-highlight ui-corner-all"><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span><%= flash[:notice] %></div><% end %>
+      <% if flash[:error] then %><div class="ui-state-error ui-state-error ui-corner-all"><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span><%= flash[:error] %></div><% end %>
+    </div>
+    
+    <div id="body">
+      <div id="leftNav">
+        <table>
+          <tr>
+            <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
+              <%= link_to 'Home', home_path %>
+            </td>
+          </tr>
+          <% if logged_in? then -%>
+          <tr>
+            <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
+              <%= link_to 'My Queue', user_queue_path%>
+            </td>
+          </tr>
+          <% end -%>
+          <tr>
+            <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
+              <%= link_to 'Addons', addons_path %>
+            </td>
+          </tr>
+          <tr>
+            <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
+              <%= link_to 'Home', "/" %>
+            </td>
+          </tr>
+          <tr>
+            <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
+              <%= link_to 'About', "/about" %>
+            </td>
+          </tr>
+        </table>
+      </div>
+      
+      <div id="content">
+        <%= yield %>
+      </div>
+    </div>
+  </div><!-- close conainter -->
 </body>
 </html>

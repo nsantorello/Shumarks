@@ -17,3 +17,26 @@
 </div>
 
 <div><span class="sm-twitter"></span>Login with Twitter</div><div><span class="sm-facebook"></span>Login with Facebook</div>
+
+<div id="dlgLogin" style="display:none;"></div>
+
+<script type="text/javascript">
+	// increase the default animation speed to exaggerate the effect
+	$.fx.speeds._default = 1000;
+	$(function() {
+		$('#dlgLogin').dialog({
+			autoOpen: false,
+			show: 'blind',
+			hide: 'explode'
+		});
+		
+		$('#login').click(function() {
+            $.get('<%= login_path %>', function(data) {
+            $('#dlgLogin').html(data);
+            alert(data);          
+        });
+           $('#dlgLogin').dialog('open');
+			//return false;
+		});
+	});
+	</script>

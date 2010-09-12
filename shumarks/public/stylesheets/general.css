@@ -1,9 +1,55 @@
+/* --------------------------------------------------------------
+
+   reset.css
+   * Resets default browser CSS.
+
+-------------------------------------------------------------- */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header,
+hgroup, nav, section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, dialog, figure, footer, header,
+hgroup, nav, section {
+    display:block;
+}
+
+body {
+  line-height: 1.5;
+}
+
+/* Tables still need 'cellspacing="0"' in the markup. */
+table { border-collapse: separate; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+table, td, th { vertical-align: middle; }
+
+/* Remove possible quote marks (") from <q>, <blockquote>. */
+blockquote:before, blockquote:after, q:before, q:after { content: ""; }
+blockquote, q { quotes: "" ""; }
+
+/* Remove annoying border on linked images. */
+a img { border: none; }
+
 html {height: 100%}
-body { background-color: #fff; color: #333; }
+body {background: transparent url('/images/shumarksbg.jpg') scroll no-repeat 0 0;color: #333; }
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
+  font-size:   14px;
   line-height: 18px;
 
 }
@@ -48,6 +94,7 @@ a.link { color: #999;}
 .linksTable td#pastLinks {text-align: center; font-weight:bold; }
 
 .pad{padding:5px;}
+.none{float:none;}
 
 body.renderLink {margin:0; width: 100%; height: 100%; overflow:hidden;}
 
@@ -56,6 +103,7 @@ body.renderLink {margin:0; width: 100%; height: 100%; overflow:hidden;}
 #viewLink td#renderingArea {height:100%}
 #viewLinkIFrame {width:100%; height:100%}
 
-#header{min-height:50px;border-bottom:1px solid #e3e3e3;}
+#header{min-height:50px;border-bottom:1px solid #e3e3e3;background:#fff;padding:10px;}
+#container{background:#fff;width:960px;}
 .sm-twitter{height:44px;width:40px;background: url("/images/social-media-icons.jpg") no-repeat scroll -44px -1px transparent;display:block;}
 .sm-facebook{height:44px;width:40px;background: url("/images/social-media-icons.jpg") no-repeat scroll -4px -44px transparent;display:block;}
