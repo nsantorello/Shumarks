@@ -88,12 +88,16 @@ class UsersController < ApplicationController
       @link = @user.links.build({:url => url, :name => name, :is_viewed => false, :blurb => blurb})
       @link.save()
     end
-    
-    if @link.errors.empty?
+  end
+  
+  def remote_result
+    @user = User.find_by_id(params[:uid])
+    @link = @user.links.find_by_id(params[:lid])
+    if params[:st]
       render 'remote_create_success', :layout => false
     else
       render 'remote_create_fail'
-    end
+    end 
   end
   
   protected
