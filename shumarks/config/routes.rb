@@ -57,6 +57,8 @@ ActionController::Routing::Routes.draw do |map|
   map.remote_login '/remote-login/', :controller => 'users', :action => 'remote_get_salt'
   map.remote_queue '/remote-queue/', :controller => 'users', :action => 'remote_get_queue'
   map.remote_create '/remote-create/', :controller => 'users', :action => 'remote_create'
+  map.remote_result '/remote-result/', :controller => 'users', :action => 'result'
+  
   
   map.create_user '/user',
     :controller => 'users', 
@@ -80,7 +82,6 @@ ActionController::Routing::Routes.draw do |map|
    
   map.user_links '/user/links', :controller => 'links', :action => 'index'
   
-  map.user_create_link '/user/links/create', :controller => 'links', :action => 'create'
   map.delete_link '/user/links/delete/:id', :controller => 'links', :action => 'delete'
   map.link '/v/:id', :controller => 'home', :action => 'view_link'
   map.follow '/follow/:id', :controller => 'users', :action => 'follow'
