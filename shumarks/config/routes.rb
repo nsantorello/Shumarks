@@ -45,13 +45,14 @@ ActionController::Routing::Routes.draw do |map|
   map.about '/about', :controller => 'home', :action => 'about'
   map.addons '/addons', :controller => 'home', :action => 'addons'
   map.view_link '/view/:id', :controller => 'home', :action => 'view_link'
-  map.queue_with_id '/user/:id', :controller => 'home', :action => 'queue'
+  map.queue_id '/queue/:id', :controller => 'home', :action => 'queue'
 
   
   # API urls
   map.save '/save', :controller => 'links', :action => 'create'
   
   # User pages
+  map.user_queue '/my-shumarks', :controller => 'users', :action => 'queue'
   map.edit_user '/account', :controller => 'users', :action => 'edit'
   map.remote_login '/remote-login/', :controller => 'users', :action => 'remote_get_salt'
   map.remote_queue '/remote-queue/', :controller => 'users', :action => 'remote_get_queue'

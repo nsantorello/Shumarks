@@ -77,9 +77,9 @@ class User < ActiveRecord::Base
   # Return the queue of links for this user
   def queue_xml
     doc = Builder::XmlMarkup.new( :target => out_string = "", :indent => 2 )
-    doc.queue ("login" => self.login) {
+    doc.queue("login" => self.login) {
       self.links.each { |link| 
-        doc.link ("viewed" => link.is_viewed) {
+        doc.link("viewed" => link.is_viewed) {
           doc.id(link.id)
           doc.name(link.name)
           doc.offsite_url(link.url)

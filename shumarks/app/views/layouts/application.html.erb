@@ -34,7 +34,7 @@
               </td>
               <% if logged_in? then -%>
 	              <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
-	                <%= link_to 'My Shumarks', :controller => 'home', :action => 'queue', :user_name => current_user.login %>
+	                <%= link_to 'My Shumarks', user_queue_path%>
 	              </td>
               <% end -%>
               <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
