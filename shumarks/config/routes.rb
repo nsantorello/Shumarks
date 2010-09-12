@@ -85,6 +85,7 @@ ActionController::Routing::Routes.draw do |map|
   map.delete_link '/user/links/delete/:id', :controller => 'links', :action => 'delete'
   map.link '/v/:id', :controller => 'home', :action => 'view_link'
   map.follow '/follow/:id', :controller => 'users', :action => 'follow'
+  map.unfollow '/unfollow/:id', :controller => 'users', :action => 'unfollow'
   
   map.queue '/:user_name', :controller => 'home', :action => 'queue'
 

@@ -33,7 +33,7 @@
 	
 					<% if logged_in? then -%>
 						<span class="right">
-	          	Drag this into your bookmarkd bar -&gt; <%= render '/home/bookmarklet' %>
+	          	Drag your Shumarklet into your bookmark bar -&gt; <%= render '/home/bookmarklet' %>
 						</span>
 					<% end -%>
         </div>        
@@ -43,7 +43,7 @@
 						<h1><%= @header_text %></h1>
 					<% end %>
 					<% if flash[:notice] or flash[:error] then %>
-	          <div id="notifications" style="padding-bottom: 10px; padding-left:20px">
+	          <div id="notifications" style="padding-bottom: 10px;">
 							<% if flash[:notice] then %>
 								<div style="width:300px" class="ui-state-highlight ui-corner-all">
 									<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>

@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     @user.password = params[:user][:passord_confirmation]
     if @user.update
       flash[:notice] = "#{@user.login} was successfully updated."
-      redirect_to user_queue_path                               
+      redirect_to user_queue_path()                               
     else
       render :action => 'edit'
     end
@@ -65,10 +65,14 @@ class UsersController < ApplicationController
     
     if current_user.errors.empty?
       flash[:notice] = "You are now following #{@user.login}"
+      redirect_to home_path()
     else
-      flash[:error] = "fml"
+      render queue_path(@user.login)
     end
-    
+  end
+  
+  def unfollow
+    redirect_to home_path()
   end
   
   # Get salt for remote request

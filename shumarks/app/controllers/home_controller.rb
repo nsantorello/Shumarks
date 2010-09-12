@@ -12,6 +12,7 @@ class HomeController < ApplicationController
       @header_text = "Welcome to Shumarks"
       render "index_loggedout"
     end
+    
   end
   
   def about
@@ -29,7 +30,7 @@ class HomeController < ApplicationController
     elsif params[:user_name]
       @user = User.find_by_login(params[:user_name])
     else
-      redirect_to home_path
+      render :action => 'index'
       return
     end
     
@@ -38,6 +39,10 @@ class HomeController < ApplicationController
       return
     end
     
+    @is_following = logged_in? and @user and @user.id != current_user.id and current_user.following?(@user)
+    
+    print @is_following
+
     @links = @user.links.find_all().sort_by {|mark| mark.created_at}
 	  @links = @links.reverse()
 	

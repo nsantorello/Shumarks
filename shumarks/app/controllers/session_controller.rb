@@ -14,6 +14,11 @@ class SessionController < ApplicationController
       render :controller => 'session', :action => 'new'
     end
   end
+  
+  def new
+    @page_title = "Login or Sign up"
+    @header_text = "Login or Sign up"
+  end
 
   def destroy
     self.current_user.forget_me if logged_in?

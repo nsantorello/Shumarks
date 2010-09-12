@@ -1,2 +1,4 @@
-<%= link_to "Follow #{ @user.login}", :controller => 'users', :action => 'follow', :id => @user %>
+<span class="ui-widget">
+	<%= link_to "Follow", follow_path(@user), :class => "small-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover ui-state-active"%>
+</span>
 <%= render '/users/list_queue'%>
