@@ -1,9 +1,9 @@
 <tr>
-	<% if logged_in? && @user && @user.id == current_user.id then -%>
-	<% end -%>
+	
 	<td class="link_name_holder" id="<%= link.id %>">
 		<div class="link_name">
-			<%= link_to link.name, view_link_path(link), :class => 'link'%>&nbsp;&nbsp;<%= link_to '(remove)', delete_link_path(link), :id => ('link_remove-' + link.id.to_s), :style => 'display:none' %>
+			<%= link_to link.name, view_link_path(link), :class => 'link'%>&nbsp;&nbsp;<% if logged_in? && @user && @user.id == current_user.id then -%>
+	<%= link_to '(remove)', delete_link_path(link), :id => ('link_remove-' + link.id.to_s), :style => 'display:none', :class => 'link_remove' %><% end -%>
 		</div>
 		<div class="blurb">
 			<%= link.blurb %>
