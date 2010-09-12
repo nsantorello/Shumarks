@@ -1,18 +1,27 @@
 <tr>
 	<% if logged_in? && @user && @user.id == current_user.id then -%>
-		<td valign="top">
-			<%= link_to 'X', delete_link_path(link) -%>
-		</td>
 	<% end -%>
-	<td>
-		<div>
-			<%= link_to link.name, link_path(link), :class => 'link'%>
+	<td class="link_name_holder" id="<%= link.id %>">
+		<div class="link_name">
+			<%= link_to link.name, view_link_path(link), :class => 'link'%>&nbsp;&nbsp;<%= link_to '(remove)', delete_link_path(link), :id => ('link_remove-' + link.id.to_s), :style => 'display:none' %>
 		</div>
-		<div>
+		<div class="blurb">
 			<%= link.blurb %>
 		</div>
-		<div>
+		<div class="meta">
 			Added <%= link.created_at.in_time_zone.strftime('%I:%M%p, %m/%d/%Y') %>
 		</div>
 	</td>
 </tr>
+<script type="text/javascript">
+$(document).ready(function(){
+$("#<%= link.id.to_s %>").hover(function()
+{
+    $("#link_remove-<%= link.id.to_s %>").css("display", "inline");
+},function()
+{
+    $("#link_remove-<%= link.id.to_s %>").css("display", "none");
+});
+}
+);
+</script>

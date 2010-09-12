@@ -9,7 +9,6 @@
 
   <body>
     <div id="container">
-      <div id="leftNav"></div>
       <div id="body">
         <div id="header">
           <div id="logo" class="left"></div>
@@ -38,11 +37,11 @@
             </tr>
           </table>
         </div>        
-        <div id="notifications">
+        <div id="notifications" style="padding-bottom: 10px; padding-left:20px">
           <% if flash[:notice] then %><div style="width:300px;">&nbsp;</div><div style="width:300px" class="ui-state-highlight ui-corner-all"><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span><%= flash[:notice] %></div><% end %>
           <% if flash[:error] then %><div style="width:300px;">&nbsp;</div><div style="width:300px" class="ui-state-error ui-state-error ui-corner-all"><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span><%= flash[:error] %></div><% end %>
         </div>
-        <div id="content">
+        <div id="content" style="padding-left:20px; padding-right:20px">
           <%= yield %>
         </div>
       </div>
