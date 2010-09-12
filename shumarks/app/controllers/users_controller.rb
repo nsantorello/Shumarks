@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     current_user.save()
     
     if current_user.errors.empty?
-      flash[:notice] = "I WIN MOTHERFUCKERS"
+      flash[:notice] = "You are now following #{@user.login}"
     else
       flash[:error] = "fml"
     end
@@ -91,7 +91,8 @@ class UsersController < ApplicationController
       @link = @user.links.build({:url => url, :name => name, :is_viewed => false, :blurb => blurb})
       @link.save()
     end
-	redirect_to ("http://localhost:3001/tweet?t=" + name + "&r=" + URI.escape(url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&lid=" + @link.id.to_s + "&uid=" + @user.id.to_s)
+	redirect_to ("http://localhost:3001/tweet?t=" + URI.escape(name, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&r=" + URI.escape(url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&lid=" + @link.id.to_s + "&uid=" + @user.id.to_s)
+    #redirect_to host.domain + ":" + host.port + "/remote-result?lid=#{params[:lid]}&uid=#{params[:uid]}&st=true"
   end
   
   def remote_result
