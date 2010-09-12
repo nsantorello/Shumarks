@@ -1,3 +1,4 @@
+require 'net/http'
 class UsersController < ApplicationController
   before_filter :login_required, :set_user, :only => [:show, :edit, :update, :queue, :follow]
   
@@ -88,6 +89,7 @@ class UsersController < ApplicationController
       @link = @user.links.build({:url => url, :name => name, :is_viewed => false, :blurb => blurb})
       @link.save()
     end
+	redirect_to ("http://localhost:3001/tweet?t=" + name + "&r=" + URI.escape(url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&lid=" + @link.id.to_s + "&uid=" + @user.id.to_s)
   end
   
   def remote_result
