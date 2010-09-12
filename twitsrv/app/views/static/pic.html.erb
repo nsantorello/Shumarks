@@ -1,0 +1,3 @@
+<% if logged_in? %>
+<%= link_to profile_image(current_user), twitter_profile_url(current_user), :target => "_blank" %>
+<% end %>
