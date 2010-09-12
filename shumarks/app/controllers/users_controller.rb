@@ -1,6 +1,6 @@
 require 'net/http'
 class UsersController < ApplicationController
-  before_filter :login_required, :set_user, :only => [:show, :edit, :update, :queue, :follow]
+  before_filter :login_required, :only => [:show, :edit, :update, :queue, :follow]
   
   # render new.rhtml
   def new
@@ -28,24 +28,48 @@ class UsersController < ApplicationController
   
   # Show user
   def show
+    @user = current_user
+    if @user
+      @links = @user.links.find_all().sort_by {|mark| mark.created_at}
+	  @links = @links.reverse()
+    end
+    
     @page_title = "Shumarks: " + @user.login
     @header_text = "#{@user.login}"
   end
   
   # Show user queue
   def queue
+    @user = current_user
+    if @user
+      @links = @user.links.find_all().sort_by {|mark| mark.created_at}
+	  @links = @links.reverse()
+    end
+    
     @page_title = "Shumarks: Queue for " + @user.login
     @header_text = "My Shumarks"
   end
   
   # Edit user information
   def edit
+    @user = current_user
+    if @user
+      @links = @user.links.find_all().sort_by {|mark| mark.created_at}
+	  @links = @links.reverse()
+    end
+    
     @page_title = "Shumarks: " + @user.login + " - settings"
     @header_text = "Edit #{@user.login}'s Settings"
   end
   
   # Update user information
   def update
+    @user = current_user
+    if @user
+      @links = @user.links.find_all().sort_by {|mark| mark.created_at}
+	  @links = @links.reverse()
+    end
+    
     @user.email = params[:user][:email]
     @user.password = params[:user][:password]
     @user.password = params[:user][:passord_confirmation]
@@ -58,7 +82,7 @@ class UsersController < ApplicationController
   end
   
   # Follow the user id give. You must be logged in
-  def follow
+  def follow    
     @user = User.find_by_id(params[:id])
     current_user.users << @user
     current_user.save()
@@ -109,15 +133,6 @@ class UsersController < ApplicationController
     else
       render 'remote_create_fail'
     end 
-  end
-  
-  protected
-  def set_user
-    @user = current_user
-    if @user
-      @links = @user.links.find_all().sort_by {|mark| mark.created_at}
-	  @links = @links.reverse()
-    end
   end
   
 end
