@@ -6,7 +6,7 @@ class HomeController < ApplicationController
       
       @links = Link.all(:conditions => {:user_id => following_user_ids}, :order => 'created_at DESC')
       
-      @header_text = "You're friends Shumarks"
+      @header_text = "Your friends' Shumarks"
       render "index_loggedin"
     else
       @header_text = "Welcome to Shumarks"
