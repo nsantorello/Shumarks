@@ -55,6 +55,13 @@ class UsersController < ApplicationController
   
   # Follow the user id give. You must be logged in
   def follow
+    current_user.users.add(@user)
+    current_user.save()
+    
+    if current_user.errors.empty?
+      
+    else
+    end
     
   end
   
@@ -62,7 +69,7 @@ class UsersController < ApplicationController
   def remote_get_salt
     @user = login_from_username_and_password
     
-    render :text => @user.salt 
+    render :text => @user.salt
   end
   
   # Get the queue for remote request
