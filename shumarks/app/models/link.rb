@@ -17,5 +17,12 @@ class Link < ActiveRecord::Base
 	def fix_name
 	  self.name = self.url if self.name.nil? or self.name.empty?
 	end
+	
+	def self.short_name
+		str = self.name
+		wordcount = 50
+		shortname = (str.length > wordcount) ? (str[0..wordcount] + "...") : str
+		return shortname
+	end
 		
 end
