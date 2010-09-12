@@ -13,25 +13,3 @@
 </div>
 
 <div style="clear:both"></div>
-<div style="font-weight:bold;font-size:18px">Automatically share your Shumarks!</div>
-<div><span class="sm-twitter"></span><div id="login_with_twitter"></div></div><div><span class="sm-facebook"></span>Login with Facebook</div>
-
-
-<script type="text/javascript">
-	function parseResponse(data)
-{
-  if (!data[0])
-{
-	$("#login_with_twitter").html('<a href="http://localhost:3001/login">Login with Twitter</a>');
-}
-else
-{
-	$("#login_with_twitter").html('<img alt="Default_profile_6_normal" height="24" src="' + data[1] + '" width="24" /> Logged in as <strong>@' + data[2] + '</strong>. <a href="http://localhost:3001/logout">Log out</a> ');
-
-}
-}
-
-	</script>
- <script type="text/javascript" 
-         src="http://localhost:3001/account">
- </script>
