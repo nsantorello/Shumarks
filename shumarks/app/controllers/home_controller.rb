@@ -1,6 +1,11 @@
 # This controller handles the login/logout function of the site.  
 class HomeController < ApplicationController
   def index
+    if logged_in?
+      render "index_loggedin"
+    else
+      render "index_loggedout"
+    end
   end
   
   def about

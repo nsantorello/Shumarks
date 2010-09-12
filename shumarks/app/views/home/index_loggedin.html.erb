@@ -33,7 +33,6 @@
 		$('#login').click(function() {
             $.get('<%= login_path %>', function(data) {
             $('#dlgLogin').html(data);
-            alert(data);          
         });
            $('#dlgLogin').dialog('open');
 			//return false;

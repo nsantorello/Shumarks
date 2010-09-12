@@ -1,0 +1,31 @@
+<div id="mid" style="padding:10px;">
+<div id="login" class="pad ui-widget ui-state-default ui-corner-top">
+<h1 class="ui-widget-text">Login</h1>
+</div>
+
+<div id="register" class="pad ui-widget ui-state-default ui-corner-top">
+<h1 class="ui-widget-text">Sign Up</h1>
+</div>
+</div>
+
+<div id="dlgLogin" style="display:none;"></div>
+
+<script type="text/javascript">
+	// increase the default animation speed to exaggerate the effect
+	$.fx.speeds._default = 1000;
+	$(function() {
+		$('#dlgLogin').dialog({
+			autoOpen: false,
+			show: 'blind',
+			hide: 'explode'
+		});
+		
+		$('#login').click(function() {
+            $.get('<%= login_path %>', function(data) {
+            $('#dlgLogin').html(data);
+        });
+           $('#dlgLogin').dialog('open');
+			//return false;
+		});
+	});
+	</script>
