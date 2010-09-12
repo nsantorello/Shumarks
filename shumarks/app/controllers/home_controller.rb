@@ -32,7 +32,9 @@ class HomeController < ApplicationController
       return
     end
     
-    @links = @user.links.find_all()
+    @links = @user.links.find_all().sort_by {|mark| mark.created_at}
+	  @links = @links.reverse()
+	
     @page_title = "#{@user.login}"
   end
   
