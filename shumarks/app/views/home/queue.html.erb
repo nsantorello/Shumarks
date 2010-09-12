@@ -1,2 +1,3 @@
 <h2><%= @user.login%>'s Shumarks</h2>
+<%= link_to :controller => 'user', :action => 'follow', :id => @user.id %>
 <%= render '/users/list_queue'%>
