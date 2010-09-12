@@ -1,4 +1,9 @@
 <tr>
+	<% if logged_in? && @user && @user.id == current_user.id then -%>
+		<td valign="top">
+			<%= link_to 'X', delete_link_path(link) -%>
+		</td>
+	<% end -%>
 	<td>
 		<div>
 			<%= link_to link.name, view_link_path(link), :class => 'link'%>
@@ -8,11 +13,6 @@
 		</div>
 		<div>
 			Added <%= link.created_at.in_time_zone.strftime('%I:%M%p, %m/%d/%Y') %>
-			<% 
-				if logged_in? && @user && @user.id == current_user.id then
-					link_to 'X', delete_link_path(link)
-				end 
-			-%>
 		</div>
 	</td>
 </tr>

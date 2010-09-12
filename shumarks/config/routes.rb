@@ -45,13 +45,13 @@ ActionController::Routing::Routes.draw do |map|
   map.about '/about', :controller => 'home', :action => 'about'
   map.addons '/addons', :controller => 'home', :action => 'addons'
   map.view_link '/view/:id', :controller => 'home', :action => 'view_link'
-  map.queue '/queue/:id', :controller => 'home', :action => 'queue'
+  map.queue_with_id '/user/:id', :controller => 'home', :action => 'queue'
+
   
   # API urls
   map.save '/save', :controller => 'links', :action => 'create'
   
   # User pages
-  map.user_queue '/my-queue', :controller => 'users', :action => 'queue'
   map.edit_user '/account', :controller => 'users', :action => 'edit'
   map.remote_login '/remote-login/', :controller => 'users', :action => 'remote_get_salt'
   map.remote_queue '/remote-queue/', :controller => 'users', :action => 'remote_get_queue'
@@ -82,6 +82,9 @@ ActionController::Routing::Routes.draw do |map|
   map.user_create_link '/user/links/create', :controller => 'links', :action => 'create'
   map.delete_link '/user/links/delete/:id', :controller => 'links', :action => 'delete'
   map.link '/view/:id', :controller => 'home', :action => 'view_link'
+  map.follow '/follow/:id', :controller => 'users', :action => 'follow'
+  
+  map.queue '/:user_name', :controller => 'home', :action => 'queue'
 
   # See how all your routes lay out with "rake routes"
 end

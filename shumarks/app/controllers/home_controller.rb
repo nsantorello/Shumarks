@@ -12,7 +12,18 @@ class HomeController < ApplicationController
   end
   
   def queue
-    @user = User.find_by_id(params[:id])
+    if params[:id]
+      @user = User.find_by_id(params[:id])
+    elseif params[:user_name]
+      @user = User.find_by_login(params[:user_name])
+    else
+      redirect_to home_path
+    end
+    
+    if logged_in? and @user and @user.id == current_user.id
+      redirect_to :controller => 'users', :action => 'queue'
+    end
+    
     @links = @user.links.find_all()
     @page_title = "#{@user.login}"
   end

@@ -14,7 +14,11 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   
   has_many :links
-  has_many :users
+  has_and_belongs_to_many(:users,
+    :join_table => "follows",
+    :foreign_key => "user_id",
+    :association_foreign_key => "follow_id"
+  )
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.

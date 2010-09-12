@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :login_required, :set_user, :only => [:show, :edit, :update, :queue]
+  before_filter :login_required, :set_user, :only => [:show, :edit, :update, :queue, :follow]
+  
   
   # render new.rhtml
   def new
@@ -52,6 +53,11 @@ class UsersController < ApplicationController
     end
   end
   
+  # Follow the user id give. You must be logged in
+  def follow
+    
+  end
+  
   # Get salt for remote request
   def remote_get_salt
     @user = login_from_username_and_password
@@ -75,8 +81,12 @@ class UsersController < ApplicationController
       @link = @user.links.build({:url => url, :name => name, :is_viewed => false, :blurb => blurb})
       @link.save()
     end
-      
-    redirect_to url
+    
+    if @link.errors.empty?
+      render 'remote_create_success', :layout => false
+    else
+      render 'remote_create_fail'
+    end
   end
   
   protected
