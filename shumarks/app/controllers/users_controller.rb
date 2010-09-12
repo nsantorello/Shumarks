@@ -42,8 +42,7 @@ class UsersController < ApplicationController
   def queue
     @user = current_user
     if @user
-      @links = @user.links.find_all().sort_by {|mark| mark.created_at}
-	  @links = @links.reverse()
+      @links = @user.links.all(:order => 'created_at DESC')
     end
     
     @page_title = "Shumarks: Queue for " + @user.login
