@@ -35,7 +35,7 @@ ActionController::Routing::Routes.draw do |map|
   # On site authentication
   #map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   
-  map.signup '/signup', :controller => 'users', :action => 'new'
+  map.signup '/signup', :controller => 'session', :action => 'new'
   map.signup_action '/session/create', :controller => 'session', :action => 'create'
   map.login '/login', :controller => 'session', :action => 'new'                                                   
   map.logout '/logout', :controller => 'session', :action => 'destroy'

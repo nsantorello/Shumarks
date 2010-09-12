@@ -1,6 +1,5 @@
 # This controller handles the login/logout function of the site.  
 class SessionController < ApplicationController
-
   def create
     self.current_user = User.authenticate(params[:session][:login], params[:session][:password])
     if logged_in?
@@ -12,7 +11,7 @@ class SessionController < ApplicationController
       flash[:notice] = "Logged in successfully"
     else
       flash.now[:error] = "Login failed, please try again."
-      render home_path
+      render :controller => 'session', :action => 'new'
     end
   end
 

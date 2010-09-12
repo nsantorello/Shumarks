@@ -16,47 +16,49 @@
 		    			<%= current_user.login %> |
             	<%= link_to 'Account', edit_user_path %> |
             	<%= link_to 'Logout', logout_path %>
+					  <% else -%>
+							<%= link_to 'Sign up', signup_path %> |
+            	<%= link_to 'Login', login_path %>
             <% end -%>
           </div>
         </div>
         <div id="topNav">
-          <table>
-            <tr>
-              <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
-                <%= link_to 'Home', home_path %>
-              </td>
-              <% if logged_in? then -%>
-	              <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
-	                <%= link_to 'My Shumarks', user_queue_path %>
-	              </td>
-								<td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
-	                <%= render '/home/bookmarklet' %>
-	              </td>
-              <% end -%>
-              <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
-                <%= link_to 'About', "/about" %>
-              </td>
-            </tr>
-          </table>
+          <%= link_to 'Home', home_path, :class => 'left'%>
+           
+	        <% if logged_in? then -%>
+	        	<%= link_to 'My Shumarks', user_queue_path, :class => 'left' %>
+	        <% end -%>
+	
+	        <%= link_to 'About', "/about", :class => 'left' %>
+	
+					<% if logged_in? then -%>
+						<span class="right">
+	          	Drag this into your bookmarkd bar -&gt; <%= render '/home/bookmarklet' %>
+						</span>
+					<% end -%>
         </div>        
-        <% if flash[:notice] or flash[:error] then %>
-          <div id="notifications" style="padding-bottom: 10px; padding-left:20px">
-						<% if flash[:notice] then %>
-							<div style="width:300px" class="ui-state-highlight ui-corner-all">
-								<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
-								<%= flash[:notice] %>
-							</div>
-					  <% end %>
-				  	<% if flash[:error] then %>
-							<div style="width:300px" class="ui-state-error ui-state-error ui-corner-all">
-								<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span>
-								<%= flash[:error] %>
-						  </div>
-						<% end %>
-					</div>
-			  <% end %>
 			
-        <div id="content" style="padding-left:20px; padding-right:20px">
+        <div id="content">
+					<% if @header_text %>
+						<h1><%= @header_text %></h1>
+					<% end %>
+					<% if flash[:notice] or flash[:error] then %>
+	          <div id="notifications" style="padding-bottom: 10px; padding-left:20px">
+							<% if flash[:notice] then %>
+								<div style="width:300px" class="ui-state-highlight ui-corner-all">
+									<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
+									<%= flash[:notice] %>
+								</div>
+						  <% end %>
+					  	<% if flash[:error] then %>
+								<div style="width:300px" class="ui-state-error ui-state-error ui-corner-all">
+									<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span>
+									<%= flash[:error] %>
+							  </div>
+							<% end %>
+						</div>
+				  <% end %>
+				
           <%= yield %>
         </div>
 

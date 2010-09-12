@@ -2,10 +2,10 @@ require 'net/http'
 class UsersController < ApplicationController
   before_filter :login_required, :set_user, :only => [:show, :edit, :update, :queue, :follow]
   
-  
   # render new.rhtml
   def new
     @page_title = "Shumarks: Signup"
+    @header_text = "Sign up"
   end
 
   # Create new user
@@ -29,16 +29,19 @@ class UsersController < ApplicationController
   # Show user
   def show
     @page_title = "Shumarks: " + @user.login
+    @header_text = "#{@user.login}"
   end
   
   # Show user queue
   def queue
     @page_title = "Shumarks: Queue for " + @user.login
+    @header_text = "My Shumarks"
   end
   
   # Edit user information
   def edit
     @page_title = "Shumarks: " + @user.login + " - settings"
+    @header_text = "Edit #{@user.login}'s Settings"
   end
   
   # Update user information
@@ -91,8 +94,7 @@ class UsersController < ApplicationController
       @link = @user.links.build({:url => url, :name => name, :is_viewed => false, :blurb => blurb})
       @link.save()
     end
-	redirect_to ("http://localhost:3001/tweet?t=" + URI.escape(name, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&r=" + URI.escape(url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&lid=" + @link.id.to_s + "&uid=" + @user.id.to_s)
-    #redirect_to host.domain + ":" + host.port + "/remote-result?lid=#{params[:lid]}&uid=#{params[:uid]}&st=true"
+	  redirect_to ("http://localhost:3001/tweet?t=" + URI.escape(name, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&r=" + URI.escape(url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&lid=" + @link.id.to_s + "&uid=" + @user.id.to_s)
   end
   
   def remote_result

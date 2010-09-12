@@ -6,14 +6,17 @@ class HomeController < ApplicationController
       
       @links = Link.all(:conditions => {:user_id => following_user_ids}, :order => 'created_at DESC')
       
+      @header_text = "You're friends Shumarks"
       render "index_loggedin"
     else
+      @header_text = "Welcome to Shumarks"
       render "index_loggedout"
     end
   end
   
   def about
     @page_title = "About Shumarks"
+    @header_text = "Shumarks"
   end
   
   def addons
@@ -21,7 +24,6 @@ class HomeController < ApplicationController
   end
   
   def queue
-    
     if params[:id]
       @user = User.find_by_id(params[:id])
     elsif params[:user_name]
@@ -40,6 +42,7 @@ class HomeController < ApplicationController
 	  @links = @links.reverse()
 	
     @page_title = "#{@user.login}"
+    @header_text = "#{@user.login}'s Shumarks"
   end
   
   def view_link
@@ -48,9 +51,10 @@ class HomeController < ApplicationController
       @user = User.find_by_id(@link.user_id)
       @next_link = @user.get_next_link()
       
-      render 'view_link', :layout => false
+      redirect_to "#{@link.url}"
     else
-      redirect_to user_queue_path
+      flash[:error] = "Sorry, the link was not found"
+      redirect_to home_path
     end
   end
 end
