@@ -9,7 +9,6 @@
 
   <body>
     <div id="container">
-      <div id="body">
         <div id="header">
           <div id="logo" class="left"></div>
           <div class="right">
@@ -43,26 +42,24 @@
         <% if flash[:notice] or flash[:error] then %>
           <div id="notifications" style="padding-bottom: 10px; padding-left:20px">
 						<% if flash[:notice] then %>
-							<div style="width:300px;">&nbsp;</div>
 							<div style="width:300px" class="ui-state-highlight ui-corner-all">
 								<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
 								<%= flash[:notice] %>
-					  </div>
+							</div>
 					  <% end %>
-				  	<% if flash[:notice] then %>
-							<div style="width:300px;">&nbsp;</div>
-								<div style="width:300px" class="ui-state-error ui-state-error ui-corner-all">
-									<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span>
-									<%= flash[:error] %>
-							  </div>
-		          </div>
+				  	<% if flash[:error] then %>
+							<div style="width:300px" class="ui-state-error ui-state-error ui-corner-all">
+								<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span>
+								<%= flash[:error] %>
+						  </div>
 						<% end %>
 					</div>
 			  <% end %>
+			
         <div id="content" style="padding-left:20px; padding-right:20px">
           <%= yield %>
         </div>
-      </div>
+
     </div><!-- close conainter -->
   </body>
 </html>

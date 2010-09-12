@@ -2,9 +2,9 @@
 	<%= render '/links/index' %>
 </div>
 
-<h2></h2>
+
 <div style="float:right; width:20%; text-align:right;">
-	<h2>Following <%= current_user.users.length %> people</h2>
+	<h4>Following <%= current_user.users.length %> people</h4>
 	<% for following in current_user.users -%>
 		<div>
 			<%= link_to "#{following.login} (#{following.links.length})", queue_path(following.login)%>
@@ -14,4 +14,5 @@
 
 <div style="clear:both"></div>
 
-<div><span class="sm-twitter"></span>Login with Twitter</div><div><span class="sm-facebook"></span>Login with Facebook</div>
+<span class="sm-twitter"></span>Login with Twitter
+<span class="sm-facebook"></span>Login with Facebook
