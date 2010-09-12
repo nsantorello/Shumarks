@@ -28,7 +28,7 @@
               </td>
               <% if logged_in? then -%>
 	              <td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
-	                <%= link_to 'My Shumarks', :controller => 'home', :action => 'queue', :user_name => current_user.login %>
+	                <%= link_to 'My Shumarks', user_queue_path %>
 	              </td>
 								<td onMouseOver="this.className='mouseOver'" onMouseOut="this.className='mouseOut'">
 	                <%= render '/home/bookmarklet' %>
@@ -42,17 +42,22 @@
         </div>        
         <% if flash[:notice] or flash[:error] then %>
           <div id="notifications" style="padding-bottom: 10px; padding-left:20px">
-						<div style="width:300px;">&nbsp;</div>
-						<div style="width:300px" class="ui-state-highlight ui-corner-all">
-							<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
-							<%= flash[:notice] %>
-					</div>
-					<div style="width:300px;">&nbsp;</div>
-						<div style="width:300px" class="ui-state-error ui-state-error ui-corner-all">
-							<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span>
-							<%= flash[:error] %>
+						<% if flash[:notice] then %>
+							<div style="width:300px;">&nbsp;</div>
+							<div style="width:300px" class="ui-state-highlight ui-corner-all">
+								<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
+								<%= flash[:notice] %>
 					  </div>
-          </div>
+					  <% end %>
+				  	<% if flash[:notice] then %>
+							<div style="width:300px;">&nbsp;</div>
+								<div style="width:300px" class="ui-state-error ui-state-error ui-corner-all">
+									<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span>
+									<%= flash[:error] %>
+							  </div>
+		          </div>
+						<% end %>
+					</div>
 			  <% end %>
         <div id="content" style="padding-left:20px; padding-right:20px">
           <%= yield %>

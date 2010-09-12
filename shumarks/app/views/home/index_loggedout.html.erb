@@ -1,43 +1,66 @@
-<div style="padding:10px 30px;margin:0 0 0 75px;"><img src="/images/123.png" alt="steps to shumarking" /></div>
+<div>
+	Shumarks is the easiest way to bookmark and share articles you're reading on the web. With one click, you can publish your favorite articles to your personal Shumark page and share them via Twitter, Facebook and LinkedIn. Shumarks also allows your friends to follow what you're reading via RSS feeds and email digests. Shumarks saves you time and creates a new mechanism for content discovery. Just Shumark and share!
+</div>
 <div id="mid" style="padding:10px;">
   <div id="login" class="ui-widget ui-corner-all">
-    <h1 class="pad ui-widget-header">Login</h1>
+    <div class="pad ui-widget-header">Login</div>
     <div class="pad">
       <% form_for :session, :url => signup_action_path do |f| -%>
-        <span class="pad"><%= f.label :Username%><br/>
-        <%= f.text_field :login %></span>
+        <span class="pad">
+					<%= f.label :Username%><br/>
+        	<%= f.text_field :login %>
+				</span>
         <div class="pad"></div>
-        <span class="pad"><%= f.label :password%><br/>
-        <%= f.password_field :password %></span>
+        <span class="pad">
+					<%= f.label :password%><br/>
+        	<%= f.password_field :password %>
+				</span>
         <div class="pad"></div>
-        <span class="pad"><label for="remember_me">Remember me:</label>
-        <%= check_box_tag 'remember_me' %></span>
-        <span><%= f.submit 'Log in', :class => "small button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover ui-state-active" %></span>
-      <% end -%>
+        <span class="pad">
+					<label for="remember_me">Remember me:</label>
+        	<%= check_box_tag 'remember_me' %></span>
+        <span>
+				<div class="pad"></div>
+				<span class="pad">
+					<%= f.submit 'Log in', :class => "small button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover ui-state-active" %>
+				</span>
+   		<% end -%>
     </div>
-  </div>
+</div>
 
 <div id="register" class="ui-widget ui-corner-all">
-<h1 class="pad ui-widget-header">Sign Up</h1>
-<div class="pad">
-<%= error_messages_for :user %>
-<% form_for :user, :url => create_user_path do |f| -%>
-<span class="pad"><label for="login">Login</label><br/>
-<%= f.text_field :login %></span>
-<div class="pad"></div>
-<span class="pad"><label for="email">Email</label><br/>
-<%= f.text_field :email %></span>
-<div class="pad"></div>
-<span class="pad"><label for="password">Password</label><br/>
-<%= f.password_field :password %></span>
-<div class="pad"></div>
-<span class="pad"><label for="password_confirmation">Confirm Password</label><br/>
-<%= f.password_field :password_confirmation %></span>
-<div class="pad"></div>
-<span><%= submit_tag 'Sign up', :class => "small button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover ui-state-active" %></span>
-<% end -%>
+	<div class="pad ui-widget-header">Sign Up</div>
+		<div class="pad">
+		<%= error_messages_for :user %>
+		<% form_for :user, :url => create_user_path do |f| -%>
+			<span class="pad"><label for="login">Login</label><br/>
+				<%= f.text_field :login %>
+			</span>
+			<div class="pad"></div>
+			<span class="pad">
+				<label for="email">Email</label><br/>
+				<%= f.text_field :email %>
+			</span>
+			<div class="pad"></div>
+			<span class="pad">
+				<label for="password">Password</label><br/>
+				<%= f.password_field :password %>
+			</span>
+			<div class="pad"></div>
+				<span class="pad">
+					<label for="password_confirmation">Confirm Password</label><br/>
+					<%= f.password_field :password_confirmation %>
+				</span>
+			<div class="pad"></div>
+			<span>
+				<%= submit_tag 'Sign up', :class => "small button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover ui-state-active" %>
+		</span>
+		<% end -%>
+	</div>
+	</div>
 </div>
-</div>
+<div style="clear:both; padding:10px 30px;margin:0 0 0 75px;">
+	<img src="/images/123.png" alt="steps to shumarking" />
 </div>
 <script type="text/javascript">
 	// increase the default animation speed to exaggerate the effect
