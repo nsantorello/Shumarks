@@ -1,7 +1,6 @@
 class Link < ActiveRecord::Base
 	belongs_to :user
 	validates_presence_of :url, :user_id, :name
-	validates_inclusion_of :is_viewed, :in => [true, false]
 	validates_format_of :url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?.*$/ix
 	
 	before_validation :fix_url, :fix_name
@@ -18,9 +17,9 @@ class Link < ActiveRecord::Base
 	  self.name = self.url if self.name.nil? or self.name.empty?
 	end
 	
-	def self.short_name
+	def short_name
 		str = self.name
-		wordcount = 50
+		wordcount = 60
 		shortname = (str.length > wordcount) ? (str[0..wordcount] + "...") : str
 		return shortname
 	end

@@ -1,16 +1,28 @@
-<%= error_messages_for :user %>
-<% form_for :user, :url => create_user_path do |f| -%>
-<p><label for="login">Login</label><br/>
-<%= f.text_field :login %></p>
-
-<p><label for="email">Email</label><br/>
-<%= f.text_field :email %></p>
-
-<p><label for="password">Password</label><br/>
-<%= f.password_field :password %></p>
-
-<p><label for="password_confirmation">Confirm Password</label><br/>
-<%= f.password_field :password_confirmation %></p>
-
-<p><%= submit_tag 'Sign up' %></p>
-<% end -%>
+<div class="pad">
+	<% form_for :user, :url => create_user_action_path do |f| -%>
+	  <%= f.error_messages %>
+		<div class="pad">
+			<label for="login">Login</label><br/>
+			<%= f.text_field :login %>
+		</div>
+		<div class="pad">
+			<label for="email">Email</label><br/>
+			<%= f.text_field :email %>
+		</div>
+		
+		<div class="pad">
+			<label for="password">Password</label><br/>
+			<%= f.password_field :password %>
+		</div>
+		
+		<div class="pad">
+			<label for="password_confirmation">Confirm Password</label>
+			<br/>
+			<%= f.password_field :password_confirmation %>
+		</div>
+			
+		<div class="pad">
+			<%= submit_tag 'Sign up', :class => "small-button" %>
+		</div>
+	<% end -%>
+</div>

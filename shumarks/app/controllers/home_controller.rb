@@ -12,7 +12,6 @@ class HomeController < ApplicationController
       @header_text = "Welcome to Shumarks"
       render "index_loggedout"
     end
-    
   end
   
   def about
@@ -24,41 +23,13 @@ class HomeController < ApplicationController
     @page_title = "Browser Addons"
   end
   
-  def queue
-    if params[:id]
-      @user = User.find_by_id(params[:id])
-    elsif params[:user_name]
-      @user = User.find_by_login(params[:user_name])
-    else
-      render :action => 'index'
-      return
-    end
-    
-    if logged_in? and @user and @user.id == current_user.id
-      redirect_to user_queue_path
-      return
-    end
-    
-    @is_following = logged_in? and @user and @user.id != current_user.id and current_user.following?(@user)
-    
-    print @is_following
-
-    @links = @user.links.all(:order => 'created_at DESC')
-	
-    @page_title = "#{@user.login}"
-    @header_text = "#{@user.login}'s Shumarks"
-  end
-  
   def view_link
     if @link = Link.find_by_id(params[:id])
-      @link.update_attribute(:is_viewed, true)
-      @user = User.find_by_id(@link.user_id)
-      @next_link = @user.get_next_link()
       
-      redirect_to "#{@link.url}"
+      redirect_to("#{@link.url}")
     else
       flash[:error] = "Sorry, the link was not found"
-      redirect_to home_path
+      redirect_to(home_path)
     end
   end
 end

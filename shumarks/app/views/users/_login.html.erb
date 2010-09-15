@@ -1,0 +1,19 @@
+<div class="pad">
+  <% form_for :session, :url => signup_action_path do |f| -%>
+    <div class="pad">
+			<%= f.label :Username %><br/>
+    	<%= f.text_field :login %>
+		</div>
+    <div class="pad">
+		  <%= f.label :password %><br/>
+    	<%= f.password_field :password %>
+ 	  </div>
+    <div class="pad">
+			<label for="remember_me">Remember me:</label>
+    	<%= check_box_tag 'remember_me' %>
+		</div>
+		<div class="pad">
+			<%= f.submit 'Log in', :class => "small-button" %>
+		</div>
+	<% end -%>
+</div>

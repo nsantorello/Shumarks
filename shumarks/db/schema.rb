@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100912073919) do
+ActiveRecord::Schema.define(:version => 20100915003943) do
 
   create_table "follows", :id => false, :force => true do |t|
     t.integer "follower_id", :null => false
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20100912073919) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.boolean  "is_viewed"
     t.string   "blurb"
   end
 
@@ -35,6 +34,13 @@ ActiveRecord::Schema.define(:version => 20100912073919) do
     t.datetime "updated_at"
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "bio"
   end
+
+  add_index "users", ["first_name"], :name => "index_users_on_first_name"
+  add_index "users", ["last_name"], :name => "index_users_on_last_name"
+  add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 
 end

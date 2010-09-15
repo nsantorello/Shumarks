@@ -13,7 +13,7 @@
           <div id="logo" class="left"></div>
           <div class="right">
             <% if logged_in? then -%>
-		    			<%= current_user.login %> |
+							<%= current_user.home_page_url %> |
             	<%= link_to 'Account', edit_user_path %> |
             	<%= link_to 'Logout', logout_path %>
 					  <% else -%>
@@ -21,12 +21,17 @@
             	<%= link_to 'Login', login_path %>
             <% end -%>
           </div>
+					<% if logged_in? and !current_user.first_name and !current_user.last_name and ! current_user.bio then %>
+						<div style="color:#165e17; padding:3px; clear:right; float:right; border:#d4ccb0 2px solid;">
+							Customize your profile here!
+						</div>
+					<% end%>
         </div>
         <div id="topNav">
           <%= link_to 'Home', home_path, :class => 'left'%>
            
 	        <% if logged_in? then -%>
-	        	<%= link_to 'My Shumarks', user_queue_path, :class => 'left' %>
+	        	<%= link_to 'My Shumarks', my_home_path, :class => 'left' %>
 	        <% end -%>
 	
 	        <%= link_to 'About', "/about", :class => 'left' %>
@@ -59,7 +64,18 @@
 						</div>
 				  <% end %>
 				
-          <%= yield %>
+					<% if logged_in? then %>
+						<div id="main-content" 	class="left">
+							<%= yield %>
+						</div>
+						<div id="friends-bar" class="right">
+							<%= render '/home/friends_bar' %>
+						</div>
+						<div style="clear:both"></div>
+					<% else %>
+						<%= yield %>
+					<% end%>
+
         </div>
 
     </div><!-- close conainter -->

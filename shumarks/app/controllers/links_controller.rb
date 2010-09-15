@@ -6,6 +6,6 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
     @link.destroy()
     
-    redirect_to(user_queue_path)
+    redirect_to(my_home_path)
   end
 end

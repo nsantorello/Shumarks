@@ -1,15 +1,7 @@
-<div style="float:left; width:80%;">
-	<%= render '/links/index' %>
+<div>
+	<% if @links.length == 0 then %>
+		<div>You don't follow anyone yet... Find your friends!</div>
+	<% else %>
+		<%= render '/links/index' %>
+	<% end %>	
 </div>
-
-
-<div style="float:right; width:20%; text-align:right;">
-	<h4>Following <%= current_user.users.length %> people</h4>
-	<% for following in current_user.users -%>
-		<div>
-			<%= link_to "#{following.login} (#{following.links.length})", queue_path(following.login)%>
-		</div>
-	<% end -%>
-</div>
-
-<div style="clear:both"></div>

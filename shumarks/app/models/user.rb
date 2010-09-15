@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :login,    :within => 3..40
   validates_length_of       :email,    :within => 3..100
+  validates_format_of       :login, :with => /\A[a-z0-9_-]*\Z/i
+  validates_format_of       :email, :with => /\A[^@\s]+@[-a-z0-9]+\.+[a-z]{2,}\Z/i
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   before_save :encrypt_password
   
@@ -24,12 +26,40 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :password, :password_confirmation
   
+  # follows given user, returns success or failure
+  def follow(user)
+    if !self.users.find_by_id(user.id) and user.id != self.id
+      self.users << user
+      self.save()
+    else
+      false
+    end
+  end
+  
+  # unfollows given user, returns success or failure
+  def unfollow(user)
+    if self.users.find_by_id(user.id) and user.id != self.id
+      self.users.delete(user)
+      self.save()
+    else
+      false
+    end
+  end
+  
   def following?(user)
     user and self.users.find_by_id(user.id)
   end
   
   def followed_by?(user)
     user and user.users.find_by_id(self.id)
+  end
+  
+  def followers
+    User.all(:include => :users, :conditions => ['users.id <> ? AND follows.follow_id = ?', self.id, self.id])
+  end
+  
+  def home_page_url
+    return "#{ENV['hostname']}/#{self.login}"
   end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
@@ -87,8 +117,7 @@ class User < ActiveRecord::Base
     doc = Builder::XmlMarkup.new( :target => out_string = "", :indent => 2 )
     doc.queue("login" => self.login) {
       self.links.each { |link| 
-        doc.link("viewed" => link.is_viewed) {
-          doc.id(link.id)
+        doc.link("id" => link.id) {
           doc.name(link.name)
           doc.offsite_url(link.url)
           doc.onsite_url("http://www.shumarks.com/view/#{link.id}?s=#{self.salt}")
@@ -97,11 +126,6 @@ class User < ActiveRecord::Base
       }
     }
     return out_string
-  end
-  
-  # Return the next link in the queue
-  def get_next_link
-    self.links.find(:first, :conditions => {:is_viewed => false})
   end
 
   protected

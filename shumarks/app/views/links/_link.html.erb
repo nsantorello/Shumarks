@@ -1,20 +1,20 @@
 <tr id="<%= link.id %>">
-	<td width="80%" class="link_name_holder">
-		<div class="link_name">
-			<%= link_to link.name, view_link_path(link), :class => 'link'%>&nbsp;&nbsp;
+	<td width="95%" class="list-item">
+		<div class="list-header">
+			<%= link_to link.short_name, view_link_path(link), :class => 'link'%>&nbsp;&nbsp;
 		</div>
-		<div class="blurb">
+		<div class="list-body">
 			<%= link.blurb %>
 		</div>
-		<div class="meta">
-			Added by <%= User.find_by_id(link.user_id).login %> at <%= link.created_at.in_time_zone.strftime('%I:%M%p, %m/%d/%Y') %>
+		<div class="list-footer">
+			Added by <%= User.find_by_id(link.user_id).login %> <%= time_ago(link.created_at)%>
 		</div>
 	</td>
-<td width="20%" style="vertical-align:middle">
-<% if logged_in? && @user && @user.id == current_user.id then -%>
-	<%= link_to '(remove)', delete_link_path(link), :id => ('link_remove-' + link.id.to_s), :style => 'display:none', :class => 'link_remove' %>
-<% end -%>
-</td>
+	<td width="5%" class="list-item">
+		<% if logged_in? && @user && @user.id == current_user.id then -%>
+			<%= link_to '(remove)', delete_link_path(link), :id => ('link_remove-' + link.id.to_s), :style => 'display:none', :class => 'link_remove' %>
+		<% end -%>
+	</td>
 </tr>
 <script type="text/javascript">
 	$(document).ready(function() {

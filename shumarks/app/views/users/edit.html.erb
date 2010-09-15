@@ -1,17 +1,40 @@
-<h1>Editing user</h1>
-
-<% form_for :user, :url => create_user_path do |f| %>
+<% form_for :user, :url => edit_user_action_path do |f| %>
   <%= f.error_messages %>
+	<div class="left">
+		<p>
+			<label for="first_name">First Name</label><br/>
+	  	<%= f.text_field :first_name %>
+		</p>
+		<p>
+			<label for="last_name">Last Name</label><br/>
+	  	<%= f.text_field :last_name %>
+		</p>
+		<p>
+			<label for="bio">Bio</label><br/>
+	  	<%= f.text_area :bio%>
+		</p>
+	</div>
+	
+	<div class="left" style="padding-left: 30px;">
+	  <p>
+			<label for="email">Email</label><br/>
+	  	<%= f.text_field :email %>
+		</p>
+  
+	  <p>
+			<label for="password">Password</label><br/>
+	  	<%= f.password_field :password %>
+	  </p>
+  
+	  <p>
+		  <label for="password_confirmation">Confirm Password</label><br/>
+	  	<%= f.password_field :password_confirmation %>
+	  </p>
+	</div>
 
-  <p><label for="email">Email</label><br/>
-  <%= f.text_field :email %></p>
-  
-  <p><label for="password">Password</label><br/>
-  <%= f.password_field :password %></p>
-  
-  <p><label for="password_confirmation">Confirm Password</label><br/>
-  <%= f.password_field :password_confirmation %></p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+	<div class="clear-both">
+		<p>
+	    <%= f.submit 'Update', :class => 'small-button' %>
+	  </p>
+	</div>
 <% end %>

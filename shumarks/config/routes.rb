@@ -35,9 +35,9 @@ ActionController::Routing::Routes.draw do |map|
   # On site authentication
   #map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   
-  map.signup '/signup', :controller => 'session', :action => 'new'
+  map.signup '/signup', :controller => 'users', :action => 'signup'
   map.signup_action '/session/create', :controller => 'session', :action => 'create'
-  map.login '/login', :controller => 'session', :action => 'new'                                                   
+  map.login '/login', :controller => 'users', :action => 'login'                                                   
   map.logout '/logout', :controller => 'session', :action => 'destroy'
 
   # Flat pages
@@ -45,40 +45,38 @@ ActionController::Routing::Routes.draw do |map|
   map.about '/about', :controller => 'home', :action => 'about'
   map.addons '/addons', :controller => 'home', :action => 'addons'
   map.view_link '/view/:id', :controller => 'home', :action => 'view_link'
-  map.queue_id '/queue/:id', :controller => 'home', :action => 'queue'
+  map.home_id '/home/:id', :controller => 'home', :action => 'home'
 
   
   # API urls
   map.save '/save', :controller => 'links', :action => 'create'
   
   # User pages
-  map.user_queue '/my-shumarks', :controller => 'users', :action => 'queue'
+  map.my_home '/my-shumarks', :controller => 'users', :action => 'home'
   map.edit_user '/account', :controller => 'users', :action => 'edit'
   map.remote_login '/remote-login/', :controller => 'users', :action => 'remote_get_salt'
-  map.remote_queue '/remote-queue/', :controller => 'users', :action => 'remote_get_queue'
+  map.remote_list '/remote-list/', :controller => 'users', :action => 'remote_get_list'
   map.remote_create '/remote-create/', :controller => 'users', :action => 'remote_create'
   map.remote_result '/remote-result/', :controller => 'users', :action => 'remote_result'
   
   
-  map.create_user '/user',
+  map.create_user_action '/user/create',
     :controller => 'users', 
     :action => 'create', 
     :conditions => {:method => :post}
   
-  map.edit_user_action '/user', 
+  map.edit_user_action '/user/edit', 
     :controller => 'users', 
     :action => 'update', 
-    :conditions => {:method => :put}
+    :conditions => {:method => :post}
     
-  map.delete_user_action '/user', 
+  map.delete_user_action '/user/delete', 
     :controller => 'users', 
-    :action => 'delete', 
-    :conditions => {:method => :delete}
+    :action => 'delete' 
     
-  map.create_user '/user',
+  map.show_user '/user/',
     :controller => 'users', 
-    :action => 'show', 
-    :conditions => {:method => :get}
+    :action => 'show'
    
   map.user_links '/user/links', :controller => 'links', :action => 'index'
   
@@ -86,8 +84,11 @@ ActionController::Routing::Routes.draw do |map|
   map.link '/v/:id', :controller => 'home', :action => 'view_link'
   map.follow '/follow/:id', :controller => 'users', :action => 'follow'
   map.unfollow '/unfollow/:id', :controller => 'users', :action => 'unfollow'
+  map.follow_list '/follow-list/', :controller => 'users', :action => 'follow_list'
+  map.follower_list '/follower-list/', :controller => 'users', :action => 'follower_list'
+  map.search_users '/search-users/', :controller => 'users', :action => 'search'
   
-  map.queue '/:user_name', :controller => 'home', :action => 'queue'
+  map.user_home '/:user_name', :controller => 'users', :action => 'home'
 
   # See how all your routes lay out with "rake routes"
 end

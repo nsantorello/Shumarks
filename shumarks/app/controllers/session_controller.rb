@@ -8,23 +8,19 @@ class SessionController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       redirect_back_or_default('/')
-      flash[:notice] = "Logged in successfully"
+      if !current_user.first_name and !current_user.last_name and ! current_user.bio
+        flash[:notice] = "Click on \"Account\" on the top right corner to customize your profile."
+      end
     else
-      flash.now[:error] = "Login failed, please try again."
-      render :controller => 'session', :action => 'new'
+      flash[:error] = "Login failed, please try again."
+      render :partial => 'users/login', :layout => 'application'
     end
   end
   
-  def new
-    @page_title = "Login or Sign up"
-    @header_text = "Login or Sign up"
-  end
-
   def destroy
     self.current_user.forget_me if logged_in?
     cookies.delete :auth_token
     reset_session
-    flash[:notice] = "You have been logged out."
     redirect_back_or_default('/')
   end
 end
