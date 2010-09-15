@@ -34,12 +34,6 @@ class UsersController < ApplicationController
     render :partial => 'signup', :layout => 'application'
   end
   
-  # Show user
-  def show
-    @page_title = "Shumarks: " + @user.login
-    @header_text = "#{@user.login}"
-  end
-  
   # Show user queue
   def home
     # Get the user by id
