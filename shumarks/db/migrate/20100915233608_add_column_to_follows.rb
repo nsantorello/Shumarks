@@ -3,6 +3,7 @@ class AddColumnToFollows < ActiveRecord::Migration
     add_column :follows, :created_at, :timestamp
     Follow.all.each do |f|
       f.created_at = Time.now
+      f.save
     end
   end
 

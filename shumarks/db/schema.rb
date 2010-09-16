@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100916015708) do
+ActiveRecord::Schema.define(:version => 20100916045551) do
 
   create_table "follows", :id => false, :force => true do |t|
     t.integer  "follower_id", :null => false
