@@ -1,15 +1,19 @@
-<div class="ui-widget">
-	<% if @is_following then %>
-		<%= link_to "Unfollow", unfollow_path(@user), :class => "small-button"%>
-	<% elsif !@is_self %>
-		<%= link_to "Follow", follow_path(@user), :class => "small-button"%>
-	<% end %>
-	
+<div class="ui-widget">	
 	<div class="content-section">
-		<% if @links.length == 0 %>
-			No Shumarks... yet!
-	  <% else %>
-			<%= render '/links/index' %>
-	  <% end %>
+		<div style="padding-bottom:10px;">
+			<% if @is_following then %>
+				<%= link_to "Unfollow", unfollow_path(@user), :class => "small-button"%>
+			<% elsif !@is_self %>
+				<%= link_to "Follow", follow_path(@user), :class => "small-button"%>
+			<% end %>
+		</div>
+		
+		<div>
+			<% if @links.length == 0 %>
+				No Shumarks... yet!
+		  <% else %>
+				<%= render '/links/index' %>
+		  <% end %>
+		</div>
   </div>
 </div>

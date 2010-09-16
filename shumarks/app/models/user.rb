@@ -16,11 +16,11 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   
   has_many :links
-  has_and_belongs_to_many(:users,
-    :join_table => "follows",
-    :foreign_key => "follower_id",
-    :association_foreign_key => "follow_id"
-  )
+  
+  has_many :follows_as_follower,  :foreign_key => 'follower_id',    :class_name => 'Follow'
+  has_many :follows_as_followee,  :foreign_key => 'followee_id',      :class_name => 'Follow'
+  has_many :followers,            :through => :follows_as_followee
+  has_many :followees,            :through => :follows_as_follower
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
@@ -28,8 +28,8 @@ class User < ActiveRecord::Base
   
   # follows given user, returns success or failure
   def follow(user)
-    if !self.users.find_by_id(user.id) and user.id != self.id
-      self.users << user
+    if !self.followees.find_by_id(user.id) and user.id != self.id
+      self.followees << user
       self.save()
     else
       false
@@ -38,8 +38,8 @@ class User < ActiveRecord::Base
   
   # unfollows given user, returns success or failure
   def unfollow(user)
-    if self.users.find_by_id(user.id) and user.id != self.id
-      self.users.delete(user)
+    if self.followees.find_by_id(user.id) and user.id != self.id
+      self.followees.delete(user)
       self.save()
     else
       false
@@ -47,15 +47,11 @@ class User < ActiveRecord::Base
   end
   
   def following?(user)
-    user and self.users.find_by_id(user.id)
+    user and self.followees.find_by_id(user.id)
   end
   
   def followed_by?(user)
-    user and user.users.find_by_id(self.id)
-  end
-  
-  def followers
-    User.all(:include => :users, :conditions => ['users.id <> ? AND follows.follow_id = ?', self.id, self.id])
+    user and self.followers.find_by_id(user.id)
   end
   
   def home_page_url

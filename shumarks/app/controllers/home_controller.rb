@@ -2,9 +2,8 @@
 class HomeController < ApplicationController
   def index
     if logged_in?
-      following_user_ids = current_user.users.all(:select => 'follow_id').map(&:follow_id)
-      
-      @links = Link.all(:conditions => {:user_id => following_user_ids}, :order => 'created_at DESC')
+      #following_user_ids = current_user.followees.all(:include => links).map(&:follow_id)
+      @links = Link.all(:conditions => {:user_id => current_user.followee_ids}, :order => 'created_at DESC')
       
       @header_text = "Your friends' Shumarks"
       render "index_loggedin"

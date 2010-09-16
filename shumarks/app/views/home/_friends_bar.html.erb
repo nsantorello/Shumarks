@@ -12,16 +12,16 @@
 
 
 <div class="section-header">
-	Following <%= current_user.users.length %>
+	Following <%= current_user.followees.length %>
 </div>
 <div class="section">
-	<% for following in current_user.users.all(:limit => 3) -%>
+	<% for following in current_user.followees.all(:limit => 3) -%>
 		<div>
 			<%= link_to "#{following.login} (#{following.links.length})", user_home_path(following.login) %>
 		</div>
 	<% end -%>
 	<div>
-		<% if current_user.users.length > 0 %>
+		<% if current_user.followees.length > 0 %>
 			<%= link_to "see all", follow_list_path, :class => 'right'%>
 			<div class="clear-both"></div>
 		<% else %>
@@ -31,17 +31,16 @@
 </div>
 
 <div class="section-header">
-	<% num_followers = current_user.followers.length%>
-	Followers <%= num_followers %>
+	Followers <%= current_user.followers.length %>
 </div>
 <div class="section">
-	<% for follower in current_user.followers[0,2]-%>
+	<% for follower in current_user.followers.all(:limit => 3)-%>
 		<div>
 			<%= link_to "#{follower.login} (#{follower.links.length})", user_home_path(follower.login)%>
 		</div>
 	<% end -%>
 	<div>
-	<% if num_followers > 0 %>
+	<% if current_user.followers.length > 0 %>
 		<%= link_to "see all", follower_list_path, :class => 'right'%>	
 		<div class="clear-both"></div>
 	<% else %>

@@ -38,7 +38,8 @@
 	
 					<% if logged_in? then -%>
 						<span class="right">
-	          	Drag your Shumarklet into your bookmark bar -&gt; <%= render '/home/bookmarklet' %>
+	          	Drag your Shumarklet into your bookmark bar
+							-&gt; <%= render '/home/bookmarklet' %>
 						</span>
 					<% end -%>
         </div>        
@@ -47,31 +48,28 @@
 					<% if @header_text %>
 						<h1><%= @header_text %></h1>
 					<% end %>
-					<% if flash[:notice] or flash[:error] then %>
-	          <div id="notifications" style="padding-bottom: 10px;">
-							<% if flash[:notice] then %>
-								<div style="width:300px" class="ui-state-highlight ui-corner-all">
-									<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
-									<%= flash[:notice] %>
-								</div>
-						  <% end %>
-					  	<% if flash[:error] then %>
-								<div style="width:300px" class="ui-state-error ui-state-error ui-corner-all">
-									<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span>
-									<%= flash[:error] %>
-							  </div>
-							<% end %>
+					
+					<% if flash[:notice] then %>
+						<div class="notification ui-state-highlight ui-corner-all">
+							<span class="notification-icon ui-icon ui-icon-info"></span>
+							<%= flash[:notice] %>
 						</div>
 				  <% end %>
-				
+			  	<% if flash[:error] then %>
+						<div class="notification ui-state-error ui-state-error ui-corner-all">
+							<span class="notification-icon ui-icon ui-icon-alert"></span>
+							<%= flash[:error] %>
+					  </div>
+					<% end %>
+					
 					<% if logged_in? then %>
-						<div id="main-content" 	class="left">
+						<div id="main-content" class="left">
 							<%= yield %>
 						</div>
 						<div id="friends-bar" class="right">
 							<%= render '/home/friends_bar' %>
 						</div>
-						<div style="clear:both"></div>
+						<div class="clear-both"></div>
 					<% else %>
 						<%= yield %>
 					<% end%>

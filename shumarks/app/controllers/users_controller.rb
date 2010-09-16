@@ -1,6 +1,6 @@
 require 'net/http'
 class UsersController < ApplicationController
-  before_filter :login_required, :set_user, :only => [:show, :edit, :update, :follow, :unfollow, :follow_list, :follower_list]
+  before_filter :login_required, :set_user, :only => [:edit, :update, :follow, :unfollow, :follow_list, :follower_list]
 
   # Create new user
   def create
@@ -16,6 +16,7 @@ class UsersController < ApplicationController
       redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!"
     else
+      @header_text = 'Create an Account'
       render :partial => 'users/signup', :layout => 'application'
     end
   end
@@ -129,7 +130,7 @@ class UsersController < ApplicationController
     @page_title = 'People you follow'
     @header_text = 'People you follow'
     
-    @users = @user.users
+    @users = @user.follows
     
     render :partial => '/users/users_list', :layout => 'application'
   end
@@ -165,6 +166,7 @@ class UsersController < ApplicationController
   # Get the queue for remote request
   def remote_get_list
     @user = login_from_salt
+    
     render :xml => @user.queue_xml 
   end
   
