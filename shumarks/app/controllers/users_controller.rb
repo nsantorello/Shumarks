@@ -130,7 +130,7 @@ class UsersController < ApplicationController
     @page_title = 'People you follow'
     @header_text = 'People you follow'
     
-    @users = @user.follows
+    @users = @user.followees
     
     render :partial => '/users/users_list', :layout => 'application'
   end
