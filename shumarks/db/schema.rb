@@ -11,7 +11,7 @@
 
 ActiveRecord::Schema.define(:version => 20100916045551) do
 
-  create_table "follows", :id => false, :force => true do |t|
+  create_table "follows", :force => true do |t|
     t.integer  "follower_id", :null => false
     t.integer  "followee_id", :null => false
     t.datetime "created_at"
