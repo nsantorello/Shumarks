@@ -1,5 +1,5 @@
 <tr class="link-tr" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
-	<td width="95%" class="list-item">
+	<td class="list-item link-content">
 		<div class="list-header">
 			<%= link_to link.short_name, view_link_path(link), :class => 'link'%>&nbsp;&nbsp;
 		</div>
@@ -10,9 +10,9 @@
 			Added by <%= User.find_by_id(link.user_id).login %> <%= time_ago(link.created_at)%>
 		</div>
 	</td>
-	<td width="5%" class="list-item display-none" id="delete-link-td-<%= link.id %>">
+	<td class="list-item delete-link-td">
 		<% if logged_in? && @user && @user.id == current_user.id then -%>
-			<%= link_to 'Remove', delete_link_path(link), :id => ('link_remove-' + link.id.to_s), :class => 'small-button' %>
+			<%= link_to 'Remove', delete_link_path(link), :id => ("delete-link-#{link.id}"), :class => 'small-button  display-none' %>
 		<% end -%>
 	</td>
 </tr>

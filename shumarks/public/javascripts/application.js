@@ -4,10 +4,10 @@ document.cookie = 'tz' + '=' + new Date().getTimezoneOffset() + '; path=/';
 
 
 function showRemoveLink(index) {
-	$('#delete-link-td-' + index).show()
+	$('#delete-link-' + index).show()
 }
 
 function hideRemoveLink(index) {
-	$('#delete-link-td-' + index).hide()
+	$('#delete-link-' + index).hide()
 }
 
