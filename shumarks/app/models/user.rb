@@ -13,10 +13,6 @@ class User < ActiveRecord::Base
   validates_format_of       :login, :with => /\A[a-z0-9_-]*\Z/i
   validates_format_of       :email, :with => /\A[^@\s]+@[-a-z0-9]+\.+[a-z]{2,}\Z/i
   validates_uniqueness_of   :login, :email, :case_sensitive => false
-  validates_length_of       :first_name, :within => 0..20
-  validates_length_of       :last_name, :within => 0..30
-  validates_format_of       :first_name, :with => /[a-z-\s']*/i
-  validates_format_of       :last_name, :with => /[a-z-\s']/i
   before_save :encrypt_password
   
   has_many :links
