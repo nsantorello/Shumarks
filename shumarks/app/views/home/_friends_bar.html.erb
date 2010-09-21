@@ -1,50 +1,52 @@
-<div class="section-header">
-	Search
-</div>
-<div class="section">
-	<div>Find your friends!</div>
-	<form action="<%= search_users_path%>" method="post">
-		<input id="search-text-input" name="user_name" />
-		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" />
-		<input type="submit" class="small-button" value="Search" />
-	<form>
-</div>
+<div class="friend-widget">
+	<div class="section-header">
+		Search
+	</div>
+	<div class="section">
+		<div>Find your friends!</div>
+		<form action="<%= search_users_path%>" method="post">
+			<input id="search-text-input" name="user_name" />
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" />
+			<input type="submit" class="small-button" value="Search" />
+		<form>
+	</div>
 
 
-<div class="section-header">
-	Following <%= current_user.followees.length %>
-</div>
-<div class="section">
-	<% for following in current_user.followees.all(:limit => 3) -%>
+	<div class="section-header">
+		Following <%= current_user.followees.length %>
+	</div>
+	<div class="section">
+		<% for following in current_user.followees.all(:limit => 3) -%>
+			<div>
+				<%= link_to "#{following.login} (#{following.links.length})", user_home_path(following.login) %>
+			</div>
+		<% end -%>
 		<div>
-			<%= link_to "#{following.login} (#{following.links.length})", user_home_path(following.login) %>
+			<% if current_user.followees.length > 0 %>
+				<%= link_to "see all", follow_list_path, :class => 'right'%>
+				<div class="clear-both"></div>
+			<% else %>
+				You are not following anyone yet.
+			<% end %>
 		</div>
-	<% end -%>
-	<div>
-		<% if current_user.followees.length > 0 %>
-			<%= link_to "see all", follow_list_path, :class => 'right'%>
+	</div>
+
+	<div class="section-header">
+		Followers <%= current_user.followers.length %>
+	</div>
+	<div class="section">
+		<% for follower in current_user.followers.all(:limit => 3)-%>
+			<div>
+				<%= link_to "#{follower.login} (#{follower.links.length})", user_home_path(follower.login)%>
+			</div>
+		<% end -%>
+		<div>
+		<% if current_user.followers.length > 0 %>
+			<%= link_to "see all", follower_list_path, :class => 'right'%>	
 			<div class="clear-both"></div>
 		<% else %>
-			You are not following anyone yet.
+			No one is following you yet.
 		<% end %>
-	</div>
-</div>
-
-<div class="section-header">
-	Followers <%= current_user.followers.length %>
-</div>
-<div class="section">
-	<% for follower in current_user.followers.all(:limit => 3)-%>
-		<div>
-			<%= link_to "#{follower.login} (#{follower.links.length})", user_home_path(follower.login)%>
 		</div>
-	<% end -%>
-	<div>
-	<% if current_user.followers.length > 0 %>
-		<%= link_to "see all", follower_list_path, :class => 'right'%>	
-		<div class="clear-both"></div>
-	<% else %>
-		No one is following you yet.
-	<% end %>
 	</div>
 </div>

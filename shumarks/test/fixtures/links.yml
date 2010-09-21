@@ -2,8 +2,10 @@
 
 one:
   user_id: 1
-  url: MyText
+  url: http://www.google.com
+  name: Google
 
 two:
   user_id: 1
-  url: MyText
+  url: http://www.microsoft.com
+  name: Microsoft

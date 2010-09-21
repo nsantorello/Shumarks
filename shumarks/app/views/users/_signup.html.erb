@@ -1,28 +1,26 @@
-<div class="pad">
-	<% form_for :user, :url => create_user_action_path do |f| -%>
-	  <%= f.error_messages %>
-		<div class="pad">
-			<label for="login">Login</label><br/>
-			<%= f.text_field :login %>
-		</div>
-		<div class="pad">
-			<label for="email">Email</label><br/>
-			<%= f.text_field :email %>
-		</div>
+<% form_for :user, :url => create_user_action_path do |f| -%>
+  <%= f.error_messages %>
+	<div class="pad">
+		<label for="login">Login</label><br/>
+		<%= f.text_field :login %>
+	</div>
+	<div class="pad">
+		<label for="email">Email</label><br/>
+		<%= f.text_field :email %>
+	</div>
+	
+	<div class="pad">
+		<label for="password">Password</label><br/>
+		<%= f.password_field :password %>
+	</div>
+	
+	<div class="pad">
+		<label for="password_confirmation">Confirm Password</label>
+		<br/>
+		<%= f.password_field :password_confirmation %>
+	</div>
 		
-		<div class="pad">
-			<label for="password">Password</label><br/>
-			<%= f.password_field :password %>
-		</div>
-		
-		<div class="pad">
-			<label for="password_confirmation">Confirm Password</label>
-			<br/>
-			<%= f.password_field :password_confirmation %>
-		</div>
-			
-		<div class="pad">
-			<%= submit_tag 'Sign up', :class => "small-button" %>
-		</div>
-	<% end -%>
-</div>
+	<div class="pad">
+		<%= submit_tag 'Sign up', :class => "small-button" %>
+	</div>
+<% end -%>

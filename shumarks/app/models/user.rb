@@ -13,18 +13,22 @@ class User < ActiveRecord::Base
   validates_format_of       :login, :with => /\A[a-z0-9_-]*\Z/i
   validates_format_of       :email, :with => /\A[^@\s]+@[-a-z0-9]+\.+[a-z]{2,}\Z/i
   validates_uniqueness_of   :login, :email, :case_sensitive => false
+  validates_length_of       :first_name, :within => 0..20
+  validates_length_of       :last_name, :within => 0..30
+  validates_format_of       :first_name, :with => /[a-z-\s']*/i
+  validates_format_of       :last_name, :with => /[a-z-\s']/i
   before_save :encrypt_password
   
   has_many :links
   
   has_many :follows_as_follower,  :foreign_key => 'follower_id',    :class_name => 'Follow'
-  has_many :follows_as_followee,  :foreign_key => 'followee_id',      :class_name => 'Follow'
+  has_many :follows_as_followee,  :foreign_key => 'followee_id',    :class_name => 'Follow'
   has_many :followers,            :through => :follows_as_followee
   has_many :followees,            :through => :follows_as_follower
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :password, :password_confirmation
+  attr_accessible :login, :email, :password, :password_confirmation, :first_name, :last_name, :bio
   
   # follows given user, returns success or failure
   def follow(user)
@@ -116,7 +120,7 @@ class User < ActiveRecord::Base
         doc.link("id" => link.id) {
           doc.name(link.name)
           doc.offsite_url(link.url)
-          doc.onsite_url("http://www.shumarks.com/view/#{link.id}?s=#{self.salt}")
+          doc.onsite_url("http://#{ENV['hostname']}/v/#{link.id}?s=#{self.salt}")
           doc.created(link.created_at)
         }
       }
@@ -135,6 +139,4 @@ class User < ActiveRecord::Base
     def password_required?
       crypted_password.blank? || !password.blank?
     end
-    
-    
 end

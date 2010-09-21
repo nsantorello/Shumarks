@@ -2,6 +2,7 @@
 class SessionController < ApplicationController
   def create
     self.current_user = User.authenticate(params[:session][:login], params[:session][:password])
+    
     if logged_in?
       if params[:remember_me] == "1"
         current_user.remember_me unless current_user.remember_token?

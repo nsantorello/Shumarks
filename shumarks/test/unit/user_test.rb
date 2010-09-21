@@ -1,98 +1,195 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class UserTest < Test::Unit::TestCase
+class UserTest < ActiveSupport::TestCase
   # Be sure to include AuthenticatedTestHelper in test/test_helper.rb instead.
   # Then, you can remove it from this and the functional test.
   include AuthenticatedTestHelper
   fixtures :users
 
-  def test_should_create_user
+  # test able to create users
+  test "should create user" do
     assert_difference 'User.count' do
       user = create_user
       assert !user.new_record?, "#{user.errors.full_messages.to_sentence}"
     end
   end
 
-  def test_should_require_login
+  # test login is required
+  test "should require login" do
     assert_no_difference 'User.count' do
       u = create_user(:login => nil)
       assert u.errors.on(:login)
     end
   end
 
-  def test_should_require_password
+  # test login should be unique case insensitive
+  test "check unique login" do
+    assert_no_difference 'User.count' do
+      u = create_user(:login => 'BoB')
+      assert u.errors.on(:login)
+    end
+  end
+  
+  # test email should be unique case insensitive
+  test "check unique email" do
+    assert_no_difference 'User.count' do
+      u = create_user(:email => 'AlIcE@gMaIl.CoM')
+      assert u.errors.on(:email)
+    end
+  end
+
+  # test password required
+  test "should require password" do
     assert_no_difference 'User.count' do
       u = create_user(:password => nil)
       assert u.errors.on(:password)
     end
   end
 
-  def test_should_require_password_confirmation
+  # test password confirmation required
+  test "should require password confirmation" do
     assert_no_difference 'User.count' do
       u = create_user(:password_confirmation => nil)
       assert u.errors.on(:password_confirmation)
     end
   end
 
-  def test_should_require_email
+  # test email is required
+  test "should require email" do
     assert_no_difference 'User.count' do
       u = create_user(:email => nil)
       assert u.errors.on(:email)
     end
   end
 
-  def test_should_reset_password
-    users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
-    assert_equal users(:quentin), User.authenticate('quentin', 'new password')
+  # test check login format to only include alpha-numeric, - and _ characters
+  test "check login format" do
+    assert_no_difference 'User.count' do
+      u = create_user(:login => 'hello asdf ,3 a0 32')
+      assert u.errors.on(:login)
+    end
+  end
+  
+  # test check email format
+  test "check email format" do
+    assert_no_difference 'User.count' do
+      u = create_user(:email => '234@ asdf.com')
+      assert u.errors.on(:email)
+    end
+  end
+  
+  # test should follow another user
+  test "should follow" do
+    assert_difference 'users(:alice).followees.count' do
+      users(:alice).follow(users(:bob))
+      assert users(:alice).followees.find_by_id(users(:bob).id)
+      assert users(:bob).followers.find_by_id(users(:alice).id)
+    end
+  end
+  
+  # test should not be able to follow self
+  test "should not follow self" do
+    assert_no_difference 'users(:alice).followees.count' do
+      users(:alice).follow(users(:alice))
+    end
+  end
+  
+  # test should not be able to follow someone twice
+  test "should follow unique" do
+    users(:alice).follow(users(:bob))
+    assert_no_difference 'users(:alice).followees.count' do
+      users(:alice).follow(users(:bob))
+    end
+  end
+  
+  test "should unfollow" do
+    users(:alice).follow(users(:bob))
+    assert_difference 'users(:alice).followees.count', -1 do
+      users(:alice).unfollow(users(:bob))
+    end
+  end
+  
+  test "should not unfollow when not following" do
+    assert_no_difference 'users(:alice).followees.count' do
+      users(:alice).unfollow(users(:bob))
+    end
+  end
+  
+  test "should not unfollow self" do
+    assert_no_difference 'users(:alice).followees.count' do
+      users(:alice).unfollow(users(:alice))
+    end
+  end
+  
+  test "should be following?" do
+    assert !users(:alice).following?(users(:bob))
+    users(:alice).follow(users(:bob))
+    assert users(:alice).following?(users(:bob))
+  end
+  
+  test "should be followed by?" do
+    assert !users(:bob).followed_by?(users(:alice))
+    users(:alice).follow(users(:bob))
+    assert users(:bob).followed_by?(users(:alice))
+  end
+  
+  test "home url" do
+    assert_equal "#{ENV['hostname']}/alice", users(:alice).home_page_url
   end
 
-  def test_should_not_rehash_password
-    users(:quentin).update_attributes(:login => 'quentin2')
-    assert_equal users(:quentin), User.authenticate('quentin2', 'test')
+  test "should reset password" do
+    users(:alice).update_attributes(:password => 'new password', :password_confirmation => 'new password')
+    assert_equal users(:alice), User.authenticate('alice', 'new password')
   end
 
-  def test_should_authenticate_user
-    assert_equal users(:quentin), User.authenticate('quentin', 'test')
+  test "should not rehash password" do
+    users(:alice).update_attributes(:login => 'alice2')
+    assert_equal users(:alice), User.authenticate('alice2', 'test')
   end
 
-  def test_should_set_remember_token
-    users(:quentin).remember_me
-    assert_not_nil users(:quentin).remember_token
-    assert_not_nil users(:quentin).remember_token_expires_at
+  test "should authenticate user" do
+    assert_equal users(:alice), User.authenticate('alice', 'test')
   end
 
-  def test_should_unset_remember_token
-    users(:quentin).remember_me
-    assert_not_nil users(:quentin).remember_token
-    users(:quentin).forget_me
-    assert_nil users(:quentin).remember_token
+  test "should set remember token" do
+    users(:alice).remember_me
+    assert_not_nil users(:alice).remember_token
+    assert_not_nil users(:alice).remember_token_expires_at
   end
 
-  def test_should_remember_me_for_one_week
+  test "should unset remember token" do
+    users(:alice).remember_me
+    assert_not_nil users(:alice).remember_token
+    users(:alice).forget_me
+    assert_nil users(:alice).remember_token
+  end
+
+  test "should remember me for one week" do
     before = 1.week.from_now.utc
-    users(:quentin).remember_me_for 1.week
+    users(:alice).remember_me_for 1.week
     after = 1.week.from_now.utc
-    assert_not_nil users(:quentin).remember_token
-    assert_not_nil users(:quentin).remember_token_expires_at
-    assert users(:quentin).remember_token_expires_at.between?(before, after)
+    assert_not_nil users(:alice).remember_token
+    assert_not_nil users(:alice).remember_token_expires_at
+    assert users(:alice).remember_token_expires_at.between?(before, after)
   end
 
-  def test_should_remember_me_until_one_week
+  test "should remember me until one week" do
     time = 1.week.from_now.utc
-    users(:quentin).remember_me_until time
-    assert_not_nil users(:quentin).remember_token
-    assert_not_nil users(:quentin).remember_token_expires_at
-    assert_equal users(:quentin).remember_token_expires_at, time
+    users(:alice).remember_me_until time
+    assert_not_nil users(:alice).remember_token
+    assert_not_nil users(:alice).remember_token_expires_at
+    assert_equal users(:alice).remember_token_expires_at, time
   end
 
-  def test_should_remember_me_default_two_weeks
+  test "should remember me default two weeks" do
     before = 2.weeks.from_now.utc
-    users(:quentin).remember_me
+    users(:alice).remember_me
     after = 2.weeks.from_now.utc
-    assert_not_nil users(:quentin).remember_token
-    assert_not_nil users(:quentin).remember_token_expires_at
-    assert users(:quentin).remember_token_expires_at.between?(before, after)
+    assert_not_nil users(:alice).remember_token
+    assert_not_nil users(:alice).remember_token_expires_at
+    assert users(:alice).remember_token_expires_at.between?(before, after)
   end
+
 
 protected
   def create_user(options = {})
