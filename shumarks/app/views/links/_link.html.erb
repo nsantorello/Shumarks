@@ -1,4 +1,4 @@
-<tr id="<%= link.id %>">
+<tr class="link-tr" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
 	<td width="95%" class="list-item">
 		<div class="list-header">
 			<%= link_to link.short_name, view_link_path(link), :class => 'link'%>&nbsp;&nbsp;
@@ -10,19 +10,10 @@
 			Added by <%= User.find_by_id(link.user_id).login %> <%= time_ago(link.created_at)%>
 		</div>
 	</td>
-	<td width="5%" class="list-item">
+	<td width="5%" class="list-item display-none" id="delete-link-td-<%= link.id %>">
 		<% if logged_in? && @user && @user.id == current_user.id then -%>
-			<%= link_to '(remove)', delete_link_path(link), :id => ('link_remove-' + link.id.to_s), :style => 'display:none', :class => 'link_remove' %>
+			<%= link_to 'Remove', delete_link_path(link), :id => ('link_remove-' + link.id.to_s), :class => 'small-button' %>
 		<% end -%>
 	</td>
 </tr>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#<%= link.id.to_s %>").hover(function() {
-		    $("#link_remove-<%= link.id.to_s %>").css("display", "inline");
-		},
-		function() {
-		    $("#link_remove-<%= link.id.to_s %>").css("display", "none");
-		});
-	});
-</script>
+
