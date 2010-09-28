@@ -8,6 +8,7 @@ class LinkTest < ActiveSupport::TestCase
       link = create_link
       assert !link.new_record?, "#{link.errors.full_messages.to_sentence}"
       assert users(:alice).links.find_by_id(link.id)
+      assert_equal 'Google', link.name
     end
   end
   
@@ -39,17 +40,10 @@ class LinkTest < ActiveSupport::TestCase
     end
   end
   
-  test "short_name" do
-    link = create_link(:name => "This name is way too long. It is over 60 characters long. 
-        We will try to shorten it by using link.short_name")
-    
-    assert link.short_name.length <= 60
-    
-  end
-  
 protected
   def create_link(options = {})
-    record = Link.new({ :user_id => users(:alice).id, :url => 'http://www.google.com', :name => 'Google' }.merge(options))
+    record = Link.new({ :user_id => users(:alice).id, :url => 'http://www.google.com', :name => 'Google', 
+      :blurb => 'Blurbiddy blurb'}.merge(options))
     record.save
     record
   end

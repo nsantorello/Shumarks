@@ -112,10 +112,10 @@ div.content-section { padding-bottom:20px;}
 .list-table td#delete {text-align: right; }
 .list-table td#follow {text-align: right; padding-top:10px; width:80px;}
 
-.list-item		 { padding-bottom: 15px; }
-.list-item .list-header 	 { color:#000; font-size: 16px; line-height:20px;}
+.list-item		 			{ padding-bottom: 15px; }
+.list-item .list-header 	{ color:#000; font-size: 16px; line-height:20px;}
 .list-item .list-sub-header { color:#aaa; font-size: 12px;}
-.list-item .list-body		 { color:#000; font-size: 12px; padding-top: 5px;}
+.list-item .list-body		{ color:#000; font-size: 12px; padding-top: 5px;}
 .list-item .list-footer     { color:#aaa; font-size: 10px;}
 
 .link-content {width: 600px;}

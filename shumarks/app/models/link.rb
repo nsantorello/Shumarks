@@ -14,7 +14,7 @@ class Link < ActiveRecord::Base
 	
 	# If the name is ever empty, populate it with the url
 	def fix_name
-	  if not self.url or not self.url.blank?
+	  if not self.name
 	    self.name = self.url
     end
 	end
