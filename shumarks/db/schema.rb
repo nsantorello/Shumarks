@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100916045551) do
+ActiveRecord::Schema.define(:version => 20100928004811) do
 
   create_table "follows", :force => true do |t|
     t.integer  "follower_id", :null => false
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 20100916045551) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "blurb"
+  end
+
+  create_table "read_receipts", :force => true do |t|
+    t.integer  "link_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

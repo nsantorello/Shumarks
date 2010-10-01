@@ -6,8 +6,6 @@ alice:
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 5.days.ago.to_s :db %>
 
-
-
 bob:
   id: 2
   login: bob
@@ -16,4 +14,26 @@ bob:
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 1.days.ago.to_s :db %>
 
+charlie:
+  id: 3
+  login: charlie
+  email: charlie@hotmail.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 2.years.ago.to_s :db %>
 
+dave:
+  id: 4
+  login: dave
+  email: dave@msn.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 1.month.ago.to_s :db %>
+
+ellen:
+  id: 5
+  login: ellen
+  email: ellen@nbc.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 5.month.ago.to_s :db %>

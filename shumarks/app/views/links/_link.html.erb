@@ -1,19 +1,23 @@
-<tr class="link-tr" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
-	<td class="list-item link-content">
+<div class="link-line-item" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
+	<div class="list-item link-content">
 		<div class="list-header">
-			<%= link_to link.short_name, view_link_path(link), :class => 'link'%>&nbsp;&nbsp;
+			<%= link_to link.short_name, link_path(link), :class => 'link'%>&nbsp;&nbsp;
+		</div>
+		<div class="list-sub-header">
+			<%= link.num_readers_to_s(current_user) %>
 		</div>
 		<div class="list-body">
 			<%= link.blurb %>
 		</div>
 		<div class="list-footer">
-			Added by <%= User.find_by_id(link.user_id).login %> <%= time_ago(link.created_at)%>
+			Added by <%= User.find_by_id(link.user_id).login %> <%= time_ago(link.created_at)%>.
+			<%= pluralize(link.readers.count, 'view') %>
 		</div>
-	</td>
-	<td class="list-item delete-link-td">
+	</div>
+	<div class="list-item delete-link">
 		<% if logged_in? && @user && @user.id == current_user.id then -%>
-			<%= link_to 'Remove', delete_link_path(link), :id => ("delete-link-#{link.id}"), :class => 'small-button  display-none' %>
+			<%= link_to 'Remove', delete_link_path(link), :id => ("delete-link-#{link.id}"), :class => 'small-button display-none' %>
 		<% end -%>
-	</td>
-</tr>
+	</div>
+</div>
 

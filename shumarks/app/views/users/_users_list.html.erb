@@ -23,7 +23,7 @@
 						</div>
 						<% for recent_link in recent_links %>
 							<div class="left">
-								<%= link_to recent_link.short_name, view_link_path(recent_link) %>
+								<%= link_to recent_link.short_name, link_path(recent_link) %>
 							</div>
 							<div class="list-footer right">
 								<%= time_ago(recent_link.created_at) %>

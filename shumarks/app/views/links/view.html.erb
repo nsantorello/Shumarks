@@ -1,0 +1,17 @@
+<div class="list-item link-content">
+	<div class="list-header">
+		<%= link_to @link.short_name, link_redirect_path(@link), :class => 'link'%>&nbsp;&nbsp;
+	</div>
+	<div class="list-sub-header">
+		<%= @link.num_readers_to_s(current_user) %>
+	</div>
+	<div class="list-body">
+		<%= @link.blurb %>
+	</div>
+	<div class="list-footer">
+		Added by <%= User.find_by_id(@link.user_id).login %> <%= time_ago(@link.created_at)%>
+	</div>
+</div>
+
+
+<h2>Comments</h2>

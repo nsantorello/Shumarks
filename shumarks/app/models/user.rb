@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   has_many :followers,            :through => :follows_as_followee
   has_many :followees,            :through => :follows_as_follower
   
+  has_many :read_receipts
+  has_many :links_read, :through => :read_receipts, :source => :link
+  
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :password, :password_confirmation, :first_name, :last_name, :bio
@@ -56,6 +59,19 @@ class User < ActiveRecord::Base
   
   def home_page_url
     return "#{ENV['hostname']}/#{self.login}"
+  end
+  
+  def read(link)
+    if link and !self.links_read.find_by_id(link.id) and link.user.id != self.id
+      self.links_read << link
+      self.save()
+    else
+      false 
+    end
+  end
+  
+  def has_read?(link)
+    link and self.links_read.find_by_id(link.id)
   end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.

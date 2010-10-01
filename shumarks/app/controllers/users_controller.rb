@@ -48,23 +48,19 @@ class UsersController < ApplicationController
     if logged_in?
       if @user
         if @user.id == current_user.id
-          @page_title = "Shumarks: Queue for " + @user.login
           @header_text = "My Shumarks"
           @is_self = true
         else
-          @page_title = "#{@user.login}"
           @header_text = "#{@user.login}'s Shumarks"
           @is_following = current_user.following?(@user)
         end
       else
         @user = current_user
-        @page_title = "Shumarks: Queue for " + @user.login
         @header_text = "My Shumarks"
         @is_self = true
       end
     else
       if @user
-        @page_title = "#{@user.login}"
         @header_text = "#{@user.login}'s Shumarks"
       else
         redirect_to(home_path)
@@ -72,6 +68,7 @@ class UsersController < ApplicationController
       end
     end
 
+    @page_title = "Shumarks: #{@user.login}"
     @links = @user.links.all(:order => 'created_at DESC')
   end
   

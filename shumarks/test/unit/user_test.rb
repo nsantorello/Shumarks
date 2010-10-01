@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
   # Be sure to include AuthenticatedTestHelper in test/test_helper.rb instead.
   # Then, you can remove it from this and the functional test.
   include AuthenticatedTestHelper
-  fixtures :users
+  fixtures :all
 
   # test able to create users
   test "should create user" do
@@ -135,6 +135,32 @@ class UserTest < ActiveSupport::TestCase
   
   test "home url" do
     assert_equal "#{ENV['hostname']}/alice", users(:alice).home_page_url
+  end
+  
+  test "should read" do
+    assert_difference 'ReadReceipt.count' do
+      assert users(:bob).read(links(:google))
+    end
+  end
+  
+  test "should not read again" do
+    users(:bob).read(links(:google))
+    assert_no_difference 'ReadReceipt.count' do
+      assert !users(:bob).read(links(:google))
+    end
+  end
+  
+  test "should not read self" do
+    users(:alice).read(links(:google))
+    assert_no_difference 'ReadReceipt.count' do
+      assert !users(:alice).read(links(:google))
+    end
+  end
+  
+  test "should have read" do
+    assert !users(:bob).has_read?(links(:google))
+    assert users(:bob).read(links(:google))
+    assert users(:bob).has_read?(links(:google))
   end
 
   test "should reset password" do

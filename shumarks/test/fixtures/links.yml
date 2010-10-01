@@ -1,11 +1,31 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+google:
   user_id: 1
   url: http://www.google.com
   name: Google
+  blurb: Don't be evil
 
-two:
+microsoft:
   user_id: 1
   url: http://www.microsoft.com
   name: Microsoft
+  blurb: We will fix it in a patch
+  
+apple:
+  user_id: 3
+  url: http://www.apple.com
+  name: Apple
+  blurb: Dont hold it that way
+
+oracle:
+  user_id: 4
+  url: http://www.oracle.com
+  name: Oracle
+  blurb: We own Java
+
+yahoo:
+  user_id: 5
+  url: http://www.yahoo.com
+  name: Yahoo
+  blurb: Yahooooo!

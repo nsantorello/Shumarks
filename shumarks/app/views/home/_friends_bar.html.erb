@@ -17,7 +17,7 @@
 
 
 	<div class="section-header">
-		Following <%= current_user.followees.length %>
+		Following <%= current_user.followees.count %>
 	</div>
 	<div class="section">
 		<% for following in current_user.followees.all(:limit => 3) -%>
@@ -26,7 +26,7 @@
 			</div>
 		<% end -%>
 		<div>
-			<% if current_user.followees.length > 0 %>
+			<% if current_user.followees.count > 0 %>
 				<%= link_to "see all", follow_list_path, :class => 'right'%>
 				<div class="clear-both"></div>
 			<% else %>
@@ -36,7 +36,7 @@
 	</div>
 
 	<div class="section-header">
-		Followers <%= current_user.followers.length %>
+		Followers <%= current_user.followers.count %>
 	</div>
 	<div class="section">
 		<% for follower in current_user.followers.all(:limit => 3)-%>
@@ -45,7 +45,7 @@
 			</div>
 		<% end -%>
 		<div>
-		<% if current_user.followers.length > 0 %>
+		<% if current_user.followers.count > 0 %>
 			<%= link_to "see all", follower_list_path, :class => 'right'%>	
 			<div class="clear-both"></div>
 		<% else %>

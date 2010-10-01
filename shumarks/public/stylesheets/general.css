@@ -109,7 +109,6 @@ div.content-section { padding-bottom:20px;}
 
 .list-table {width:100%;}
 .list-table td        {padding:2px 5px 20px 0; vertical-align:top; }
-.list-table td#delete {text-align: right; }
 .list-table td#follow {text-align: right; padding-top:10px; width:80px;}
 
 .list-item		 			{ padding-bottom: 15px; }
@@ -118,7 +117,8 @@ div.content-section { padding-bottom:20px;}
 .list-item .list-body		{ color:#000; font-size: 12px; padding-top: 5px;}
 .list-item .list-footer     { color:#aaa; font-size: 10px;}
 
-.link-content {width: 600px;}
+.link-content {width: 600px; float: left;}
+.delete-link {float:right; text-align:right;}
 
 .pad{padding:5px;}
 .none{float:none;clear:both;}

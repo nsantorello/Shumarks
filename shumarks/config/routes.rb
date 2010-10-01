@@ -44,7 +44,6 @@ ActionController::Routing::Routes.draw do |map|
   map.home '/', :controller => 'home', :action => 'index'
   map.about '/about', :controller => 'home', :action => 'about'
   map.addons '/addons', :controller => 'home', :action => 'addons'
-  map.view_link '/view/:id', :controller => 'home', :action => 'view_link'
   map.home_id '/home/:id', :controller => 'home', :action => 'home'
 
   
@@ -80,8 +79,11 @@ ActionController::Routing::Routes.draw do |map|
    
   map.user_links '/user/links', :controller => 'links', :action => 'index'
   
+  map.link '/links/:id', :controller => 'links', :action => 'view'
+  
   map.delete_link '/user/links/delete/:id', :controller => 'links', :action => 'delete'
-  map.link '/v/:id', :controller => 'home', :action => 'view_link'
+  map.link_redirect '/v/:id', :controller => 'links', :action => 'redir'
+  
   map.follow '/follow/:id', :controller => 'users', :action => 'follow'
   map.unfollow '/unfollow/:id', :controller => 'users', :action => 'unfollow'
   map.follow_list '/follow-list/', :controller => 'users', :action => 'follow_list'

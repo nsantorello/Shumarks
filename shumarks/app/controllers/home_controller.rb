@@ -21,14 +21,4 @@ class HomeController < ApplicationController
   def addons
     @page_title = "Browser Addons"
   end
-  
-  def view_link
-    if @link = Link.find_by_id(params[:id])
-      
-      redirect_to("#{@link.url}")
-    else
-      flash[:error] = "Sorry, the link was not found"
-      redirect_to(home_path)
-    end
-  end
 end
