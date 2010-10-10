@@ -13,10 +13,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   
   # reset title to default
-  before_filter :reset_title
-  
-  # log user in if salt was passed in
-  before_filter :login_from_salt
+  before_filter :save_session, :login_from_salt, :reset_title
   
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
@@ -37,9 +34,33 @@ class ApplicationController < ActionController::Base
     time.in_time_zone(browser_timezone)
   end
   
-  protected
+protected
   def reset_title
     @page_title = "Shumarks"
+  end
+  
+  def save_session
+    # First request to the server, start the session
+    if not internal_session = Session.find_by_ruby_session_id(session[:session_id])
+      internal_session = Session.new(
+        :ruby_session_id => session[:session_id], 
+        :referrer => request.referrer,
+        :user_agent => request.env['HTTP_USER_AGENT'],
+        :client_ip => request.remote_ip
+      )
+      internal_session.save()
+      
+      # First time user
+      if not cookies[:user_id]
+        user = User.new(:is_registered => false)
+        user.save
+        cookies[:user_id] = {:value => user.id, :expires => 1.months.from_now}
+
+        internal_session.update_attributes(:user_id => cookies[:user_id].to_i)
+      end      
+    end
+    
+    session[:internal_session_id] = internal_session.id
   end  
 
 end

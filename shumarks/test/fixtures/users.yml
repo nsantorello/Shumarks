@@ -5,6 +5,7 @@ alice:
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 5.days.ago.to_s :db %>
+  is_registered: true
 
 bob:
   id: 2
@@ -13,6 +14,7 @@ bob:
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 1.days.ago.to_s :db %>
+  is_registered: true
 
 charlie:
   id: 3
@@ -21,6 +23,7 @@ charlie:
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 2.years.ago.to_s :db %>
+  is_registered: true
 
 dave:
   id: 4
@@ -29,6 +32,7 @@ dave:
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 1.month.ago.to_s :db %>
+  is_registered: true
 
 ellen:
   id: 5
@@ -37,3 +41,9 @@ ellen:
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 5.month.ago.to_s :db %>
+  is_registered: true
+
+fred:
+  id: 6
+  created_at: <%= 1.day.ago.to_s :db %>
+  is_registered: false

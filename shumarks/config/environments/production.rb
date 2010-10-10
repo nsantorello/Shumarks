@@ -27,4 +27,4 @@ config.action_view.cache_template_loading            = false
 # Enable threaded mode
 # config.threadsafe!
 
-ENV['hostname'] = 'shumarks.com'
+ENV['hostname'] = 'shumark.it'

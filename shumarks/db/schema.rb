@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100928004811) do
+ActiveRecord::Schema.define(:version => 20101007024325) do
 
   create_table "follows", :force => true do |t|
     t.integer  "follower_id", :null => false
@@ -31,7 +31,23 @@ ActiveRecord::Schema.define(:version => 20100928004811) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "session_id"
   end
+
+  create_table "sessions", :force => true do |t|
+    t.string   "ruby_session_id", :null => false
+    t.integer  "user_id"
+    t.string   "referrer"
+    t.string   "user_agent"
+    t.string   "client_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "destroyed_at"
+  end
+
+  add_index "sessions", ["referrer"], :name => "index_sessions_on_referrer"
+  add_index "sessions", ["ruby_session_id"], :name => "index_sessions_on_ruby_session_id"
+  add_index "sessions", ["user_id"], :name => "index_sessions_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "login"
@@ -45,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20100928004811) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "bio"
+    t.boolean  "is_registered"
   end
 
   add_index "users", ["first_name"], :name => "index_users_on_first_name"

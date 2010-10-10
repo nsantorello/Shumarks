@@ -34,4 +34,12 @@ module ApplicationHelper
         "#{(minutes / 1440).round} days"
     end
   end
+  
+  def internal_session()
+    Session.find_by_id(session[:internal_session_id])
+  end
+  
+  def user_in_cookie()
+    User.find_by_id(cookies[:user_id].to_i)
+  end
 end

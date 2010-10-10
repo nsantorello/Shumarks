@@ -1,11 +1,15 @@
 # This controller handles the login/logout function of the site.  
 class SessionController < ApplicationController
+  # Login
   def create
     self.current_user = User.authenticate(params[:session][:login], params[:session][:password])
     
     if logged_in?
       if params[:remember_me] == "1"
-        current_user.remember_me unless current_user.remember_token?
+        unless current_user.remember_token?
+          current_user.remember_me 
+        end
+        
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       
@@ -21,10 +25,16 @@ class SessionController < ApplicationController
     end
   end
   
+  # Log out
   def destroy
-    self.current_user.forget_me if logged_in?
+    if logged_in?
+      self.current_user.forget_me
+    end
     cookies.delete :auth_token
+    internal_session.update_attributes(:destroyed_at => Time.now)
+    
     reset_session
+
     redirect_back_or_default('/')
   end
 end

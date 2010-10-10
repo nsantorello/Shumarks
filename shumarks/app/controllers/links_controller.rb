@@ -15,13 +15,16 @@ class LinksController < ApplicationController
       redirect_to(home_path)
     end
     
-    @page_title = @link.name
+    @actual_link = true
+    @page_title = "Shumarks: " + @link.name
   end
   
   def redir
     if @link = Link.find_by_id(params[:id])
       if logged_in?
         current_user.read(@link)
+      else
+        user_in_cookie.read(@link)
       end
       redirect_to("#{@link.url}")    
     else

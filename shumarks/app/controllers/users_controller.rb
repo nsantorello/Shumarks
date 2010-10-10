@@ -9,8 +9,10 @@ class UsersController < ApplicationController
     # request forgery protection.
     # uncomment at your own risk
     # reset_session
-    @user = User.new(params[:user])
-    @user.save
+    @user = User.find(cookies[:user_id])
+    @user.is_registered = true
+    @user.update_attributes(params[:user])
+    
     if @user.errors.empty?
       self.current_user = @user
       redirect_back_or_default('/')

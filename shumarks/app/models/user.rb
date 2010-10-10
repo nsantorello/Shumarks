@@ -3,16 +3,18 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
-  validates_presence_of     :login, :email
-  validates_presence_of     :password,                   :if => :password_required?
-  validates_presence_of     :password_confirmation,      :if => :password_required?
-  validates_length_of       :password, :within => 4..40, :if => :password_required?
-  validates_confirmation_of :password,                   :if => :password_required?
-  validates_length_of       :login,    :within => 3..40
-  validates_length_of       :email,    :within => 3..100
-  validates_format_of       :login, :with => /\A[a-z0-9_-]*\Z/i
-  validates_format_of       :email, :with => /\A[^@\s]+@[-a-z0-9]+\.+[a-z]{2,}\Z/i
-  validates_uniqueness_of   :login, :email, :case_sensitive => false
+  validates_inclusion_of    :is_registered, :in => [true, false]
+  validates_presence_of     :login, :email,               :if => :registering?
+  validates_presence_of     :password,                    :if => :password_required?
+  validates_presence_of     :password_confirmation,       :if => :password_required?
+  validates_length_of       :password, :within => 4..40,  :if => :password_required?
+  validates_confirmation_of :password,                    :if => :password_required?
+  validates_length_of       :login,    :within => 3..40,  :if => :registering?
+  validates_length_of       :email,    :within => 3..100, :if => :registering?
+  validates_format_of       :login, :with => /\A[a-z0-9_-]*\Z/i, :if => :registering?
+  validates_format_of       :email, :with => /\A[^@\s]+@[-a-z0-9]+\.+[a-z]{2,}\Z/i, :if => :registering?
+  validates_uniqueness_of   :login, :email, :case_sensitive => false, :if => :registering?
+  
   before_save :encrypt_password
   
   has_many :links
@@ -25,13 +27,15 @@ class User < ActiveRecord::Base
   has_many :read_receipts
   has_many :links_read, :through => :read_receipts, :source => :link
   
+  has_many :sessions
+  
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :password, :password_confirmation, :first_name, :last_name, :bio
+  attr_accessible :is_registered, :login, :email, :password, :password_confirmation, :first_name, :last_name, :bio
   
   # follows given user, returns success or failure
   def follow(user)
-    if !self.followees.find_by_id(user.id) and user.id != self.id
+    if user and user.is_registered and self.is_registered and !self.followees.find_by_id(user.id) and user.id != self.id
       self.followees << user
       self.save()
     else
@@ -41,7 +45,7 @@ class User < ActiveRecord::Base
   
   # unfollows given user, returns success or failure
   def unfollow(user)
-    if self.followees.find_by_id(user.id) and user.id != self.id
+    if user and self.followees.find_by_id(user.id) and user.id != self.id
       self.followees.delete(user)
       self.save()
     else
@@ -143,12 +147,19 @@ class User < ActiveRecord::Base
   protected
     # before filter 
     def encrypt_password
-      return if password.blank?
+      if password.blank?
+        return
+      end
+      
       self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?
       self.crypted_password = encrypt(password)
     end
       
     def password_required?
-      crypted_password.blank? || !password.blank?
+      registering? and (crypted_password.blank? or !password.blank?)
+    end
+    
+    def registering?
+      self.is_registered
     end
 end
