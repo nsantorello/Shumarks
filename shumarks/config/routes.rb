@@ -50,6 +50,14 @@ ActionController::Routing::Routes.draw do |map|
   # API urls
   map.save '/save', :controller => 'links', :action => 'create'
   
+  # Twitter API urls
+  map.save 'twitter-auth', :controller => 'users', :action => 'twitter_create'
+  map.save 'twitter-callback', :controller => 'users', :action => 'twitter_callback'
+  
+  # Facebook API urls
+  map.save 'facebook-auth', :controller => 'users', :action => 'facebook_create'
+  map.save 'facebook-callback', :controller => 'users', :action => 'facebook_callback'
+  
   # User pages
   map.my_home '/my-shumarks', :controller => 'users', :action => 'home'
   map.edit_user '/account', :controller => 'users', :action => 'edit'
