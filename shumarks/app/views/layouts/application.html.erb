@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <div id="container">
+    <div id="container" class="top-corners bottom-corners">
         <div id="header">
           <div id="logo" class="left"></div>
           <div class="right">
@@ -21,17 +21,18 @@
             	<%= link_to 'Login', login_path %>
             <% end -%>
           </div>
-					<% if logged_in? and !current_user.first_name and !current_user.last_name and ! current_user.bio then %>
-						<div style="color:#165e17; padding:3px; clear:right; float:right; border:#d4ccb0 2px solid;">
-							Customize your profile here!
-						</div>
-					<% end%>
         </div>
         <div id="topNav">
-          <%= link_to 'Home', home_path, :class => 'left'%>
+          <%= link_to 'Home', logged_in? ? user_home_path : home_path, :class => 'left'%>
            
 	        <% if logged_in? then -%>
-	        	<%= link_to 'My Shumarks', my_home_path, :class => 'left' %>
+	        	<%= link_to 'My Shumarks', user_path(current_user.login), :class => 'left' %>
+		       	<%= link_to 'Discover!', home_path, :class => 'left' %>
+						<% if @is_following then %>
+								<%= link_to "Unfollow", unfollow_path(@user), :class => "small-button"%>
+						<% elsif @user and not @is_self %>
+								<%= link_to "Follow", follow_path(@user), :class => "small-button"%>
+						<% end %>
 	        <% end -%>
 	
 	        <%= link_to 'About', "/about", :class => 'left' %>
@@ -61,19 +62,22 @@
 							<%= flash[:error] %>
 					  </div>
 					<% end %>
+					
 					<div class="clear-both"></div>
-					<% if logged_in? then %>
-						<div id="main-content" class="left">
-							<%= yield %>
-						</div>
-						<div id="friends-bar" class="right">
-							<%= render '/home/friends_bar' %>
-						</div>
-						<div class="clear-both"></div>
-					<% else %>
+					<div id="main-content" class="left">
 						<%= yield %>
-					<% end%>
-
+						<div class="clear-both"></div>
+					</div>
+					<div id="side-bar" class="sidebar-widget right">
+						<% if logged_in? then %>
+							<%= render '/home/friends_bar' %>
+						<% end %>
+						
+						<% if @most_read %>
+							<%= render '/home/most_viewed_bar' %>
+						<% end %>
+					</div>
+					<div class="clear-both"></div>
         </div>
 
     </div><!-- close conainter -->

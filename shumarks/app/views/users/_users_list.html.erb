@@ -3,7 +3,7 @@
 		<tr>
 			<td class="list-item">
 				<div class="list-header">
-					<%= link_to user.login, user_home_path(user.login) %>
+					<%= link_to user.login, user_path(user.login) %>
 					<% if user.first_name or user.last_name %>
 							- <%= user.first_name %> <%= user.last_name %>
 					<% end %>
@@ -15,7 +15,7 @@
 					</div>
 				<% end %>
 				
-				<% recent_links = user.links.all(:limit => 3, :order => 'created_at DESC') %>
+				<% recent_links = user.links.most_recent(:limit => 3) %>
 				<% if recent_links.length > 0 then %>
 					<div class="list-body">
 						<div class="clear-both">

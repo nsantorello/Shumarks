@@ -26,10 +26,9 @@ class Link < ActiveRecord::Base
 	end
 	
 	# Shortens a name to only 60 characters
-	def short_name
+	def short_name(how_short = 55)
 		str = self.name
-		wordcount = 60
-		shortname = (str.length > wordcount) ? (str[0..wordcount] + "...") : str
+		shortname = (str.length > how_short) ? (str[0..how_short] + "...") : str
 		return shortname
 	end
 	
@@ -39,9 +38,9 @@ class Link < ActiveRecord::Base
   end
   
   # Get the readers of this link who follow the given user
-  def readers_who_follow(user, options={:limit => 3, :order => 'created_at DESC'})
+  def readers_who_follow(user, options={})
     if user
-      self.readers.all({:conditions => {:id => user.followers}}.merge(options))
+      self.readers.all({:conditions => {:id => user.followers}, :limit => 3, :order => 'read_receipts.created_at DESC'}.merge(options))
     else
       false
     end
@@ -70,4 +69,34 @@ class Link < ActiveRecord::Base
     end
 	  s
   end
+  
+  # finders
+  def self.most_read(options = {})
+    Link.all({
+      :joins => 'LEFT JOIN read_receipts ON links.id = read_receipts.link_id', 
+      :group => :id, 
+      :order => 'COUNT(*) DESC',
+      :limit => 10
+    }.merge(options))
+  end
+  
+  def self.most_recent(options = {})
+    Link.all({
+      :order => 'created_at DESC', 
+      :limit => 15
+    }.merge(options))
+  end
+  
+  def self.feed_of(user, options = {})
+    if user
+       Link.all({
+         :conditions => {:user_id => user.followee_ids}, 
+         :order => 'created_at DESC',
+         :limit => 15
+       }.merge(options))
+    else
+      false
+    end
+  end
+  
 end

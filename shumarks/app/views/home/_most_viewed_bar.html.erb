@@ -1,0 +1,23 @@
+<div class="section-header">
+	Most Popular
+</div>
+<div class="section">
+	<div class="link-list">
+		<% for link in @most_read -%>
+			<div class="link-line-item">
+				<div class="list-item link-content">
+					<div class="list-header left">
+						<%= link_to link.short_name(30), link_path(link), :class => 'link'%>&nbsp;&nbsp;
+					</div>
+					<div class="list-footer right">
+						<%= link.readers.count %>
+					</div>
+					<div class="list-sub-header clear-left">						
+						<%= time_ago(link.created_at)%>
+					</div>
+				</div>
+				<div class="clear-both"></div>
+			</div>
+	  <% end -%>
+	</div>
+</div>

@@ -6,7 +6,7 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
     @link.destroy()
     
-    redirect_to(my_home_path)
+    redirect_to user_home_path(current_user.login)
   end
   
   def view

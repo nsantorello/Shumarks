@@ -1,0 +1,13 @@
+<div class="pager">
+	<%= link_to '&lt;&lt;', redir_path, :class => 'small-button' %>
+	
+	<%= link_to '&lt;', redir_path + "?p=#{[@page_index - 1, 1].max}", :class => 'small-button' %>
+	
+	<% (1..(@page_total+1)).each do |i| %>
+		<%= link_to i, redir_path + "?p=#{i}", :class => "small-button #{@page_index + 1 == i ? 'current' : ''}" %>
+	<% end %>
+	
+	<%= link_to '&gt;', redir_path + "?p=#{[@page_index + 1, @page_total+1].min}", :class => 'small-button' %>
+	
+	<%= link_to '&gt;&gt;', redir_path + "?p=#{@page_total + 1}", :class => 'small-button'%>
+</div>

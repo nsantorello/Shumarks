@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   
   # reset title to default
-  before_filter :save_session, :login_from_salt, :reset_title
+  before_filter :save_session, :login_from_salt, :set_common_vars
   
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
@@ -35,8 +35,11 @@ class ApplicationController < ActionController::Base
   end
   
 protected
-  def reset_title
+  def set_common_vars
     @page_title = "Shumarks"
+    @page_index = params[:p] ? params[:p].to_i - 1 : 0
+    @page_size = 10
+    @page_total = 0
   end
   
   def save_session

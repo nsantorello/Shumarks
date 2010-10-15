@@ -13,7 +13,7 @@ class SessionController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       
-      redirect_back_or_default('/')
+      redirect_back_or_default(user_home_path)
       
       if !current_user.first_name and !current_user.last_name and ! current_user.bio
         flash[:notice] = "Click on \"Account\" on the top right corner to customize your profile."

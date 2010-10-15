@@ -1,5 +1,5 @@
 <div class="link-line-item" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
-	<div class="list-item link-content">
+	<div class="list-item link-content left">
 		<div class="list-header">
 			<%= link_to link.short_name, (@actual_link ? link_redirect_path(link) : link_path(link)), :class => 'link'%>&nbsp;&nbsp;
 		</div>
@@ -14,7 +14,7 @@
 			<%= pluralize(link.readers.count, 'view') %>
 		</div>
 	</div>
-	<div class="list-item delete-link">
+	<div class="list-item delete-link right">
 		<% if logged_in? && @user && @user.id == current_user.id then -%>
 			<%= link_to 'Remove', delete_link_path(link), :id => ("delete-link-#{link.id}"), :class => 'small-button display-none' %>
 		<% end -%>

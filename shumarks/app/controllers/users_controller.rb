@@ -1,6 +1,6 @@
 require 'net/http'
 class UsersController < ApplicationController
-  before_filter :login_required, :set_user, :only => [:edit, :update, :follow, :unfollow, :follow_list, :follower_list]
+  before_filter :login_required, :set_user, :only => [:edit, :update, :follow, :unfollow, :follow_list, :follower_list, :home]
 
   # Create new user
   def create
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
   
   # Show user queue
-  def home
+  def links
     # Get the user by id
     if params[:id]
       @user = User.find_by_id(params[:id])
@@ -47,8 +47,11 @@ class UsersController < ApplicationController
       @user = User.find_by_login(params[:user_name])
     end
     
-    if logged_in?
-      if @user
+    unless @user
+      flash[:error] = "User not found."
+      redirect_to(home_path)
+    else
+      if logged_in?
         if @user.id == current_user.id
           @header_text = "My Shumarks"
           @is_self = true
@@ -57,21 +60,21 @@ class UsersController < ApplicationController
           @is_following = current_user.following?(@user)
         end
       else
-        @user = current_user
-        @header_text = "My Shumarks"
-        @is_self = true
-      end
-    else
-      if @user
         @header_text = "#{@user.login}'s Shumarks"
-      else
-        redirect_to(home_path)
-        return
       end
-    end
 
-    @page_title = "Shumarks: #{@user.login}"
-    @links = @user.links.all(:order => 'created_at DESC')
+      @page_title = "Shumarks: #{@user.login}"
+      @links = @user.links.most_recent
+      @page_total = @user.links.count / @page_size
+    end
+  end
+  
+  def home
+    @page_title = "Shumakrs: #{@user.login}"
+    @header_text = "Home"
+    @links = Link.feed_of(current_user, {:limit => @page_size, :offset => @page_size * @page_index})
+    @page_total = Link.feed_of(current_user, :limit => nil).length / @page_size
+    @is_self = true
   end
   
   # Edit user information
@@ -201,7 +204,7 @@ class UsersController < ApplicationController
   def set_user
     @user = current_user
     if @user
-      @links = @user.links.all(:order => 'created_at DESC')
+      @links = @user.links.most_recent(:limit => @page_size, :offset => @page_size * @page_index)
     end
   end
   

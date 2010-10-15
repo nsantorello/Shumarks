@@ -44,14 +44,12 @@ ActionController::Routing::Routes.draw do |map|
   map.home '/', :controller => 'home', :action => 'index'
   map.about '/about', :controller => 'home', :action => 'about'
   map.addons '/addons', :controller => 'home', :action => 'addons'
-  map.home_id '/home/:id', :controller => 'home', :action => 'home'
 
   
   # API urls
   map.save '/save', :controller => 'links', :action => 'create'
   
   # User pages
-  map.my_home '/my-shumarks', :controller => 'users', :action => 'home'
   map.edit_user '/account', :controller => 'users', :action => 'edit'
   map.remote_login '/remote-login/', :controller => 'users', :action => 'remote_get_salt'
   map.remote_list '/remote-list/', :controller => 'users', :action => 'remote_get_list'
@@ -90,7 +88,8 @@ ActionController::Routing::Routes.draw do |map|
   map.follower_list '/follower-list/', :controller => 'users', :action => 'follower_list'
   map.search_users '/search-users/', :controller => 'users', :action => 'search'
   
-  map.user_home '/:user_name', :controller => 'users', :action => 'home'
+  map.user_home '/home', :controller => 'users', :action => 'home'
+  map.user '/:user_name', :controller => 'users', :action => 'links'
 
   # See how all your routes lay out with "rake routes"
 end
