@@ -1,12 +1,12 @@
 class LinksController < ApplicationController
-  before_filter :login_required, :only => [:new, :create, :destroy, :index]
+  before_filter :login_required, :only => [:new, :create, :delete, :index]
   
   # Delete a link
   def delete
     @link = Link.find(params[:id])
     @link.destroy()
     
-    redirect_to user_home_path(current_user.login)
+    redirect_to user_path(current_user.login)
   end
   
   def view
