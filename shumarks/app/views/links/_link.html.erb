@@ -15,7 +15,7 @@
 		</div>
 	</div>
 	<div class="list-item delete-link right">
-		<% if logged_in? and link.user == current_user then -%>
+		<% if @show_delete then -%>
 			<%= link_to 'Remove', delete_link_path(link), :id => ("delete-link-#{link.id}"), :class => 'small-button display-none' %>
 		<% end -%>
 	</div>

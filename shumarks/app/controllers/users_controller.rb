@@ -55,6 +55,7 @@ class UsersController < ApplicationController
         if @user.id == current_user.id
           @header_text = "My Shumarks"
           @is_self = true
+          @show_delete
         else
           @header_text = "#{@user.login}'s Shumarks"
           @is_following = current_user.following?(@user)
