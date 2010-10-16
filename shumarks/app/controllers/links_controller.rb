@@ -4,7 +4,9 @@ class LinksController < ApplicationController
   # Delete a link
   def delete
     @link = Link.find(params[:id])
-    @link.destroy()
+    if @link.user = current_user
+      @link.destroy()
+    end
     
     redirect_to user_path(current_user.login)
   end
