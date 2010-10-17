@@ -1,7 +1,7 @@
 <div class="link-line-item" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
 	<div class="list-item link-content left">
 		<div class="list-header">
-			<%= link_to link.short_name, (@actual_link ? link_redirect_path(link) : link_path(link)), :class => 'link'%>&nbsp;&nbsp;
+			<%= link_to link.short_name, (@actual_link ? link_redirect_path(link) : link_path(link)), :class => 'link', :target => "#{@actual_link ? '_blank' : ''}" %>&nbsp;&nbsp;
 		</div>
 		<div class="list-sub-header">
 			<%= link.num_readers_to_s(current_user) %>
