@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   def login
     @page_title = "Login"
     @header_text = "Login"
+    @hide_sidebar = true
     render :partial => 'login', :layout => 'application'
   end
   
@@ -34,6 +35,7 @@ class UsersController < ApplicationController
   def signup
     @page_title = "Create an Account"
     @header_text = "Create an Account"
+    @hide_sidebar = true
     render :partial => 'signup', :layout => 'application'
   end
   
@@ -148,14 +150,19 @@ class UsersController < ApplicationController
   end
   
   def search
-    @search_term = params[:user_name].gsub('[^a-zA-Z0-9]', '')
-    safe_term = "%#{@search_term}%"
-    print safe_term
-    @users = User.all(:conditions => 
-        ["login LIKE ? OR first_name LIKE ? OR last_name LIKE ?", safe_term, safe_term, safe_term])
+    if @search_term 
+      @search_term = params[:user_name].gsub('[^a-zA-Z0-9]', '')
+      safe_term = "%#{@search_term}%"
+
+      @users = User.all(:conditions => 
+          ["login LIKE ? OR first_name LIKE ? OR last_name LIKE ?", safe_term, safe_term, safe_term])
+    else
+      @users = []
+    end
+
     @page_title = 'Search Results'
     @header_text = "Search results for \"#{@search_term}\""
-    
+  
     render :partial => '/users/users_list', :layout => 'application'
   end
     

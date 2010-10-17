@@ -11,15 +11,14 @@
     <div id="container" class="top-corners bottom-corners">
         <div id="header">
           <div id="logo" class="left"></div>
-          <div class="right">
-            <% if logged_in? then -%>
+          <div id="top-right-bar" class="right">
+            <% if logged_in? then %>
 							<%= current_user.home_page_url %> |
             	<%= link_to 'Account', edit_user_path %> |
             	<%= link_to 'Logout', logout_path %>
-					  <% else -%>
-							<%= link_to 'Sign up', signup_path %> |
-            	<%= link_to 'Login', login_path %>
-            <% end -%>
+					  <% else %>
+							<%= render '/users/login' %>
+            <% end %>
           </div>
         </div>
         <div id="topNav">
@@ -68,15 +67,17 @@
 						<%= yield %>
 						<div class="clear-both"></div>
 					</div>
-					<div id="side-bar" class="sidebar-widget right">
-						<% if logged_in? then %>
-							<%= render '/home/friends_bar' %>
-						<% end %>
+					<% unless @hide_sidebar then %>
+						<div id="side-bar" class="sidebar-widget right">
+							<% if logged_in? then %>
+								<%= render '/home/friends_bar' %>
+							<% end %>
 						
-						<% if @most_read %>
-							<%= render '/home/most_viewed_bar' %>
-						<% end %>
-					</div>
+							<% if @most_read then %>
+								<%= render '/home/most_viewed_bar' %>
+							<% end %>
+						</div>
+					<% end %>
 					<div class="clear-both"></div>
         </div>
 

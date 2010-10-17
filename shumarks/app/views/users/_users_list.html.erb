@@ -1,4 +1,7 @@
 <table class="list-table">
+	<% if @users.length == 0 %>
+		No one here...
+	<% end %>
 	<% for user in @users %>
 		<tr>
 			<td class="list-item">

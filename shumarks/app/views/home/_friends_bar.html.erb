@@ -1,16 +1,16 @@
 <div class="section-header">
-	Search
+	Find your friends!
 </div>
 <div class="section">
-	<div>Find your friends!</div>
 	<form action="<%= search_users_path %>" method="post">
-		<div>
-			<input id="search-text-input" name="user_name"/>
+		<div class="form-input left">
+			<input id="search-text-input" name="user_name" class="top-corners bottom-corners"/>
 		</div>
 		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" />
-		<div>
+		<div class="right">
 			<input type="submit" class="small-button" value="Search" />
 		</div>
+		<div class="clear-both"></div>
 	<form>
 </div>
 

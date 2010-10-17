@@ -20,6 +20,7 @@ class SessionController < ApplicationController
       end
     else
       flash[:error] = "Login failed, please try again."
+      @hide_sidebar = true
         
       render :partial => 'users/login', :layout => 'application'
     end
