@@ -20,29 +20,46 @@
 							<%= render '/users/login' %>
             <% end %>
           </div>
+					<div class="clear-both"></div>
+					<div id="welcome-div" class="clear-both">
+						<div id="welcome-message">
+							Shumarks is the fastest and easiest ways to share and discover content on the Internet.
+						</div>
+						<div id="welcome-subheader">
+							<%= link_to 'More info', about_path %>
+						</div>
+						<div class="right clear-both">
+							<%= link_to 'Join Today!', signup_path, :class => 'small-button' %>
+						</div>
+						<div class="clear-both">
+						</div>
+					</div>
         </div>
-        <div id="topNav">
-          <%= link_to 'Home', logged_in? ? user_home_path : home_path, :class => 'left'%>
+
+				<% if logged_in? %>
+        	<div id="topNav">
+	          <%= link_to 'Home', logged_in? ? user_home_path : home_path, :class => 'left'%>
            
-	        <% if logged_in? then -%>
-	        	<%= link_to 'My Shumarks', user_path(current_user.login), :class => 'left' %>
-		       	<%= link_to 'Discover!', home_path, :class => 'left' %>
-						<% if @is_following then %>
-								<%= link_to "Unfollow", unfollow_path(@user), :class => "small-button"%>
-						<% elsif @user and not @is_self %>
-								<%= link_to "Follow", follow_path(@user), :class => "small-button"%>
-						<% end %>
-	        <% end -%>
+		        <% if logged_in? then -%>
+		        	<%= link_to 'My Shumarks', user_path(current_user.login), :class => 'left' %>
+			       	<%= link_to 'Discover!', home_path, :class => 'left' %>
+							<% if @is_following then %>
+									<%= link_to "Unfollow", unfollow_path(@user), :class => "small-button"%>
+							<% elsif @user and not @is_self %>
+									<%= link_to "Follow", follow_path(@user), :class => "small-button"%>
+							<% end %>
+		        <% end -%>
 	
-	        <%= link_to 'About', "/about", :class => 'left' %>
+		        <%= link_to 'About', "/about", :class => 'left' %>
 	
-					<% if logged_in? then -%>
-						<span class="right">
-	          	Drag your Shumarklet into your bookmark bar
-							-&gt; <%= render '/home/bookmarklet' %>
-						</span>
-					<% end -%>
-        </div>        
+						<% if logged_in? then -%>
+							<span class="right">
+		          	Drag your Shumarklet into your bookmark bar
+								-&gt; <%= render '/home/bookmarklet' %>
+							</span>
+						<% end -%>
+	        </div>        
+				<% end %>
 			
         <div id="content">
 					<% if @header_text %>

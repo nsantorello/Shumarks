@@ -1,24 +1,34 @@
-<div class="link-line-item" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
-	<div class="list-item link-content left">
-		<div class="list-header">
-			<%= link_to link.short_name, (@actual_link ? link_redirect_path(link) : link_path(link)), :class => 'link', :target => "#{@actual_link ? '_blank' : ''}" %>&nbsp;&nbsp;
-		</div>
-		<div class="list-sub-header">
-			<%= link.num_readers_to_s(current_user) %>
-		</div>
-		<div class="list-body">
-			<%= link.blurb %>
-		</div>
-		<div class="list-footer">
-			Added by <%= link.user.login %> <%= time_ago(link.created_at)%>.
-			<%= pluralize(link.readers.count, 'view') %>
-		</div>
+<div class="list-item link-content" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
+	<div class="delete-link">
+		<%= 
+			if @show_delete then
+				link_to 'X', 
+					delete_link_path(link), 
+					:id => ("delete-link-#{link.id}"), 
+					:class => 'small-button display-none' 
+			end 
+		%>
 	</div>
-	<div class="list-item delete-link right">
-		<% if @show_delete then -%>
-			<%= link_to 'Remove', delete_link_path(link), :id => ("delete-link-#{link.id}"), :class => 'small-button display-none' %>
-		<% end -%>
+	
+	<div class="list-header">
+		<%= link_to link.short_name, 
+				(@actual_link ? link_redirect_path(link) : link_path(link)), 
+				:class => 'link', 
+				:target => "#{@actual_link ? '_blank' : ''}" 
+		 %>
 	</div>
-	<div class="clear-both"></div>
-</div>
+	
+	<div class="list-sub-header">
+		<%= link.num_readers_to_s(current_user) %>
+	</div>
+	
+	<div class="list-body">
+		<%= link.blurb %>
+	</div>
+	
+	<div class="list-footer">
+		Added by <%= link.user.login %> <%= time_ago(link.created_at)%>.
+		<%= pluralize(link.readers.count, 'view') %>
+	</div>
 
+</div>
