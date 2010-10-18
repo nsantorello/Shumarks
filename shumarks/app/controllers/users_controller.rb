@@ -69,6 +69,7 @@ class UsersController < ApplicationController
       @page_title = "Shumarks: #{@user.login}"
       @links = @user.links.most_recent
       @page_total = @user.links.count / @page_size
+      @hide_sidebar = true
     end
   end
   

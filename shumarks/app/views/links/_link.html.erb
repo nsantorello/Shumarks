@@ -1,4 +1,6 @@
-<div class="list-item link-content" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
+<% char_limit = 70 unless char_limit %>
+<% last_item = false unless last_item %>
+<div class="list-item link-content <%= last_item ? 'last-list-item' : '' %>" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
 	<div class="delete-link">
 		<%= 
 			if @show_delete then
@@ -11,11 +13,15 @@
 	</div>
 	
 	<div class="list-header">
-		<%= link_to link.short_name, 
+		<%= link_to link.short_name(char_limit), 
 				(@actual_link ? link_redirect_path(link) : link_path(link)), 
 				:class => 'link', 
 				:target => "#{@actual_link ? '_blank' : ''}" 
 		 %>
+	</div>
+	
+	<div class="link-view-count">
+		<%= link.readers.count %>
 	</div>
 	
 	<div class="list-sub-header">
@@ -26,9 +32,14 @@
 		<%= link.blurb %>
 	</div>
 	
-	<div class="list-footer">
-		Added by <%= link.user.login %> <%= time_ago(link.created_at)%>.
+	<div class="list-footer link-sentence-desc">
+		Added by <%= link_to link.user.login, user_path(link.user.login) %> <%= time_ago(link.created_at)%>.
+	</div>
+	
+	<div class="link-view-count-in-words">
 		<%= pluralize(link.readers.count, 'view') %>
 	</div>
+	
 
+	<div class="clear-both"></div>
 </div>

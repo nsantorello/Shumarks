@@ -10,7 +10,9 @@
   <body>
     <div id="container" class="top-corners bottom-corners">
         <div id="header">
-          <div id="logo" class="left"></div>
+					<a href="/">
+						<img src="/images/logo.png" />
+					</a>
           <div id="top-right-bar" class="right">
             <% if logged_in? then %>
 							<%= current_user.home_page_url %> |
@@ -25,8 +27,21 @@
 
         </div>
 
-				<% if logged_in? %>
-        	<div id="topNav">
+				<% if @show_welcome %>
+					<div id="welcome-div" class="clear-both top-corners bottom-corners">
+						<div id="welcome-message">
+							Shumarks is the fastest and easiest ways to share and discover content on the Internet.
+						</div>
+						<div id="welcome-subheader">
+							<%= link_to 'More info', about_path %>
+						</div>
+						<div class="right clear-both">
+							<%= link_to 'Join Today!', signup_path, :class => 'small-button' %>
+						</div>
+						<div class="clear-both"></div>
+					</div>
+	     	<% else %>
+					<div id="topNav">
 	          <%= link_to 'Home', logged_in? ? user_home_path : home_path, :class => 'left'%>
            
 		        <% if logged_in? then -%>
@@ -48,19 +63,6 @@
 							</span>
 						<% end -%>
 	        </div>
-	     	<% else %>
-					<div id="welcome-div" class="clear-both">
-						<div id="welcome-message">
-							Shumarks is the fastest and easiest ways to share and discover content on the Internet.
-						</div>
-						<div id="welcome-subheader">
-							<%= link_to 'More info', about_path %>
-						</div>
-						<div class="right clear-both">
-							<%= link_to 'Join Today!', signup_path, :class => 'small-button' %>
-						</div>
-						<div class="clear-both"></div>
-					</div>
 				<% end %>
 			
         <div id="content">

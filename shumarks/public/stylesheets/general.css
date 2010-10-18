@@ -140,19 +140,29 @@ div.content-section { padding-bottom:20px;}
 .list-table td        {padding:2px 5px 20px 0; vertical-align:top; }
 .list-table td#follow {text-align: right; padding-top:10px; width:80px;}
 
-.list-item		 							{ padding-bottom: 3px; margin-bottom:10px; border-bottom:1px dashed; }
-.list-item .list-header 		{ color:#000; font-size: 16px; padding:2px 0;}
-.list-item .list-sub-header { color:#aaa; font-size: 12px;}
-.list-item .list-body				{ color:#000; font-size: 12px; padding-top: 5px;}
-.list-item .list-footer     { color:#aaa; font-size: 10px;}
+.list-item		 												{ padding-bottom: 3px; margin-bottom:15px; border-bottom:1px dashed; }
+.last-list-item												{ border:none;}
+.list-item .list-header 							{ color:#000; font-size: 16px; padding:2px 0;}
+.list-item .list-sub-header 					{ color:#aaa; font-size: 12px;}
+.list-item .list-body									{ color:#000; font-size: 12px; padding-top: 5px;}
+.list-item .list-footer     					{ color:#aaa; font-size: 10px;}
+.list-item .link-sentence-desc    		{ float:left; clear:left;}
+.list-item .link-view-count-in-words	{ float:left; clear:right; padding-left:2px; color:#aaa; font-size: 10px;}
+.list-item .link-view-count						{ display: none;}
 
 .delete-link {text-align:right; float:right;}
 
-.sidebar-widget .link-content								{ width: auto; }
-.sidebar-widget .list-item									{ padding-bottom: 5px; }
-.sidebar-widget .list-item .list-sub-header { font-size: 10px; padding-top:2px; }
-.sidebar-widget .list-item .list-header 		{ font-size: 12px; line-height:10px; }
-.sidebar-widget .list-item .list-footer     { font-size: 18px; line-height:22px; color:#165e17; }
+.sidebar-widget .link-content													{ width: auto; }
+.sidebar-widget .last-list-item												{ border: none ;}
+.sidebar-widget .list-item														{ padding-bottom: 5px; }
+.sidebar-widget .list-item .list-header 							{ float:left; clear:left; font-size: 12px; line-height:10px;}
+.sidebar-widget .list-item .list-body									{ display: none;}
+.sidebar-widget .list-item .link-sentence-desc    		{ float:left; clear:left;}
+.sidebar-widget .list-item .link-view-count-in-words	{ display: none;}
+.sidebar-widget .list-item .link-view-count						{ display: block; float:right; line-height:22px; font-size:20px; color:#165317;}
+
+.view-link .list-item										{ border: none;}
+.view-link .list-item .list-header 			{ display: none; }
 
 .pad{padding:5px;}
 .none{float:none;clear:both;}

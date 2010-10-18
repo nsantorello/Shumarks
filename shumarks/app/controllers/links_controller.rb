@@ -20,6 +20,9 @@ class LinksController < ApplicationController
     
     @actual_link = true
     @page_title = "Shumarks: " + @link.name
+    @hide_sidebar = true
+    @header_text = "<a href=\"#{@link.url}\">#{@link.name}</a>"
+    
   end
   
   def redir

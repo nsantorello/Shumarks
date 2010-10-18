@@ -6,6 +6,7 @@ class HomeController < ApplicationController
     @most_recent = Link.most_recent(:limit => @page_size, :offset => @page_size * @page_index)
     @page_total = Link.count / @page_size
     @most_read = Link.most_read
+    @show_welcome = true
   end
   
   def about
