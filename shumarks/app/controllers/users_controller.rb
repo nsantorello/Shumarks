@@ -97,7 +97,7 @@ class UsersController < ApplicationController
     
     if @user.save()
       flash[:notice] = "#{@user.login} was successfully updated."
-      redirect_to my_home_path()                               
+      redirect_to user_home_path                               
     else
       render :action => 'edit'
     end

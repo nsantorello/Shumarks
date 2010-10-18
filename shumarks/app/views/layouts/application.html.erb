@@ -21,19 +21,8 @@
             <% end %>
           </div>
 					<div class="clear-both"></div>
-					<div id="welcome-div" class="clear-both">
-						<div id="welcome-message">
-							Shumarks is the fastest and easiest ways to share and discover content on the Internet.
-						</div>
-						<div id="welcome-subheader">
-							<%= link_to 'More info', about_path %>
-						</div>
-						<div class="right clear-both">
-							<%= link_to 'Join Today!', signup_path, :class => 'small-button' %>
-						</div>
-						<div class="clear-both">
-						</div>
-					</div>
+
+
         </div>
 
 				<% if logged_in? %>
@@ -58,7 +47,20 @@
 								-&gt; <%= render '/home/bookmarklet' %>
 							</span>
 						<% end -%>
-	        </div>        
+	        </div>
+	     	<% else %>
+					<div id="welcome-div" class="clear-both">
+						<div id="welcome-message">
+							Shumarks is the fastest and easiest ways to share and discover content on the Internet.
+						</div>
+						<div id="welcome-subheader">
+							<%= link_to 'More info', about_path %>
+						</div>
+						<div class="right clear-both">
+							<%= link_to 'Join Today!', signup_path, :class => 'small-button' %>
+						</div>
+						<div class="clear-both"></div>
+					</div>
 				<% end %>
 			
         <div id="content">
