@@ -164,8 +164,8 @@ div.content-section { padding-bottom:20px;}
 .view-link .list-item										{ border: none;}
 .view-link .list-item .list-header 			{ display: none; }
 
-.pad{padding:5px;}
-.none{float:none;clear:both;}
+.pad		{ padding:5px; }
+.none		{ float:none; clear:both; }
 
 .notification						{float: left; width: 400px; margin-bottom:10px;}
 .notification .notification-icon 	{float: left; margin-right: 0.3em;}

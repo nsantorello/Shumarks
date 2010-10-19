@@ -56,11 +56,12 @@ class UsersController < ApplicationController
       if logged_in?
         if @user.id == current_user.id
           @header_text = "My Shumarks"
-          @is_self = true
           @show_delete = true
         else
           @header_text = "#{@user.login}'s Shumarks"
           @is_following = current_user.following?(@user)
+          @show_following = !@is_following
+          @show_unfollowing = @is_following
         end
       else
         @header_text = "#{@user.login}'s Shumarks"
@@ -74,11 +75,10 @@ class UsersController < ApplicationController
   end
   
   def home
-    @page_title = "Shumakrs: #{@user.login}"
+    @page_title = "Shumarks: #{@user.login}"
     @header_text = "Home"
     @links = Link.feed_of(current_user, {:limit => @page_size, :offset => @page_size * @page_index})
     @page_total = Link.feed_of(current_user, :limit => nil).length / @page_size
-    @is_self = true
   end
   
   # Edit user information

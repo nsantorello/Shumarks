@@ -23,8 +23,6 @@
             <% end %>
           </div>
 					<div class="clear-both"></div>
-
-
         </div>
 
 				<% if @show_welcome %>
@@ -47,9 +45,9 @@
 		        <% if logged_in? then -%>
 		        	<%= link_to 'My Shumarks', user_path(current_user.login), :class => 'left' %>
 			       	<%= link_to 'Discover!', home_path, :class => 'left' %>
-							<% if @is_following then %>
+							<% if @show_unfollowing then %>
 									<%= link_to "Unfollow", unfollow_path(@user), :class => "small-button"%>
-							<% elsif @user and not @is_self %>
+							<% elsif @show_following %>
 									<%= link_to "Follow", follow_path(@user), :class => "small-button"%>
 							<% end %>
 		        <% end -%>
