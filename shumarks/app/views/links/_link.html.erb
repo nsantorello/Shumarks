@@ -13,10 +13,7 @@
 	</div>
 	
 	<div class="list-header">
-		<%= link_to link.short_name(char_limit), 
-				(@actual_link ? link_redirect_path(link) : link_path(link)), 
-				:class => 'link', 
-				:target => "#{@actual_link ? '_blank' : ''}" 
+		<%= link_to link.short_name(char_limit), link_path(link), :class => 'link'
 		 %>
 	</div>
 	

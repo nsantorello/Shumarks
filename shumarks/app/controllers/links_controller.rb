@@ -18,11 +18,9 @@ class LinksController < ApplicationController
       redirect_to(home_path)
     end
     
-    @actual_link = true
     @page_title = "Shumarks: " + @link.name
     @hide_sidebar = true
-    @header_text = "<a href=\"#{@link.url}\">#{@link.name}</a>"
-    
+    @header_text = "<a href=\"#{link_redirect_path(@link)}\" target=\"_blank\">#{@link.name}</a>"
   end
   
   def redir
