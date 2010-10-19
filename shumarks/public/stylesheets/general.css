@@ -155,7 +155,7 @@ div.content-section { padding-bottom:20px;}
 .sidebar-widget .link-content													{ width: auto; }
 .sidebar-widget .last-list-item												{ border: none ;}
 .sidebar-widget .list-item														{ padding-bottom: 5px; }
-.sidebar-widget .list-item .list-header 							{ float:left; clear:left; font-size: 12px; line-height:10px;}
+.sidebar-widget .list-item .list-header 							{ float:left; clear:left; font-size: 14px; line-height:10px;}
 .sidebar-widget .list-item .list-body									{ display: none;}
 .sidebar-widget .list-item .link-sentence-desc    		{ float:left; clear:left;}
 .sidebar-widget .list-item .link-view-count-in-words	{ display: none;}
