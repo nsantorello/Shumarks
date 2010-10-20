@@ -34,9 +34,16 @@ class UsersControllerTest < ActionController::TestCase
     assert user.id == assigns(:user).id
   end
   
-  test "should be registered after create" do
+  test "new user should not override already registered user" do
+    cookies[:user_id] = users(:alice).id
+    assert_difference "User.count" do
+      create_user
+    end
+  end
+  
+  test "new user should be saved in cookie" do
     create_user
-    assert assigns(:user).is_registered
+    assert_equal assigns(:user).id, cookies[:user_id]
   end
   
   test "should have salt after create unregistered" do

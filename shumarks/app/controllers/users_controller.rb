@@ -10,12 +10,18 @@ class UsersController < ApplicationController
     # uncomment at your own risk
     # reset_session
     @user = User.find(cookies[:user_id])
+    if @user.is_registered
+      @user = User.new(params[:user])
+    end
+    
     @user.is_registered = true
     @user.update_attributes(params[:user])
     
     if @user.errors.empty?
       self.current_user = @user
       flash[:notice] = "Thanks for signing up!"
+      
+      cookies[:user_id] = {:value => @user.id}
       redirect_to user_home_path
     else
       @header_text = 'Create an Account'
