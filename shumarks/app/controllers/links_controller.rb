@@ -1,11 +1,11 @@
 class LinksController < ApplicationController
-  before_filter :login_required, :only => [:new, :create, :delete, :index]
+  before_filter :login_required, :only => [:delete]
   
   # Delete a link
   def delete
     @link = Link.find(params[:id])
     
-    if @link.user = current_user
+    if @link.user == current_user
       @link.destroy()
     end
     
@@ -16,11 +16,11 @@ class LinksController < ApplicationController
     if not @link = Link.find_by_id(params[:id])
       flash[:error] = "Sorry, the link was not found"
       redirect_to(home_path)
+    else
+      @page_title = "Shumarks: " + @link.name
+      @hide_sidebar = true
+      @header_text = "<a href=\"#{link_redirect_path(@link)}\" target=\"_blank\">#{@link.name}</a>"
     end
-    
-    @page_title = "Shumarks: " + @link.name
-    @hide_sidebar = true
-    @header_text = "<a href=\"#{link_redirect_path(@link)}\" target=\"_blank\">#{@link.name}</a>"
   end
   
   def redir

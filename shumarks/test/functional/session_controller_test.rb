@@ -9,7 +9,10 @@ class SessionControllerTest < ActionController::TestCase
   end
   
   test "should login" do
-    cookies[:user_id] = { :value => User.new(:is_registered => false).save().id }
+    user = User.new(:is_registered => false)
+    user.save
+    
+    cookies[:user_id] = { :value => user.id }
     logged_out_user_id = cookies[:user_id].to_i
     post :create, :session => {:login => users(:alice).login, :password => 'test' }
     

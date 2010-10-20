@@ -45,25 +45,30 @@ ellen:
 
 fred:
   id: 6
+  login: un-registered-user-6
   created_at: <%= 1.day.ago.to_s :db %>
   is_registered: false
   
 greg:
   id: 7
+  login: un-registered-user-7
   created_at: <%= 1.day.ago.to_s :db %>
   is_registered: false
   
 harry:
   id: 8
+  login: un-registered-user-8
   created_at: <%= 1.day.ago.to_s :db %>
   is_registered: false
   
 isabelle:
   id: 9
+  login: un-registered-user-9
   created_at: <%= 1.day.ago.to_s :db %>
   is_registered: false
   
 jack:
   id: 10
+  login: un-registered-user-10
   created_at: <%= 1.day.ago.to_s :db %>
   is_registered: false

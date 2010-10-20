@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   attr_accessor :password
 
   validates_inclusion_of    :is_registered, :in => [true, false]
-  validates_presence_of     :login, :email,               :if => :registering?
+  validates_presence_of     :login
+  validates_presence_of     :email,                       :if => :registering?
   validates_presence_of     :password,                    :if => :password_required?
   validates_presence_of     :password_confirmation,       :if => :password_required?
   validates_length_of       :password, :within => 4..40,  :if => :password_required?
@@ -66,7 +67,7 @@ class User < ActiveRecord::Base
   end
   
   def read(link)
-    if link and !self.links_read.find_by_id(link.id) and link.user.id != self.id
+    if link and !self.has_read?(link) and link.user.id != self.id
       self.links_read << link
       self.save()
     else
@@ -145,14 +146,14 @@ class User < ActiveRecord::Base
   end
 
   protected
-    # before filter 
     def encrypt_password
-      if password.blank?
-        return
+      unless password.blank?
+        self.crypted_password = encrypt(password)
       end
       
-      self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?
-      self.crypted_password = encrypt(password)
+      if new_record?
+        self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")
+      end
     end
       
     def password_required?

@@ -14,6 +14,10 @@ class UserTest < ActiveSupport::TestCase
     end
   end
   
+  test "new users should have salt" do
+    assert create_user.salt
+  end
+  
   test "should create non-registered user" do
     assert_difference 'User.count' do
       user = create_user(:is_registered => false)

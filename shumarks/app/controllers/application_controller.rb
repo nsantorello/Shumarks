@@ -44,26 +44,25 @@ protected
   
   def save_session
     # First request to the server, start the session
-    if not internal_session = Session.find_by_ruby_session_id(session[:session_id])
+    user_agent = request.env['HTTP_USER_AGENT']
+    unless user_agent =~ /bot|baidu/ or internal_session = Session.find_by_ruby_session_id(session[:session_id])
       internal_session = Session.new(
         :ruby_session_id => session[:session_id], 
         :referrer => request.referrer,
-        :user_agent => request.env['HTTP_USER_AGENT'],
+        :user_agent => user_agent,
         :client_ip => request.remote_ip
       )
       internal_session.save()
-      
+    
       # First time user
       if not cookies[:user_id]
-        user = User.new(:is_registered => false)
+        user = User.new(:is_registered => false, :login => request.remote_ip)
         user.save
         cookies[:user_id] = {:value => user.id, :expires => 1.months.from_now}
 
         internal_session.update_attributes(:user_id => cookies[:user_id].to_i)
       end      
+      session[:internal_session_id] = internal_session.id
     end
-    
-    session[:internal_session_id] = internal_session.id
   end  
-
 end
