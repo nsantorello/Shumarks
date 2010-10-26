@@ -118,7 +118,7 @@ class UsersController < ApplicationController
         redirect_to home_path()
     elsif @user
       flash[:notice] = "Already following"
-      redirect_to  user_home_path(@user.login)
+      redirect_to user_path(@user.login)
     else
       redirect_to home_path()
     end
@@ -132,7 +132,7 @@ class UsersController < ApplicationController
       redirect_to home_path()
     elsif @user
       flash[:notice] = "You aren't following #{@user.login}"
-      redirect_to  user_home_path(@user.login)
+      redirect_to user_path(@user.login)
     else
       redirect_to home_path()
     end
@@ -157,8 +157,8 @@ class UsersController < ApplicationController
   end
   
   def search
-    if @search_term 
-      @search_term = params[:user_name].gsub('[^a-zA-Z0-9]', '')
+    @search_term = params[:user_name].gsub('[^a-zA-Z0-9]', '')
+    if !@search_term.blank?
       safe_term = "%#{@search_term}%"
 
       @users = User.all(:conditions => 
@@ -188,7 +188,6 @@ class UsersController < ApplicationController
   end
   
   def remote_create
-    
     if @user = login_from_salt
       url = params[:url]
       name = params[:name]

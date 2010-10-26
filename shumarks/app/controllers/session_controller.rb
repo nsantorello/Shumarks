@@ -11,6 +11,7 @@ class SessionController < ApplicationController
         end
         
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
+        cookies[:user_id] = {:value => current.id}
       end
       
       redirect_back_or_default(user_home_path)
@@ -18,6 +19,7 @@ class SessionController < ApplicationController
       if !current_user.first_name and !current_user.last_name and ! current_user.bio
         flash[:notice] = "Click on \"Account\" on the top right corner to customize your profile."
       end
+      
     else
       flash[:error] = "Login failed, please try again."
       @hide_sidebar = true
