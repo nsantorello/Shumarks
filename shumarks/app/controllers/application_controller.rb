@@ -56,7 +56,7 @@ protected
     
       # First time user
       if not cookies[:user_id]
-        user = User.new(:is_registered => false, :login => request.remote_ip)
+        user = User.new(:is_registered => false, :login => request.remote_ip + "--" + Time.now.to_s)
         user.save
         cookies[:user_id] = {:value => user.id, :expires => 1.months.from_now}
 
