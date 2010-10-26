@@ -4,7 +4,7 @@
 <div class="section">
 	<form action="<%= search_users_path %>" method="post">
 		<div class="form-input left">
-			<input id="search-text-input" name="user_name" class="top-corners bottom-corners"/>
+			<input type="text" id="search-text-input" name="user_name" class="top-corners bottom-corners"/>
 		</div>
 		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" />
 		<div class="right">
