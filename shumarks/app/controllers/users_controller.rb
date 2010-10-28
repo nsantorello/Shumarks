@@ -15,7 +15,8 @@ class UsersController < ApplicationController
     end
     
     @user.is_registered = true
-    @user.update_attributes(params[:user])
+    @user.attributes = params[:user]
+    @user.save
     
     if @user.errors.empty?
       self.current_user = @user
@@ -74,17 +75,16 @@ class UsersController < ApplicationController
       end
 
       @page_title = "Shumarks: #{@user.login}"
-      @links = @user.links.most_recent
-      @page_total = @user.links.count / @page_size
-      @hide_sidebar = true
+      @links = @user.links.most_recent(@pager)
+      @page_total = (@user.links.count.to_f / @page_size.to_f).ceil
     end
   end
   
   def home
     @page_title = "Shumarks: #{@user.login}"
     @header_text = "Home"
-    @links = Link.feed_of(current_user, {:limit => @page_size, :offset => @page_size * @page_index})
-    @page_total = Link.feed_of(current_user, :limit => nil).length / @page_size
+    @links = Link.feed_of(current_user, @pager)
+    @page_total = (Link.feed_of(current_user, :limit => nil).length.to_f / @page_size.to_f).ceil
   end
   
   # Edit user information

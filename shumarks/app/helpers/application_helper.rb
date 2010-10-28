@@ -1,5 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  include SessionHelper
+  
   def time_ago(time, options = {})
     start_date = options.delete(:start_date) || Time.new
     date_format = options.delete(:date_format) || :default
@@ -34,10 +36,7 @@ module ApplicationHelper
         "#{(minutes / 1440).round} days"
     end
   end
-  
-  def internal_session()
-    Session.find_by_id(session[:internal_session_id])
-  end
+
   
   def user_in_cookie()
     User.find_by_id(cookies[:user_id].to_i)

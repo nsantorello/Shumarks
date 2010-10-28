@@ -40,7 +40,7 @@ class Link < ActiveRecord::Base
   # Get the readers of this link who follow the given user
   def readers_who_follow(user, options={})
     if user
-      self.readers.all({:conditions => {:id => user.followers}, :limit => 3, :order => 'read_receipts.created_at DESC'}.merge(options))
+      self.readers.all({:conditions => {:id => user.followers, :is_registered => true}, :limit => 3, :order => 'read_receipts.created_at DESC'}.merge(options))
     else
       false
     end

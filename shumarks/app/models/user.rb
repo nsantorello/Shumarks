@@ -4,8 +4,7 @@ class User < ActiveRecord::Base
   attr_accessor :password
 
   validates_inclusion_of    :is_registered, :in => [true, false]
-  validates_presence_of     :login
-  validates_presence_of     :email,                       :if => :registering?
+  validates_presence_of     :email, :login, :salt,        :if => :registering?
   validates_presence_of     :password,                    :if => :password_required?
   validates_presence_of     :password_confirmation,       :if => :password_required?
   validates_length_of       :password, :within => 4..40,  :if => :password_required?
@@ -17,6 +16,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :email, :case_sensitive => false, :if => :registering?
   
   before_save :encrypt_password
+  before_validation :generate_salt
   
   has_many :links
   
@@ -150,8 +150,10 @@ class User < ActiveRecord::Base
       unless password.blank?
         self.crypted_password = encrypt(password)
       end
-      
-      if new_record?
+    end
+    
+    def generate_salt
+      if registering? and login and salt.blank?
         self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")
       end
     end

@@ -14,8 +14,12 @@ class UserTest < ActiveSupport::TestCase
     end
   end
   
-  test "new users should have salt" do
+  test "new registered users should have salt" do
     assert create_user.salt
+  end
+  
+  test "new unregistered users don't have salf" do
+    assert !create_user(:is_registered => false).salt
   end
   
   test "should create non-registered user" do

@@ -11,7 +11,6 @@ class HomeControllerTest < ActionController::TestCase
       get :index
       assert_response 200
       assert internal_session = Session.find_by_id(session[:internal_session_id])
-      assert internal_session.user_id = cookies['user_id']
     end
   end
   

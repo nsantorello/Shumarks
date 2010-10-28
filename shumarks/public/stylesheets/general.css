@@ -178,6 +178,8 @@ div.content-section { padding-bottom:20px;}
 }
 .small-button:hover { text-decoration:none;}
 
+.disabled-button { cursor:default; border-color:#ccc; color:#ccc;}
+
 #main-content {width:68%;}
 
 .section-header {background:#d4ccb0; padding:5px 10px; font-weight:bold; 

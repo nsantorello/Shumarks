@@ -11,7 +11,6 @@ class SessionController < ApplicationController
         end
         
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
-        cookies[:user_id] = {:value => current.id}
       end
       
       redirect_back_or_default(user_home_path)

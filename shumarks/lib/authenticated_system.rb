@@ -21,6 +21,7 @@ module AuthenticatedSystem
         session[:user_id] =  new_user.id
         @current_user = new_user
         internal_session.update_attributes(:user_id => new_user.id)
+        cookies[:user_id] = {:value => self.current_user.id, :expires => 1.months.from_now}
       else
         session[:user_id] = nil
         @current_user = false;
