@@ -45,6 +45,7 @@
 		        <% if logged_in? then -%>
 		        	<%= link_to 'My Shumarks', user_path(current_user.login), :class => 'left' %>
 			       	<%= link_to 'Discover!', home_path, :class => 'left' %>
+			
 							<% if @show_unfollowing then %>
 									<%= link_to "Unfollow", unfollow_path(@user), :class => "small-button"%>
 							<% elsif @show_following %>
@@ -88,6 +89,8 @@
 					</div>
 					<% unless @hide_sidebar then %>
 						<div id="side-bar" class="sidebar-widget right">
+							<%= render '/home/user_search'%>
+							
 							<% if logged_in? then %>
 								<%= render '/home/friends_bar' %>
 							<% end %>

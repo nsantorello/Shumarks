@@ -1,21 +1,4 @@
 <div class="section-header">
-	Find your friends!
-</div>
-<div class="section">
-	<form action="<%= search_users_path %>" method="post">
-		<div class="form-input left">
-			<input type="text" id="search-text-input" name="user_name" class="top-corners bottom-corners"/>
-		</div>
-		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" />
-		<div class="right">
-			<input type="submit" class="small-button" value="Search" />
-		</div>
-		<div class="clear-both"></div>
-	<form>
-</div>
-
-
-<div class="section-header">
 	Following <%= current_user.followees.count %>
 </div>
 <div class="section">

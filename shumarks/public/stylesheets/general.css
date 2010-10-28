@@ -103,8 +103,6 @@ pre {
 a 	 { color:#165e17; font-weight:bold; text-decoration:none;}
 a:hover {text-decoration: none; }
 
-.fieldWithErrors { padding: 2px; background-color: red; display: table; }
-
 .left { float: left; }
 .right { float: right; }
 .clear-both {clear: both;}
@@ -112,8 +110,11 @@ a:hover {text-decoration: none; }
 .clear-right {clear: right;}
 .display-none {display: none;}
 
-.form-input input {height:20px; border:1px #D4CCB0 solid; padding: 0 5px; margin:3px 0;}
+.form-input input {height:20px; border:1px #d4ccb0 solid; padding: 0 5px; margin:3px 0;}
 .form-input textarea {border:1px #d4ccb0 solid;}
+
+.fieldWithErrors input { border:2px red solid;}
+.fieldWithErrors textarea { border:2px red solid;}
 
 #top-right-bar .form-label 												{ float:left; clear:left; display:none;}
 #top-right-bar .form-input 												{ float:left; clear:left; line-height: 18px;}
@@ -135,10 +136,16 @@ div.content-section { padding-bottom:20px;}
 #welcome-message   { font-size: 20px; line-height:22px; padding-bottom:10px; }
 #welcome-subheader { font-size: 12px; }
 
-#errorExplanation { width: 400px; border: 2px solid red; padding: 7px; padding-bottom: 12px; margin-bottom: 20px; background-color: #f0f0f0; }
+#errorExplanation { 
+	width: 400px; border: 2px solid #c00; padding: 7px; padding-bottom: 12px; margin-bottom: 20px; background-color: #f0f0f0; 
+	-moz-border-radius-topleft: 6px;  -webkit-border-top-left-radius: 6px; border-top-left-radius:6px; 
+	-moz-border-radius-topright: 6px; -webkit-border-top-right-radius: 6px; border-top-right-radius:6px;
+	-moz-border-radius-bottomleft: 6px;  -webkit-border-bottom-left-radius: 6px; border-bottom-left-radius:6px; 
+	-moz-border-radius-bottomright: 6px; -webkit-border-bottom-right-radius: 6px; border-bottom-right-radius:6px;
+}
 #errorExplanation h2 { text-align: left; font-weight: bold; padding: 5px 5px 5px 15px; font-size: 12px; margin: -7px; background-color: #c00; color: #fff; }
-#errorExplanation p { color: #333; margin-bottom: 0; padding: 5px;}
-#errorExplanation ul li { font-size: 12px; list-style: square; }
+#errorExplanation p { color: #333; margin-bottom: 0; margin-top: 5px; padding: 5px;}
+#errorExplanation ul li { font-size: 12px; list-style: circle; margin-left:15px;}
 
 #container {background:#f5f5f5; min-height: 800px; }
 #content {clear:both; padding:5px 15px 20px 15px;}
