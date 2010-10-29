@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
   before_filter :login_required, :only => [:delete]
+  before_filter :hide_sidebar, :only => [:view]
   
   # Delete a link
   def delete
@@ -18,7 +19,6 @@ class LinksController < ApplicationController
       redirect_to(home_path)
     else
       @page_title = "Shumarks: " + @link.name
-      @hide_sidebar = true
       @header_text = "<a href=\"#{link_redirect_path(@link)}\" target=\"_blank\">#{@link.name}</a>"
     end
   end

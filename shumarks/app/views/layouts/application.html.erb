@@ -89,15 +89,13 @@
 					</div>
 					<% unless @hide_sidebar then %>
 						<div id="side-bar" class="sidebar-widget right">
-							<%= render '/home/user_search'%>
+							<%= render '/sidebar/user_search'%>
 							
 							<% if logged_in? then %>
-								<%= render '/home/friends_bar' %>
+								<%= render '/sidebar/friends_bar' %>
 							<% end %>
 						
-							<% if @most_read then %>
-								<%= render '/home/most_viewed_bar' %>
-							<% end %>
+							<%= render '/sidebar/most_viewed_bar' %>
 						</div>
 					<% end %>
 					<div class="clear-both"></div>

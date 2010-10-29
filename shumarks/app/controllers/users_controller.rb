@@ -1,6 +1,7 @@
 require 'net/http'
 class UsersController < ApplicationController
   before_filter :login_required, :set_user, :only => [:edit, :update, :follow, :unfollow, :follow_list, :follower_list, :home]
+  before_filter :hide_sidebar, :only => [:create, :login, :signup, :edit, :update]
 
   # Create new user
   def create
@@ -34,7 +35,7 @@ class UsersController < ApplicationController
   def login
     @page_title = "Login"
     @header_text = "Login"
-    @hide_sidebar = true
+
     render :partial => 'login', :layout => 'application'
   end
   
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
   def signup
     @page_title = "Create an Account"
     @header_text = "Create an Account"
-    @hide_sidebar = true
+
     render :partial => 'signup', :layout => 'application'
   end
   

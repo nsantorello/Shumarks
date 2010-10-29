@@ -36,6 +36,10 @@ module ApplicationHelper
         "#{(minutes / 1440).round} days"
     end
   end
+  
+  def hide_sidebar()
+    @hide_sidebar = true;
+  end
 
   
   def user_in_cookie()

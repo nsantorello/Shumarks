@@ -1,5 +1,7 @@
 # This controller handles the login/logout function of the site.  
 class HomeController < ApplicationController
+  before_filter :hide_sidebar, :only => [:about, :addons]
+  
   def index
     @header_text = logged_in? ? "Most Recent" : "Shumarks"
     

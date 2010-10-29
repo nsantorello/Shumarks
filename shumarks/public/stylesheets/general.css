@@ -49,7 +49,7 @@ table {
 	border-spacing: 0;
 }
 
-input[type='text'] {
+input[type='text'], input[type="password"] {
 	width:150px;
 }
 
@@ -110,8 +110,11 @@ a:hover {text-decoration: none; }
 .clear-right {clear: right;}
 .display-none {display: none;}
 
-.form-input input {height:20px; border:1px #d4ccb0 solid; padding: 0 5px; margin:3px 0;}
-.form-input textarea {border:1px #d4ccb0 solid;}
+.form-input input {height:20px; border:1px #d4ccb0 solid; padding: 0 5px; margin:3px 0 8px 0;}
+.form-input textarea {border:1px #d4ccb0 solid; padding: 3px 5px; margin:3px 0 8px 0;}
+.form-label#remember-me-label    { float:left; clear:left; padding:3px 0; }
+.form-input#remember-me-checkbox { float:left; padding-left: 4px;}
+.form-submit#login-submit        { clear:both; }
 
 .fieldWithErrors input { border:2px red solid;}
 .fieldWithErrors textarea { border:2px red solid;}
@@ -123,7 +126,7 @@ a:hover {text-decoration: none; }
 #top-right-bar .form-input input[type='password'] { width: 165px; }
 #top-right-bar #remember-me-label 								{ display:block; padding:3px 0; }
 #top-right-bar #remember-me-checkbox 							{ float:left; clear:none; padding:0 4px; }
-#top-right-bar #login-submit 											{ float:right; line-height:18px; }
+#top-right-bar #login-submit 											{ float:right; clear:right; line-height:18px; }
 #top-right-bar #login-submit input[type='submit'] { margin:2px 0 0 0; }
 
 #login-info 	{float:left;}
@@ -210,9 +213,11 @@ div.content-section { padding-bottom:20px;}
 
 .pager .current { background:#D4CCB0; color: #fff;}
 
-.list-table {width:100%;}
-.list-table td        {padding:2px 5px 20px 0; vertical-align:top; }
-.list-table td#follow {text-align: right; padding-top:10px; width:80px;}
+.list {width:100%;}
+
+.user-list .list-item 								{ width: 100%;}
+.user-list .list-header								{ float: left; clear:left; }
+.user-list .follow-user								{ float: right; clear:right; text-align: right; padding-top:10px;}
 
 .list-item		 												{ padding-bottom: 3px; margin-bottom:15px; border-bottom:1px dashed; }
 .last-list-item												{ border:none;}
