@@ -43,6 +43,8 @@ protected
     @page_total = 0
     @page_offset = [@page_index - @page_max/2, 0].max
     @pager = { :limit => @page_size, :offset => @page_size * @page_index }
+    
+    @remote_call = !params[:rc].blank?
   end
   
   def save_session

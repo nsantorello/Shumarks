@@ -1,10 +1,30 @@
 class LinksController < ApplicationController
-  before_filter :login_required, :only => [:delete]
+  before_filter :login_required, :only => [:delete, :save, :create]
   before_filter :hide_sidebar, :only => [:view]
+  
+  def save
+    @link = current_user.links.build(params[:link])
+    @link.save()     
+    
+    if @link.errors.empty?
+      @page_title = 'Success!'
+      render 'create_success', :layout => 'bookmarklet_frame'
+    else
+      @page_title = 'Shumark this page!'
+      render 'create', :layout => 'bookmarklet_frame'
+    end
+  end
+  
+  def create
+    @page_title = 'Shumark this page!'
+    @link = Link.new(params[:link])
+    render 'create', :layout => 'bookmarklet_frame'
+  end
   
   # Delete a link
   def delete
     @link = Link.find(params[:id])
+    @adding_from_bookmarklet = params[:bm].blank?
     
     if @link.user == current_user
       @link.destroy()

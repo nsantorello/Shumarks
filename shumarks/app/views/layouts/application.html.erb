@@ -8,6 +8,9 @@
   </head>
 
   <body>
+		<div class="ad">
+			<%= render '/ads/ad'%>
+		</div>
     <div id="container" class="top-corners bottom-corners">
         <div id="header">
 					<a href="/">
@@ -58,7 +61,7 @@
 						<% if logged_in? then -%>
 							<span class="right">
 		          	Drag your Shumarklet into your bookmark bar
-								-&gt; <%= render '/home/bookmarklet' %>
+								-&gt; <%= render '/bookmarklet/bookmarklet' %>
 							</span>
 						<% end -%>
 	        </div>
@@ -102,5 +105,10 @@
         </div>
 
     </div><!-- close conainter -->
+
+		<div class="ad">
+			<%= render '/ads/ad'%>
+		</div>
+		
   </body>
 </html>

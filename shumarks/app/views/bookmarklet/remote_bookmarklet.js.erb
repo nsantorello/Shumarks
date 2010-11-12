@@ -1,0 +1,45 @@
+var server = "http://<%=ENV['hostname']%>";
+
+function include_css(file, id) {
+	jQuery('body').append(
+		jQuery('<link>')
+			.attr('type', 'text/javascript')
+			.attr('href', server + file)
+			.attr('rel', 'stylesheet')
+			.attr('id', id)
+	);
+}
+
+function clean_up() {
+	jQuery('div.shumarks').remove();
+	jQuery('#shumarks-overlay-css').remove();
+	jQuery('#shumarks-js').remove();
+	jQuery('#shumarks-jquery-js').remove();
+}
+
+include_css('/stylesheets/remote-bookmarklet-overlay.css', 'shumarks-overlay-css');
+
+var desc = '';
+
+jQuery('p').each(function() {
+	desc += jQuery(this).text().replace(/\s+/g, ' ') + " ";
+	
+	if (desc.length > 300) {
+		return false;
+	}
+});
+
+desc = desc.substring(0, 300).replace(/\s+/g, ' ');
+
+var key = '<%= @salt %>';
+var link_url = encodeURIComponent(location.href);
+var link_name = encodeURIComponent(document.title);
+var link_blurb = encodeURIComponent(desc);
+var shumarks_url = '<%= link_create_url %>?rc=1' + 
+  		'&s=' + key + '&link[url]=' + link_url + '&link[name]='+ link_name + '&link[blurb]=' + link_blurb;
+
+
+jQuery('body').append(jQuery('<div>').attr('class', 'shumarks'));
+jQuery('div.shumarks').append(jQuery('<iframe>').attr('src', shumarks_url).attr('class', 'shumarks').attr('scrolling', 'no'));
+jQuery('div.shumarks').append(jQuery('<img>').attr('src', server + '/images/close.png').attr('id', 'shumarks-close'));
+jQuery('#shumarks-close').unbind().bind('click', clean_up);

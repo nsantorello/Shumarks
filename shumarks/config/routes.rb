@@ -35,6 +35,8 @@ ActionController::Routing::Routes.draw do |map|
   # On site authentication
   #map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   
+  map.bookmarklet '/bm/:salt', :controller => 'bookmarklet', :action => 'remote_bookmarklet_javascript'
+  
   map.signup '/signup', :controller => 'users', :action => 'signup'
   map.signup_action '/session/create', :controller => 'session', :action => 'create'
   map.login '/login', :controller => 'users', :action => 'login'                                                   
@@ -44,10 +46,11 @@ ActionController::Routing::Routes.draw do |map|
   map.home '/', :controller => 'home', :action => 'index'
   map.about '/about', :controller => 'home', :action => 'about'
   map.addons '/addons', :controller => 'home', :action => 'addons'
-
   
-  # API urls
-  map.save '/save', :controller => 'links', :action => 'create'
+
+  map.link_save '/links/create', :controller => 'links', :action => 'save', :conditions => {:method => :post}
+  map.link_create '/links/create', :controller => 'links', :action => 'create', :conditions => {:method => :get}
+  map.link '/links/:id', :controller => 'links', :action => 'view'
   
   # User pages
   map.edit_user '/account', :controller => 'users', :action => 'edit'
@@ -55,7 +58,6 @@ ActionController::Routing::Routes.draw do |map|
   map.remote_list '/remote-list/', :controller => 'users', :action => 'remote_get_list'
   map.remote_create '/remote-create/', :controller => 'users', :action => 'remote_create'
   map.remote_result '/remote-result/', :controller => 'users', :action => 'remote_result'
-  
   
   map.create_user_action '/user/create',
     :controller => 'users', 
@@ -76,8 +78,7 @@ ActionController::Routing::Routes.draw do |map|
     :action => 'show'
    
   map.user_links '/user/links', :controller => 'links', :action => 'index'
-  
-  map.link '/links/:id', :controller => 'links', :action => 'view'
+
   
   map.delete_link '/user/links/delete/:id', :controller => 'links', :action => 'delete'
   map.link_redirect '/v/:id', :controller => 'links', :action => 'redir'

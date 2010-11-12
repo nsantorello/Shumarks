@@ -4,8 +4,7 @@
 	<div class="delete-link">
 		<%= 
 			if @show_delete then
-				link_to 'X', 
-					delete_link_path(link), 
+				link_to 'X', delete_link_path(link), 
 					:id => ("delete-link-#{link.id}"), 
 					:class => 'small-button display-none' 
 			end 
@@ -13,8 +12,7 @@
 	</div>
 	
 	<div class="list-header">
-		<%= link_to link.short_name(char_limit), link_path(link), :class => 'link'
-		 %>
+		<%= link_to link.short_name(char_limit), link_path(link), :class => 'link' %>
 	</div>
 	
 	<div class="link-view-count">

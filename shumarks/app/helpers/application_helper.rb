@@ -7,12 +7,12 @@ module ApplicationHelper
     date_format = options.delete(:date_format) || :default
     delta_minutes = (start_date.to_i - time.to_i).floor / 60
     if delta_minutes.abs <= (8724*60)       
-     distance = distance_of_time_in_words(delta_minutes)       
-     if delta_minutes < 0
+      distance = distance_of_time_in_words(delta_minutes)       
+      if delta_minutes < 0
         return "#{distance} from now"
-     else
+      else
         return "#{distance} ago"
-     end
+      end
     else
       return "on #{DateTime.now.to_formatted_s(date_format)}"
     end
@@ -40,9 +40,17 @@ module ApplicationHelper
   def hide_sidebar()
     @hide_sidebar = true;
   end
-
   
   def user_in_cookie()
     User.find_by_id(cookies[:user_id].to_i)
+  end
+  
+  def errors_for(object, attribute)
+    if errors = object.errors.on(attribute)
+      errors = [errors] unless errors.is_a?(Array)
+      return '<ul class="form-input-error-list">' + errors.map {
+        |e| '<li class="form-input-error">' + attribute.to_s + ' '+ e + '</li>'
+      }.join + '</ul>'
+    end
   end
 end

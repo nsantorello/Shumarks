@@ -81,7 +81,7 @@ blockquote, q { quotes: "" ""; }
 a img { border: none; }
 
 html {height: 100%}
-body {background: #165e17 scroll no-repeat 0 0; color: #333; }
+body { color: #333; }
 
 body, p, ol, ul, td {
   font-family: 'Lucida Grande', verdana, arial, helvetica, sans-serif;
@@ -89,16 +89,12 @@ body, p, ol, ul, td {
   line-height	: 18px;
 }
 
-body { margin: 0 auto; width: 1000px; padding:10px 0;}
-
 pre {
   background-color: #eee;
   padding: 10px;
   font-size: 11px;
 }
 .meta { font-size:12px; color: #999; }
-
-
 
 a 	 { color:#165e17; font-weight:bold; text-decoration:none;}
 a:hover {text-decoration: none; }
@@ -115,6 +111,7 @@ a:hover {text-decoration: none; }
 .form-label#remember-me-label    { float:left; clear:left; padding:3px 0; }
 .form-input#remember-me-checkbox { float:left; padding-left: 4px;}
 .form-submit#login-submit        { clear:both; }
+.form-input-error {color: #c00;}
 
 .fieldWithErrors input { border:2px red solid;}
 .fieldWithErrors textarea { border:2px red solid;}
@@ -251,3 +248,6 @@ div.content-section { padding-bottom:20px;}
 
 .sm-twitter{height:44px;width:40px;background: url("/images/social-media-icons.jpg") no-repeat scroll -44px -1px transparent;display:block;}
 .sm-facebook{height:44px;width:40px;background: url("/images/social-media-icons.jpg") no-repeat scroll -4px -44px transparent;display:block;}
+
+
+.ad { text-align:center; padding:10px;}
