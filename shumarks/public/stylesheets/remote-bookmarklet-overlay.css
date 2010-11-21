@@ -1,6 +1,6 @@
 /* the overlayed element */
 div.shumarks {
-	position:fixed;
+	position: absolute;
 	right: 10px;
 	top: 10px;
 
@@ -17,8 +17,8 @@ div.shumarks {
 	padding:5px;
 
 	/* CSS3 styling for latest browsers */
-	-moz-box-shadow:0 0 90px 5px #000;
-	-webkit-box-shadow: 0 0 90px #000;	
+	/*-moz-box-shadow:0 0 90px 5px #000;
+	-webkit-box-shadow: 0 0 90px #000;	*/
 
 	-moz-border-radius-topleft: 6px;  -webkit-border-top-left-radius: 6px; border-top-left-radius:6px; 
 	-moz-border-radius-topright: 6px; -webkit-border-top-right-radius: 6px; border-top-right-radius:6px;

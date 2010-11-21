@@ -1,23 +1,25 @@
 var server = "http://<%=ENV['hostname']%>";
 
 function include_css(file, id) {
-	jQuery('body').append(
-		jQuery('<link>')
-			.attr('type', 'text/javascript')
-			.attr('href', server + file)
-			.attr('rel', 'stylesheet')
-			.attr('id', id)
-	);
+	jQuery('<link>', {
+		id: id,
+		type: 'text/css',
+		href: server + file,
+		rel: 'stylesheet'
+	}).appendTo('head');
 }
 
 function clean_up() {
-	jQuery('div.shumarks').remove();
+	jQuery('#shumarks-bookmarklet').remove();
 	jQuery('#shumarks-overlay-css').remove();
 	jQuery('#shumarks-js').remove();
 	jQuery('#shumarks-jquery-js').remove();
+	jQuery(window).unbind('autoscroll');
 }
 
-include_css('/stylesheets/remote-bookmarklet-overlay.css', 'shumarks-overlay-css');
+function autoscroll() {
+	scrollingDiv.stop().animate({'marginTop': (jQuery(window).scrollTop() + 30) + 'px'}, 'slow');
+}
 
 var desc = '';
 
@@ -38,8 +40,14 @@ var link_blurb = encodeURIComponent(desc);
 var shumarks_url = '<%= link_create_url %>?rc=1' + 
   		'&s=' + key + '&link[url]=' + link_url + '&link[name]='+ link_name + '&link[blurb]=' + link_blurb;
 
+include_css('/stylesheets/remote-bookmarklet-overlay.css', 'shumarks-overlay-css');
 
-jQuery('body').append(jQuery('<div>').attr('class', 'shumarks'));
-jQuery('div.shumarks').append(jQuery('<iframe>').attr('src', shumarks_url).attr('class', 'shumarks').attr('scrolling', 'no'));
-jQuery('div.shumarks').append(jQuery('<img>').attr('src', server + '/images/close.png').attr('id', 'shumarks-close'));
+jQuery('body').append(jQuery('<div>', {className: 'shumarks', id: 'shumarks-bookmarklet'}));
+jQuery('#shumarks-bookmarklet').append(jQuery('<iframe>', {src: shumarks_url, className: 'shumarks', scrolling: 'no'}));
+jQuery('#shumarks-bookmarklet').append(jQuery('<img>', {src: server + '/images/close.png', id: 'shumarks-close'}).attr('frameBorder', '0'));
 jQuery('#shumarks-close').unbind().bind('click', clean_up);
+
+var scrollingDiv = jQuery('#shumarks-bookmarklet');
+
+autoscroll();
+jQuery(window).bind('scroll', autoscroll);
