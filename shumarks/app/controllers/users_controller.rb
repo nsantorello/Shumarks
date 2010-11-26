@@ -188,29 +188,6 @@ class UsersController < ApplicationController
     render :xml => @user.queue_xml 
   end
   
-  def remote_create
-    if @user = login_from_salt
-      url = params[:url]
-      name = params[:name]
-      blurb = params[:b]
-      
-      if url and name
-        @link = @user.links.build({:url => url, :name => name, :blurb => blurb})
-        @link.save()
-      end
-      
-      if @link.errors.empty?
-        render 'remote_create_success', :layout => false
-      else
-        render 'remote_create_fail'
-      end
-    else
-      render 'remote_create_fail'
-    end
-    
-	  #redirect_to ("http://localhost:3001/tweet?t=" + URI.escape(name, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&r=" + URI.escape(url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&lid=" + @link.id.to_s + "&uid=" + @user.id.to_s)
-  end
-  
   def remote_result
     @user = User.find_by_id(params[:uid])
     @link = @user.links.find_by_id(params[:lid])

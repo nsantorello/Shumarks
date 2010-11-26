@@ -206,19 +206,6 @@ class UsersControllerTest < ActionController::TestCase
     assert_response 302
   end
   
-  test "should remote create link" do
-    assert_difference "Link.count" do
-      remote_create
-    end
-    assert users(:alice).links.find_by_name('Digg')
-  end
-  
-  test "should require salt for remote create" do
-    assert_no_difference "Link.count" do
-      remote_create(:s => 'wrongsalt')
-    end    
-  end
-  
   protected
     def create_user(options = {})
       post :create, :user => { :login => 'quire', :email => 'quire@example.com',
@@ -240,12 +227,5 @@ class UsersControllerTest < ActionController::TestCase
     
     def search_user(user_string) 
       get :search, :user_name => user_string
-    end
-    
-    def remote_create(options = {})
-      get :remote_create, {:s => users(:alice).salt, 
-        :name => 'Digg', 
-        :url => 'http://www.digg.com', 
-        :blurb => 'Digg Sucks'}.merge(options)
     end
 end

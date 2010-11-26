@@ -56,7 +56,7 @@ ActionController::Routing::Routes.draw do |map|
   map.edit_user '/account', :controller => 'users', :action => 'edit'
   map.remote_login '/remote-login/', :controller => 'users', :action => 'remote_get_salt'
   map.remote_list '/remote-list/', :controller => 'users', :action => 'remote_get_list'
-  map.remote_create '/remote-create/', :controller => 'users', :action => 'remote_create'
+  map.remote_create '/remote-create/', :controller => 'bookmarklet', :action => 'old_bookmarklet_landing'
   map.remote_result '/remote-result/', :controller => 'users', :action => 'remote_result'
   
   map.create_user_action '/user/create',

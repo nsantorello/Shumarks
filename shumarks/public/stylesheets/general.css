@@ -249,5 +249,6 @@ div.content-section { padding-bottom:20px;}
 .sm-twitter{height:44px;width:40px;background: url("/images/social-media-icons.jpg") no-repeat scroll -44px -1px transparent;display:block;}
 .sm-facebook{height:44px;width:40px;background: url("/images/social-media-icons.jpg") no-repeat scroll -4px -44px transparent;display:block;}
 
+#big-shumarklet-button {padding:10px 20px; line-height:160px; border:5px solid #D4CCB0; font-size:48px;}
 
 .ad { text-align:center; padding:10px;}

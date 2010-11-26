@@ -61,7 +61,7 @@
 						<% if logged_in? then -%>
 							<span class="right">
 		          	Drag your Shumarklet into your bookmark bar
-								-&gt; <%= render '/bookmarklet/bookmarklet' %>
+								-&gt; <a href="<%=shumarklet_url%>" class="small-button">Shumark it</a> 
 							</span>
 						<% end -%>
 	        </div>
