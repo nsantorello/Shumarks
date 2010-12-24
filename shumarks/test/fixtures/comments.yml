@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+link_1_comment_1: 
+  id: 1
+  user_id: 1
+  link_id: 1
+  text: This link sucks
+  created_at: <% 5.days.ago.to_s %>
+
+link_1_comment_2: 
+  id: 2
+  user_id: 2
+  link_id: 1
+  text: No you suck
+  created_at: <% 4.days.ago.to_s %>
+  
+
