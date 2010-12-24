@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   before_filter :login_required, :only => [:delete, :save, :create]
-  before_filter :hide_sidebar, :only => [:view]
+  before_filter :hide_sidebar, :only => []
   
   def save
     @link = current_user.links.build(params[:link])
@@ -40,6 +40,7 @@ class LinksController < ApplicationController
     else
       @page_title = "Shumarks: " + @link.name
       @header_text = "<a href=\"#{link_redirect_path(@link)}\" target=\"_blank\">#{@link.name}</a>"
+      @comments = @link.comments.all(:limit => 10, :order => 'created_at ASC')
     end
   end
   

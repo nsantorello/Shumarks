@@ -14,8 +14,4 @@ class HomeController < ApplicationController
     @page_title = "About Shumarks"
     @header_text = "Shumarks"
   end
-  
-  def addons
-    @page_title = "Browser Addons"
-  end
 end

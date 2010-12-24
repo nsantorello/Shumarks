@@ -164,6 +164,10 @@ class LinkTest < ActiveSupport::TestCase
     assert_equal 3, bobs_feed.length
   end
   
+  test "links should have comments" do
+    assert links(:google).comments
+  end
+  
 protected
   def create_link(options = {})
     record = Link.new({ :user_id => users(:alice).id, :url => 'http://www.google.com', :name => 'Google', 

@@ -1,3 +1,6 @@
 .DS_Store
 shumarks/log
 shumarks/test/coverage
+.loadpath
+.project
+.tmp*

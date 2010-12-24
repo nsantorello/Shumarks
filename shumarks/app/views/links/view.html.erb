@@ -1,7 +1,58 @@
+<% content_for :header do %>
+  <script type="text/javascript">
+    function reset_comment_text() {
+      jQuery('#comment_text').val('');
+    }
+    
+    function update_next_comment_page(){
+      var nextPage = jQuery('#next-comment-page');
+      var newDiv = jQuery('<div class="display-none comments">');
+      var newComments = jQuery('#newly-loaded-comments');
+      
+      nextPage.val("" + (parseInt(nextPage.val()) + 1));
+      jQuery('.comments').last().after(newDiv.html(newComments.html()));
+      newDiv.slideDown('slow');
+      newComments.hide().html('');
+    }
+  </script>
+<% end %>
 <div class="view-link">
 	<%= render @link %>
 </div>
 
 <div class="comments clear-both">
 	<h2>Comments</h2>
+  <div id="comments" class="comments">
+    <%= render @comments %>
+  </div>
+  <div id="newly-loaded-comments" class="display-none"></div>
+  <div id="new-comment"></div>
+  
+  <% form_remote_tag :url => comment_show_path(@link.id),
+		  :update => {:success => 'newly-loaded-comments', :failure => 'comment-error'},
+      :position => :bottom,
+      :method => :get,
+      :complete => 'update_next_comment_page()' do 
+   %>
+     <input type="hidden" id="next-comment-page" name="p" value="2"/>
+     <%= submit_tag 'More', :class => 'small-button show-more-bar' %>
+  <% end %> 
+  
+  <div id="comment-error"></div>
+  <% form_remote_tag :url => comment_create_path,	
+			:update => {:success => 'new-comment', :failure => 'comment-error'}, 
+			:position => :bottom,
+			:success => 'reset_comment_text()' do 
+   %>
+      
+    <div class="form-label">
+      Leave a comment:
+    </div>
+    <div class="form-input">
+      <%= text_area 'comment', 'text' %>
+    </div>
+    
+    <%= hidden_field 'comment', 'link_id', :value => @link.id %>
+    <%= submit_tag 'Submit', :class => 'small-button' %>
+  <% end %>
 </div>

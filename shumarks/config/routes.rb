@@ -41,16 +41,20 @@ ActionController::Routing::Routes.draw do |map|
   map.signup_action '/session/create', :controller => 'session', :action => 'create'
   map.login '/login', :controller => 'users', :action => 'login'                                                   
   map.logout '/logout', :controller => 'session', :action => 'destroy'
+  map.access_denied '/access_denied', :controller => 'session', :action => 'access_denied'
 
   # Flat pages
   map.home '/', :controller => 'home', :action => 'index'
   map.about '/about', :controller => 'home', :action => 'about'
-  map.addons '/addons', :controller => 'home', :action => 'addons'
   
-
+  # Links
   map.link_save '/links/create', :controller => 'links', :action => 'save', :conditions => {:method => :post}
   map.link_create '/links/create', :controller => 'links', :action => 'create', :conditions => {:method => :get}
   map.link '/links/:id', :controller => 'links', :action => 'view'
+  
+  # Comments
+  map.comment_create '/comments/create', :controller => 'comments', :action => 'create', :conditions => {:method => :post}
+  map.comment_show   '/comments/:link_id/', :controller => 'comments', :action => 'show', :conditions => {:method => :get}
   
   # User pages
   map.edit_user '/account', :controller => 'users', :action => 'edit'

@@ -72,4 +72,9 @@ class LinksControllerTest < ActionController::TestCase
     end
   end
   
+  test "should set comments on view" do
+    get :view, :id => links(:google).id
+    assert assigns :comments
+  end
+  
 end

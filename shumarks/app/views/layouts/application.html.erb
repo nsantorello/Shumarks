@@ -5,16 +5,17 @@
   <head>
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <%= render 'layouts/header.html' %>
+    <%= yield :header %>
   </head>
 
   <body>
 		<div class="ad">
 			<%= render '/ads/ad'%>
 		</div>
-    <div id="container" class="top-corners bottom-corners">
+    <div id="container" class="all-corners">
         <div id="header">
 					<a href="/">
-						<img src="/images/logo.png" />
+						<img src="/images/logo.png" alt="Shumarks"/>
 					</a>
           <div id="top-right-bar" class="right">
             <% if logged_in? then %>
@@ -29,7 +30,7 @@
         </div>
 
 				<% if @show_welcome %>
-					<div id="welcome-div" class="clear-both top-corners bottom-corners">
+					<div id="welcome-div" class="clear-both all-corners">
 						<div id="welcome-message">
 							Shumarks is the fastest and easiest ways to share and discover content on the Internet.
 						</div>

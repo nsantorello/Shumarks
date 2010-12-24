@@ -1,6 +1,6 @@
 # This controller handles the login/logout function of the site.  
 class SessionController < ApplicationController
-  before_filter :hide_sidebar, :only => [:create]
+  before_filter :hide_sidebar, :only => [:create, :access_denied]
   # Login
   def create
     if (params[:session]) 
@@ -44,5 +44,9 @@ class SessionController < ApplicationController
     reset_session
 
     redirect_back_or_default('/')
+  end
+  
+  def access_denied
+    render 'home/access_denied'
   end
 end

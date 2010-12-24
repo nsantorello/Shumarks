@@ -83,7 +83,7 @@ a img { border: none; }
 html {height: 100%}
 body { color: #333; }
 
-body, p, ol, ul, td {
+body, p, ol, ul, td, textarea {
   font-family: 'Lucida Grande', verdana, arial, helvetica, sans-serif;
   font-size:   12px;
   line-height	: 18px;
@@ -99,6 +99,8 @@ pre {
 a 	 { color:#165e17; font-weight:bold; text-decoration:none;}
 a:hover {text-decoration: none; }
 
+.center { margin-left:auto; margin-right: auto; }
+
 .left { float: left; }
 .right { float: right; }
 .clear-both {clear: both;}
@@ -106,8 +108,20 @@ a:hover {text-decoration: none; }
 .clear-right {clear: right;}
 .display-none {display: none;}
 
-.form-input input {height:20px; border:1px #d4ccb0 solid; padding: 0 5px; margin:3px 0 8px 0;}
-.form-input textarea {border:1px #d4ccb0 solid; padding: 3px 5px; margin:3px 0 8px 0;}
+.form-input input { height:20px; border:1px #d4ccb0 solid; padding: 0 5px; margin:3px 0 8px 0;}
+.form-input textarea { 
+  border:1px #d4ccb0 solid; padding: 3px 5px; margin:3px 0 8px 0;
+  -moz-border-radius-topleft: 6px;  -webkit-border-top-left-radius: 6px; border-top-left-radius:6px; 
+	-moz-border-radius-topright: 6px; -webkit-border-top-right-radius: 6px; border-top-right-radius:6px;
+	-moz-border-radius-bottomleft: 6px;  -webkit-border-bottom-left-radius: 6px; border-bottom-left-radius:6px; 
+	-moz-border-radius-bottomright: 6px; -webkit-border-bottom-right-radius: 6px; border-bottom-right-radius:6px;
+}
+.form-input input[type="text"], .form-input input[type="password"] {
+  -moz-border-radius-topleft: 6px;  -webkit-border-top-left-radius: 6px; border-top-left-radius:6px; 
+	-moz-border-radius-topright: 6px; -webkit-border-top-right-radius: 6px; border-top-right-radius:6px;
+	-moz-border-radius-bottomleft: 6px;  -webkit-border-bottom-left-radius: 6px; border-bottom-left-radius:6px; 
+	-moz-border-radius-bottomright: 6px; -webkit-border-bottom-right-radius: 6px; border-bottom-right-radius:6px;
+}
 .form-label#remember-me-label    { float:left; clear:left; padding:3px 0; }
 .form-input#remember-me-checkbox { float:left; padding-left: 4px;}
 .form-submit#login-submit        { clear:both; }
@@ -143,6 +157,7 @@ div.content-section { padding-bottom:20px;}
 	-moz-border-radius-bottomleft: 6px;  -webkit-border-bottom-left-radius: 6px; border-bottom-left-radius:6px; 
 	-moz-border-radius-bottomright: 6px; -webkit-border-bottom-right-radius: 6px; border-bottom-right-radius:6px;
 }
+
 #errorExplanation h2 { text-align: left; font-weight: bold; padding: 5px 5px 5px 15px; font-size: 12px; margin: -7px; background-color: #c00; color: #fff; }
 #errorExplanation p { color: #333; margin-bottom: 0; margin-top: 5px; padding: 5px;}
 #errorExplanation ul li { font-size: 12px; list-style: circle; margin-left:15px;}
@@ -206,6 +221,13 @@ div.content-section { padding-bottom:20px;}
 	-moz-border-radius-bottomright: 6px; -webkit-border-bottom-right-radius: 6px; border-bottom-right-radius:6px;
 }
 
+.all-corners {
+  -moz-border-radius-topleft: 6px;  -webkit-border-top-left-radius: 6px; border-top-left-radius:6px; 
+	-moz-border-radius-topright: 6px; -webkit-border-top-right-radius: 6px; border-top-right-radius:6px;
+	-moz-border-radius-bottomleft: 6px;  -webkit-border-bottom-left-radius: 6px; border-bottom-left-radius:6px; 
+	-moz-border-radius-bottomright: 6px; -webkit-border-bottom-right-radius: 6px; border-bottom-right-radius:6px;
+}
+
 .pager { text-align:center; }
 
 .pager .current { background:#D4CCB0; color: #fff;}
@@ -246,8 +268,15 @@ div.content-section { padding-bottom:20px;}
 .notification						{float: left; width: 400px; margin-bottom:10px;}
 .notification .notification-icon 	{float: left; margin-right: 0.3em;}
 
-.sm-twitter{height:44px;width:40px;background: url("/images/social-media-icons.jpg") no-repeat scroll -44px -1px transparent;display:block;}
-.sm-facebook{height:44px;width:40px;background: url("/images/social-media-icons.jpg") no-repeat scroll -4px -44px transparent;display:block;}
+.sm-twitter {height:44px;width:40px;background: url("/images/social-media-icons.jpg") no-repeat scroll -44px -1px transparent;display:block;}
+.sm-facebook {height:44px;width:40px;background: url("/images/social-media-icons.jpg") no-repeat scroll -4px -44px transparent;display:block;}
+
+.comment { margin-top: 10px; border-bottom:1px dashed #ccc;}
+.comment .comment-subline { color:#aaa; font-size: 10px; }
+.comments textarea { width: 650px; height: 100px;}
+
+.show-more-bar {width:100%;}
+
 
 #big-shumarklet-button {padding:10px 20px; line-height:160px; border:5px solid #D4CCB0; font-size:48px;}
 

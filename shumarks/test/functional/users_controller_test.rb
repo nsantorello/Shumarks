@@ -79,14 +79,14 @@ class UsersControllerTest < ActionController::TestCase
   test "should require login to edit" do
     get :edit
     assert_response 302
-    assert_redirected_to "/"
+    assert_redirected_to "/access_denied"
   end
   
   test "should require login when update" do
     update_user
     assert_nil assigns(:user)
     assert_response 302
-    assert_redirected_to "/"
+    assert_redirected_to "/access_denied"
   end
   
   test "should update" do

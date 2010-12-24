@@ -9,6 +9,7 @@ class Link < ActiveRecord::Base
 	
   has_many :read_receipts
 	has_many :readers, :through => :read_receipts, :source => :reader
+  has_many :comments
 	
 	
 	# If the url doesn't have http:// or https://, add it

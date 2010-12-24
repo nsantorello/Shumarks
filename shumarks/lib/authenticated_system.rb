@@ -73,12 +73,13 @@ module AuthenticatedSystem
     def access_denied
       respond_to do |format|
         format.html do
-          store_location
           flash[:error] = "Please Log In or Register."
-          redirect_to home_path
-        end
-        format.any do
-          request_http_basic_authentication 'Web Password'
+          if request.xhr?
+            render :text => "Please Log In or Register."
+          else
+            store_location
+            redirect_to access_denied_path
+          end
         end
       end
     end
