@@ -245,8 +245,9 @@ div.content-section { padding-bottom:20px;}
 .list-item .list-body									{ color:#000; font-size: 12px; padding-top: 5px;}
 .list-item .list-footer     					{ color:#aaa; font-size: 10px;}
 .list-item .link-sentence-desc    		{ float:left; clear:left;}
-.list-item .link-view-count-in-words	{ float:left; clear:right; padding-left:2px; color:#aaa; font-size: 10px;}
+.list-item .link-view-count-in-words	{ float:left; clear:right; padding-left:5px; color:#aaa; font-size: 10px;}
 .list-item .link-view-count						{ display: none;}
+.list-item .link-comment-count        { color: #aaa; font-size: 10px; padding-left: 5px; float:left; }
 
 .delete-link {text-align:right; float:right;}
 
@@ -257,6 +258,7 @@ div.content-section { padding-bottom:20px;}
 .sidebar-widget .list-item .list-body									{ display: none;}
 .sidebar-widget .list-item .link-sentence-desc    		{ float:left; clear:left;}
 .sidebar-widget .list-item .link-view-count-in-words	{ display: none;}
+.sidebar-widget .list-item .link-comment-count      	{ display: none;}
 .sidebar-widget .list-item .link-view-count						{ display: block; float:right; line-height:22px; font-size:20px; color:#165317;}
 
 .view-link .list-item										{ border: none;}

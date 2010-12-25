@@ -30,11 +30,15 @@
 	<div class="list-footer link-sentence-desc">
 		Added by <%= link_to link.user.login, user_path(link.user.login) %> <%= time_ago(link.created_at)%>.
 	</div>
+  
+  <div class="link-comment-count">
+    <%= link.comments.count %> comments
+  </div>
 	
 	<div class="link-view-count-in-words">
 		<%= pluralize(link.readers.count, 'view') %>
 	</div>
 	
-
 	<div class="clear-both"></div>
+  
 </div>
