@@ -77,6 +77,7 @@
 					<%= flash[:error] %>
 			  </div>
 			<% end %>
+			
 			<section id="shumarks">
 				<h2><%= @header_text %></h2>
 					<%= yield %>
@@ -88,11 +89,11 @@
 			<%= render '/sidebar/search' %>
 			<%= render '/sidebar/most_viewed_bar' %>
 			<%= render '/sidebar/top_topics' %>
-			
-				        </aside>
-					<% end %>
-				        <div class="clear-both"></div>
-				        <footer><a href="#">About</a> | <a href="#">Privacy Policy</a> | <a href="#">Contact</a> &copy;2010 Shumarks, LLC.</footer>
+		</aside>
+		<% end %>
+		
+		<div class="clear-both"></div>
+		<footer><%= link_to 'About', about_path %> &copy;2010 Shumarks, LLC.</footer>
 	</div>
     <div id="container" class="all-corners">
      
