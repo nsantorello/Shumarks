@@ -1,0 +1,4 @@
+<% char_limit = 25 unless char_limit %>
+<% links.each_with_index { |link, i| %>
+	<%= render 'links/shortlink', :last_item => i == links.length-1, :char_limit => char_limit, :link => link %>
+<% } %>

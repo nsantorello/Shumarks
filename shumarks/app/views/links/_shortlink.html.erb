@@ -1,0 +1,9 @@
+<% char_limit = 25 unless char_limit %>
+<% last_item = false unless last_item %>
+<section class="item">
+	<div class="main-link"><%= link_to link.short_name(char_limit), link_path(link) %>
+		<div class="secondary">Added by <%= link_to link.user.login, user_path(link.user.login) %> <%= time_ago(link.created_at)%></div>
+	</div>
+	<div class="rank"><%= link.readers.count %></div>
+	<div class="clear-both"></div>
+</section>
