@@ -1,6 +1,6 @@
-$(document).ready(function(){
+jQuery(document).ready(function(){
 	// ROUNDED CORNERS FOR IE
-	$(function(){ 
+	jQuery(function(){ 
 		settings = {
 			tl: { radius: 9 },
 			tr: { radius: 9 },
@@ -9,37 +9,37 @@ $(document).ready(function(){
 			autoPad: true,
 			validTags: ["div"]
 		}
-		$('#join-now').corner(settings);
-		$('#shumarks').corner(settings);
-		$('.style-one').corner(settings);
-		$('.style-two').corner(settings);
-		$('#profile .name').corner(settings);
-		$('tabs.ul li').corner(settings);
-		$('.tabs-container').corner(settings);
+		jQuery('#join-now').corner(settings);
+		jQuery('#shumarks').corner(settings);
+		jQuery('.style-one').corner(settings);
+		jQuery('.style-two').corner(settings);
+		jQuery('#profile .name').corner(settings);
+		jQuery('tabs.ul li').corner(settings);
+		jQuery('.tabs-container').corner(settings);
 	});
 	
 	// FADE FOR BUTTONS
-	$(".fade").hover(
+	jQuery(".fade").hover(
 		function() {
-			$(this).animate({"opacity": "0.75"}, "fast");
+			jQuery(this).animate({"opacity": "0.75"}, "fast");
 		},
 		function() {
-			$(this).animate({"opacity": "1"}, "fast");
+			jQuery(this).animate({"opacity": "1"}, "fast");
 	});
 	
 	// TAB STUFF
 	//Default Action
-	$(".tab-content").hide(); //Hide all content
-	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-	$(".tab-content:first").show(); //Show first tab content
+	jQuery(".tab-content").hide(); //Hide all content
+	jQuery("ul.tabs li:first").addClass("active").show(); //Activate first tab
+	jQuery(".tab-content:first").show(); //Show first tab content
 	
 	//On Click Event
-	$("ul.tabs li").click(function() {
-		$("ul.tabs li").removeClass("active"); //Remove any "active" class
-		$(this).addClass("active"); //Add "active" class to selected tab
-		$(".tab-content").hide(); //Hide all tab content
-		var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
-		$(activeTab).fadeIn(); //Fade in the active content
+	jQuery("ul.tabs li").click(function() {
+		jQuery("ul.tabs li").removeClass("active"); //Remove any "active" class
+		jQuery(this).addClass("active"); //Add "active" class to selected tab
+		jQuery(".tab-content").hide(); //Hide all tab content
+		var activeTab = jQuery(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+		jQuery(activeTab).fadeIn(); //Fade in the active content
 		return false;
 	});	
 	
