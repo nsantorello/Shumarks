@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   # Be sure to include AuthenticatedTestHelper in test/test_helper.rb instead.
@@ -10,7 +10,29 @@ class UserTest < ActiveSupport::TestCase
   test "should create user" do
     assert_difference 'User.count' do
       user = create_user
-      assert !user.new_record?, "#{user.errors.full_messages.to_sentence}"
+      assert !user.new_record?
+    end
+  end
+  
+  test "new registered users should have salt" do
+    assert create_user.salt
+  end
+  
+  test "new unregistered users don't have salf" do
+    assert !create_user(:is_registered => false).salt
+  end
+  
+  test "should create non-registered user" do
+    assert_difference 'User.count' do
+      user = create_user(:is_registered => false)
+      assert !user.new_record?
+    end
+  end
+  
+  test "should require is_registered" do
+    assert_no_difference 'User.count' do
+      user = create_user(:is_registered => nil)
+      assert user.errors.on(:is_registered)
     end
   end
 
@@ -121,6 +143,24 @@ class UserTest < ActiveSupport::TestCase
     end
   end
   
+  test "should not follow un-registered" do
+    assert_no_difference 'users(:alice).followees.count' do
+      users(:alice).follow(users(:fred))
+    end
+  end
+  
+  test "cannot follow when un-registered" do
+    assert_no_difference 'users(:fred).followees.count' do
+      users(:fred).follow(users(:alice))
+    end
+  end
+  
+  test "should require followee" do
+    assert_no_difference 'users(:alice).followees.count' do
+      users(:alice).follow(nil)
+    end
+  end
+  
   test "should be following?" do
     assert !users(:alice).following?(users(:bob))
     users(:alice).follow(users(:bob))
@@ -161,6 +201,12 @@ class UserTest < ActiveSupport::TestCase
     assert !users(:bob).has_read?(links(:google))
     assert users(:bob).read(links(:google))
     assert users(:bob).has_read?(links(:google))
+  end
+  
+  test "should read when un-registered" do
+    assert_difference 'ReadReceipt.count' do
+      assert users(:fred).read(links(:google))
+    end
   end
 
   test "should reset password" do
@@ -218,8 +264,15 @@ class UserTest < ActiveSupport::TestCase
 
 
 protected
-  def create_user(options = {})
-    record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))
+  def create_user(options={})
+    record = User.new({ 
+        :login => 'quire', 
+        :email => 'quire@example.com', 
+        :password => 'quire', 
+        :password_confirmation => 'quire',
+        :is_registered => true
+      }.merge(options))
+      
     record.save
     record
   end

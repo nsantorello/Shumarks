@@ -1,5 +1,6 @@
 <div class="link-list">
-	<% for link in @links -%>
-    <%= render link %>
-  <% end -%>
+	<% char_limit = 70 unless char_limit %>
+	<% links.each_with_index { |link, i| %>
+    <%= render link, :last_item => i == links.length-1, :char_limit => char_limit %>
+  <% } %>
 </div>

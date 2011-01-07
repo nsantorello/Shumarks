@@ -35,20 +35,26 @@ ActionController::Routing::Routes.draw do |map|
   # On site authentication
   #map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   
+  map.bookmarklet '/bm/:salt', :controller => 'bookmarklet', :action => 'remote_bookmarklet_javascript'
+  
   map.signup '/signup', :controller => 'users', :action => 'signup'
   map.signup_action '/session/create', :controller => 'session', :action => 'create'
   map.login '/login', :controller => 'users', :action => 'login'                                                   
   map.logout '/logout', :controller => 'session', :action => 'destroy'
+  map.access_denied '/access_denied', :controller => 'session', :action => 'access_denied'
 
   # Flat pages
   map.home '/', :controller => 'home', :action => 'index'
   map.about '/about', :controller => 'home', :action => 'about'
-  map.addons '/addons', :controller => 'home', :action => 'addons'
-  map.home_id '/home/:id', :controller => 'home', :action => 'home'
-
   
-  # API urls
-  map.save '/save', :controller => 'links', :action => 'create'
+  # Links
+  map.link_save '/links/create', :controller => 'links', :action => 'save', :conditions => {:method => :post}
+  map.link_create '/links/create', :controller => 'links', :action => 'create', :conditions => {:method => :get}
+  map.link '/links/:id', :controller => 'links', :action => 'view'
+  
+  # Comments
+  map.comment_create '/comments/create', :controller => 'comments', :action => 'create', :conditions => {:method => :post}
+  map.comment_show   '/comments/:link_id/', :controller => 'comments', :action => 'show', :conditions => {:method => :get}
   
   # Twitter API urls
   map.save 'twitter-auth', :controller => 'users', :action => 'twitter_create'
@@ -59,13 +65,11 @@ ActionController::Routing::Routes.draw do |map|
   map.save 'facebook-callback', :controller => 'users', :action => 'facebook_callback'
   
   # User pages
-  map.my_home '/my-shumarks', :controller => 'users', :action => 'home'
   map.edit_user '/account', :controller => 'users', :action => 'edit'
   map.remote_login '/remote-login/', :controller => 'users', :action => 'remote_get_salt'
   map.remote_list '/remote-list/', :controller => 'users', :action => 'remote_get_list'
-  map.remote_create '/remote-create/', :controller => 'users', :action => 'remote_create'
+  map.remote_create '/remote-create/', :controller => 'bookmarklet', :action => 'old_bookmarklet_landing'
   map.remote_result '/remote-result/', :controller => 'users', :action => 'remote_result'
-  
   
   map.create_user_action '/user/create',
     :controller => 'users', 
@@ -86,8 +90,7 @@ ActionController::Routing::Routes.draw do |map|
     :action => 'show'
    
   map.user_links '/user/links', :controller => 'links', :action => 'index'
-  
-  map.link '/links/:id', :controller => 'links', :action => 'view'
+
   
   map.delete_link '/user/links/delete/:id', :controller => 'links', :action => 'delete'
   map.link_redirect '/v/:id', :controller => 'links', :action => 'redir'
@@ -98,7 +101,8 @@ ActionController::Routing::Routes.draw do |map|
   map.follower_list '/follower-list/', :controller => 'users', :action => 'follower_list'
   map.search_users '/search-users/', :controller => 'users', :action => 'search'
   
-  map.user_home '/:user_name', :controller => 'users', :action => 'home'
+  map.user_home '/home', :controller => 'users', :action => 'home'
+  map.user '/:user_name', :controller => 'users', :action => 'links'
 
   # See how all your routes lay out with "rake routes"
 end

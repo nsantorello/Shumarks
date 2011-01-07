@@ -1,0 +1,19 @@
+<div class="section-header">
+	<% if logged_in? %>
+		Find your friends!
+	<% else %>
+	  Find people!
+	<% end %>
+</div>
+<div class="section">
+	<form action="<%= search_users_path %>" method="post">
+		<div class="form-input left">
+			<input type="text" id="search-text-input" name="user_name" class="top-corners bottom-corners"/>
+		</div>
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" />
+		<div class="right">
+			<input type="submit" class="small-button" value="Search" />
+		</div>
+		<div class="clear-both"></div>
+	<form>
+</div>

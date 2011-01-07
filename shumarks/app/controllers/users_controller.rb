@@ -1,7 +1,8 @@
 require 'oauth/oauth/consumer'
 require 'net/http'
 class UsersController < ApplicationController
-  before_filter :login_required, :set_user, :only => [:edit, :update, :follow, :unfollow, :follow_list, :follower_list]
+  before_filter :login_required, :set_user, :only => [:edit, :update, :follow, :unfollow, :follow_list, :follower_list, :home]
+  before_filter :hide_sidebar, :only => [:create, :login, :signup, :edit, :update]
 
   # Create new user
   def create
@@ -10,12 +11,21 @@ class UsersController < ApplicationController
     # request forgery protection.
     # uncomment at your own risk
     # reset_session
-    @user = User.new(params[:user])
+    @user = User.find(cookies[:user_id])
+    if @user.is_registered
+      @user = User.new(params[:user])
+    end
+    
+    @user.is_registered = true
+    @user.attributes = params[:user]
     @user.save
+    
     if @user.errors.empty?
       self.current_user = @user
-      redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!"
+      
+      cookies[:user_id] = {:value => @user.id}
+      redirect_to user_home_path
     else
       @header_text = 'Create an Account'
       render :partial => 'users/signup', :layout => 'application'
@@ -26,6 +36,7 @@ class UsersController < ApplicationController
   def login
     @page_title = "Login"
     @header_text = "Login"
+
     render :partial => 'login', :layout => 'application'
   end
   
@@ -33,11 +44,12 @@ class UsersController < ApplicationController
   def signup
     @page_title = "Create an Account"
     @header_text = "Create an Account"
+
     render :partial => 'signup', :layout => 'application'
   end
   
   # Show user queue
-  def home
+  def links
     # Get the user by id
     if params[:id]
       @user = User.find_by_id(params[:id])
@@ -46,31 +58,35 @@ class UsersController < ApplicationController
       @user = User.find_by_login(params[:user_name])
     end
     
-    if logged_in?
-      if @user
+    unless @user
+      flash[:error] = "User not found."
+      redirect_to(home_path)
+    else
+      if logged_in?
         if @user.id == current_user.id
           @header_text = "My Shumarks"
-          @is_self = true
+          @show_delete = true
         else
           @header_text = "#{@user.login}'s Shumarks"
           @is_following = current_user.following?(@user)
+          @show_following = !@is_following
+          @show_unfollowing = @is_following
         end
       else
-        @user = current_user
-        @header_text = "My Shumarks"
-        @is_self = true
-      end
-    else
-      if @user
         @header_text = "#{@user.login}'s Shumarks"
-      else
-        redirect_to(home_path)
-        return
       end
-    end
 
+      @page_title = "Shumarks: #{@user.login}"
+      @links = @user.links.most_recent(@pager)
+      @page_total = (@user.links.count.to_f / @page_size.to_f).ceil
+    end
+  end
+  
+  def home
     @page_title = "Shumarks: #{@user.login}"
-    @links = @user.links.all(:order => 'created_at DESC')
+    @header_text = "Home"
+    @links = Link.feed_of(current_user, @pager)
+    @page_total = (Link.feed_of(current_user, :limit => nil).length.to_f / @page_size.to_f).ceil
   end
   
   # Edit user information
@@ -90,7 +106,7 @@ class UsersController < ApplicationController
     
     if @user.save()
       flash[:notice] = "#{@user.login} was successfully updated."
-      redirect_to my_home_path()                               
+      redirect_to user_home_path                               
     else
       render :action => 'edit'
     end
@@ -104,7 +120,7 @@ class UsersController < ApplicationController
         redirect_to home_path()
     elsif @user
       flash[:notice] = "Already following"
-      redirect_to  user_home_path(@user.login)
+      redirect_to user_path(@user.login)
     else
       redirect_to home_path()
     end
@@ -118,7 +134,7 @@ class UsersController < ApplicationController
       redirect_to home_path()
     elsif @user
       flash[:notice] = "You aren't following #{@user.login}"
-      redirect_to  user_home_path(@user.login)
+      redirect_to user_path(@user.login)
     else
       redirect_to home_path()
     end
@@ -144,13 +160,18 @@ class UsersController < ApplicationController
   
   def search
     @search_term = params[:user_name].gsub('[^a-zA-Z0-9]', '')
-    safe_term = "%#{@search_term}%"
-    print safe_term
-    @users = User.all(:conditions => 
-        ["login LIKE ? OR first_name LIKE ? OR last_name LIKE ?", safe_term, safe_term, safe_term])
+    if !@search_term.blank?
+      safe_term = "%#{@search_term}%"
+
+      @users = User.all(:conditions => 
+          ["login LIKE ? OR first_name LIKE ? OR last_name LIKE ?", safe_term, safe_term, safe_term])
+    else
+      @users = []
+    end
+
     @page_title = 'Search Results'
     @header_text = "Search results for \"#{@search_term}\""
-    
+  
     render :partial => '/users/users_list', :layout => 'application'
   end
     
@@ -168,24 +189,6 @@ class UsersController < ApplicationController
     render :xml => @user.queue_xml 
   end
   
-  def remote_create
-    @user = login_from_salt
-    
-    url = params[:url]
-    name = params[:name]
-    blurb = params[:b]
-    if url and name
-      @link = @user.links.build({:url => url, :name => name, :blurb => blurb})
-      @link.save()
-    end
-    if @link.errors.empty?
-      render 'remote_create_success', :layout => false
-    else
-      render 'remote_create_fail'
-    end
-	  #redirect_to ("http://localhost:3001/tweet?t=" + URI.escape(name, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&r=" + URI.escape(url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")) + "&lid=" + @link.id.to_s + "&uid=" + @user.id.to_s)
-  end
-  
   def remote_result
     @user = User.find_by_id(params[:uid])
     @link = @user.links.find_by_id(params[:lid])
@@ -200,7 +203,7 @@ class UsersController < ApplicationController
   def set_user
     @user = current_user
     if @user
-      @links = @user.links.all(:order => 'created_at DESC')
+      @links = @user.links.most_recent(:limit => @page_size, :offset => @page_size * @page_index)
     end
   end
   

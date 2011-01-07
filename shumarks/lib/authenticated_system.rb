@@ -1,4 +1,5 @@
 module AuthenticatedSystem
+  include ApplicationHelper
   protected
     # Returns true or false if the user is logged in.
     # Preloads @current_user with the user model if they're logged in.
@@ -9,13 +10,22 @@ module AuthenticatedSystem
     # Accesses the current user from the session. 
     # Future calls avoid the database because nil is not equal to false.
     def current_user
-      @current_user ||= (login_from_salt || login_from_session || login_from_basic_auth || login_from_cookie) unless @current_user == false
+      unless @current_user == false
+        @current_user ||= (login_from_salt || login_from_session || login_from_basic_auth || login_from_cookie) 
+      end
     end
 
     # Store the given user id in the session.
     def current_user=(new_user)
-      session[:user_id] = new_user ? new_user.id : nil
-      @current_user = new_user || false
+      if new_user
+        session[:user_id] =  new_user.id
+        @current_user = new_user
+        internal_session.update_attributes(:user_id => new_user.id)
+        cookies[:user_id] = {:value => self.current_user.id, :expires => 1.months.from_now}
+      else
+        session[:user_id] = nil
+        @current_user = false;
+      end
     end
 
     # Check if the user is authorized
@@ -63,12 +73,13 @@ module AuthenticatedSystem
     def access_denied
       respond_to do |format|
         format.html do
-          store_location
           flash[:error] = "Please Log In or Register."
-          redirect_to home_path
-        end
-        format.any do
-          request_http_basic_authentication 'Web Password'
+          if request.xhr?
+            render :text => "Please Log In or Register."
+          else
+            store_location
+            redirect_to access_denied_path
+          end
         end
       end
     end

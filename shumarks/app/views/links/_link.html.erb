@@ -1,23 +1,44 @@
-<div class="link-line-item" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
-	<div class="list-item link-content">
-		<div class="list-header">
-			<%= link_to link.short_name, link_path(link), :class => 'link'%>&nbsp;&nbsp;
-		</div>
-		<div class="list-sub-header">
-			<%= link.num_readers_to_s(current_user) %>
-		</div>
-		<div class="list-body">
-			<%= link.blurb %>
-		</div>
-		<div class="list-footer">
-			Added by <%= User.find_by_id(link.user_id).login %> <%= time_ago(link.created_at)%>.
-			<%= pluralize(link.readers.count, 'view') %>
-		</div>
+<% char_limit = 70 unless char_limit %>
+<% last_item = false unless last_item %>
+<div class="list-item link-content <%= last_item ? 'last-list-item' : '' %>" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
+	<div class="delete-link">
+		<%= 
+			if @show_delete then
+				link_to 'X', delete_link_path(link), 
+					:id => ("delete-link-#{link.id}"), 
+					:class => 'small-button display-none' 
+			end 
+		%>
 	</div>
-	<div class="list-item delete-link">
-		<% if logged_in? && @user && @user.id == current_user.id then -%>
-			<%= link_to 'Remove', delete_link_path(link), :id => ("delete-link-#{link.id}"), :class => 'small-button display-none' %>
-		<% end -%>
+	
+	<div class="list-header">
+		<%= link_to link.short_name(char_limit), link_path(link), :class => 'link' %>
 	</div>
+	
+	<div class="link-view-count">
+		<%= link.readers.count %>
+	</div>
+	
+	<div class="list-sub-header">
+		<%= link.num_readers_to_s(current_user) %>
+	</div>
+	
+	<div class="list-body">
+		<%= link.blurb %>
+	</div>
+	
+	<div class="list-footer link-sentence-desc">
+		Added by <%= link_to link.user.login, user_path(link.user.login) %> <%= time_ago(link.created_at)%>.
+	</div>
+  
+  <div class="link-comment-count">
+    <%= link.comments.count %> comments
+  </div>
+	
+	<div class="link-view-count-in-words">
+		<%= pluralize(link.readers.count, 'view') %>
+	</div>
+	
+	<div class="clear-both"></div>
+  
 </div>
-

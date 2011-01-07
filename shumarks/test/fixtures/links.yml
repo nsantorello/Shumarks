@@ -5,27 +5,32 @@ google:
   url: http://www.google.com
   name: Google
   blurb: Don't be evil
+  created_at: <%= 1.year.ago.to_s :db %> 
 
 microsoft:
   user_id: 1
   url: http://www.microsoft.com
   name: Microsoft
   blurb: We will fix it in a patch
+  created_at: <%= 1.month.ago.to_s :db %>
   
 apple:
   user_id: 3
   url: http://www.apple.com
   name: Apple
   blurb: Dont hold it that way
+  created_at: <%= 1.day.ago.to_s :db %>
 
 oracle:
   user_id: 4
   url: http://www.oracle.com
   name: Oracle
   blurb: We own Java
+  created_at: <%= 1.hour.ago.to_s :db %>
 
 yahoo:
   user_id: 5
   url: http://www.yahoo.com
   name: Yahoo
   blurb: Yahooooo!
+  created_at: <%= 1.minute.ago.to_s :db %>

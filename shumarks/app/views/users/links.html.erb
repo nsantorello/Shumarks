@@ -1,0 +1,10 @@
+<div>
+		<% if @links.length == 0 %>
+			No Shumarks... yet!
+	  <% else %>
+			<%= render '/links/index', :links => @links %>
+			<%= render '/layouts/pagination', :redir_path => user_path(@user.login) %>
+	  <% end %>
+</div>
+
+

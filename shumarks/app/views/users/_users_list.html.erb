@@ -1,49 +1,57 @@
-<table class="list-table">
-	<% for user in @users %>
-		<tr>
-			<td class="list-item">
-				<div class="list-header">
-					<%= link_to user.login, user_home_path(user.login) %>
-					<% if user.first_name or user.last_name %>
-							- <%= user.first_name %> <%= user.last_name %>
+<div class="list user-list">
+	<% if @users.length == 0 %>
+		No one here...
+	<% end %>
+	
+	<% @users.each_with_index do |user, i|  %>
+		<div class="list-item <%= 'last-list-item' if i == @users.length - 1 %>">
+			<div class="list-header">
+				<%= link_to user.login, user_path(user.login) %>
+				<% if user.first_name or user.last_name %>
+						- <%= user.first_name %> <%= user.last_name %>
+				<% end %>
+			</div>
+			
+			<% if logged_in? %>
+				<div class="follow-user">
+					<% if current_user.following?(user) then %>
+						<%= link_to "Unfollow", unfollow_path(user), :class => "small-button"%>
+					<% elsif user.id != current_user.id %>
+						<%= link_to "Follow", follow_path(user), :class => "small-button"%>
 					<% end %>
 				</div>
-	
-				<% if user.bio %>
-					<div class="list-body">
-						<%= user.bio %>
-					</div>
-				<% end %>
-				
-				<% recent_links = user.links.all(:limit => 3, :order => 'created_at DESC') %>
-				<% if recent_links.length > 0 then %>
-					<div class="list-body">
-						<div class="clear-both">
-							Recently shared: 
-						</div>
-						<% for recent_link in recent_links %>
-							<div class="left">
-								<%= link_to recent_link.short_name, link_path(recent_link) %>
-							</div>
-							<div class="list-footer right">
-								<%= time_ago(recent_link.created_at) %>
-							</div>
-							<div class="clear-both"></div>
-						<% end %>
-					</div>
-				<% end %>
+			<% end%>
+			
+			<div class="clear-both"> </div>
 
-				<div class="list-footer">
-					Joined <%= user.created_at.strftime('%m/%d/%Y')%>
+			<% if user.bio %>
+				<div class="list-body">
+					<%= user.bio %>
 				</div>
-			</td>
-			<td id="follow">
-				<% if logged_in? and current_user.following?(user) then %>
-					<%= link_to "Unfollow", unfollow_path(user), :class => "small-button"%>
-				<% elsif logged_in? and user.id != current_user.id %>
-					<%= link_to "Follow", follow_path(user), :class => "small-button"%>
-				<% end %>
-			</td>
-		</tr>
+			<% end %>
+		
+			<% recent_links = user.links.most_recent(:limit => 3) %>
+			<% if recent_links.length > 0 then %>
+				<div class="list-body">
+					<div class="clear-both">
+						Recently shared: 
+					</div>
+					<% for recent_link in recent_links %>
+						<div class="left">
+							<%= link_to recent_link.short_name, link_path(recent_link) %>
+						</div>
+						<div class="list-footer right">
+							<%= time_ago(recent_link.created_at) %>
+						</div>
+						<div class="clear-both"></div>
+					<% end %>
+				</div>
+			<% end %>
+
+			<div class="list-footer">
+				Joined <%= user.created_at.strftime('%m/%d/%Y')%>
+			</div>
+		</div>
 	<% end %>
-</table>
+</div>
+<%= render 'layouts/pagination', :redir_path => search_users_path %>

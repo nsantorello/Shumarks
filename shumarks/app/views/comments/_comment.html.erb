@@ -1,0 +1,8 @@
+<div class="comment">
+  <p class="comment-text">
+    <%= comment.text %>
+  </p>
+  <p class="comment-subline">
+    Added <%= time_ago(comment.created_at) %> by <%= link_to comment.user.login, user_path(comment.user.login) %>
+  </p>
+</div>

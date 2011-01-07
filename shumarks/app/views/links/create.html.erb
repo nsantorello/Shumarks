@@ -1,0 +1,32 @@
+<% form_for :link, :url => link_save_url, :method => 'POST' do |f| -%>
+	<div class="form-label">
+		<label for="url">Url: </label>
+	</div>
+	<div class="form-input-error-list">
+		<%= errors_for(@link, :url) %>
+	</div>
+  <div class="form-input">
+  	<%= f.text_field :url, :class => 'top-corners bottom-corners', :value => @link.url %>
+  </div>
+	<div class="form-label">
+		<label for="name">Title: </label>
+	</div>
+	<div class="form-input-error-list">
+		<%= errors_for(@link, :name) %>
+	</div>
+  <div class="form-input">
+  	<%= f.text_field :name, :class => 'top-corners bottom-corners', :value => @link.name %>
+  </div>
+	<div class="form-label">
+		<label for="blurb">Blurb: </label>
+	</div>
+	<div class="form-input-error-list">
+		<%= errors_for(@link, :blurb) %>
+	</div>
+  <div class="form-input">
+  	<%= f.text_area :blurb, :class => 'top-corners bottom-corners', :value => @link.blurb %>
+  </div>
+	<div class="form-submit clear-both">
+		<%= submit_tag 'Shumark it!', :class => "small-button" %>
+	</div>
+<% end %>

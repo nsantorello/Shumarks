@@ -1,24 +1,17 @@
 # This controller handles the login/logout function of the site.  
 class HomeController < ApplicationController
+  before_filter :hide_sidebar, :only => [:about, :addons]
+  
   def index
-    if logged_in?
-      #following_user_ids = current_user.followees.all(:include => links).map(&:follow_id)
-      @links = Link.all(:conditions => {:user_id => current_user.followee_ids}, :order => 'created_at DESC')
-      
-      @header_text = "Your friends' Shumarks"
-      render "index_loggedin"
-    else
-      @header_text = "Welcome to Shumarks"
-      render "index_loggedout"
-    end
+    @header_text = logged_in? ? "Most Recent" : "Shumarks"
+    
+    @most_recent = Link.most_recent(@pager)
+    @page_total = (Link.count.to_f / @page_size.to_f).ceil
+    @show_welcome = !logged_in?
   end
   
   def about
     @page_title = "About Shumarks"
     @header_text = "Shumarks"
-  end
-  
-  def addons
-    @page_title = "Browser Addons"
   end
 end

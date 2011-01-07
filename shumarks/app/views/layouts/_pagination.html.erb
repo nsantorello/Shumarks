@@ -1,0 +1,21 @@
+<div class="pager">
+	<% if @page_index == 0 then %>
+		<span class="small-button disabled-button">&lt;&lt;</span>
+		<span class="small-button disabled-button">&lt;</span>
+	<% else %>
+		<%= link_to '&lt;&lt;', redir_path, :class => 'small-button' %>
+		<%= link_to '&lt;', redir_path + "?p=#{[@page_index, 1].max}", :class => 'small-button' %>
+	<% end %>
+	
+	<% (@page_offset..([@page_max + @page_offset - 1, @page_total - 1].min)).each do |i| %>
+		<%= link_to i + 1, redir_path + "?p=#{i + 1}", :class => "small-button #{@page_index == i ? 'current' : ''}" %>
+	<% end %>
+	
+	<% if @page_index == @page_total - 1 then %>
+		<span class="small-button disabled-button">&gt;</span>
+		<span class="small-button disabled-button">&gt;&gt;</span>
+	<% else %>
+		<%= link_to '&gt;', redir_path + "?p=#{[@page_index + 2, @page_total + 1].min}", :class => 'small-button' %>	
+		<%= link_to '&gt;&gt;', redir_path + "?p=#{@page_total}", :class => 'small-button'%>
+	<% end %>
+</div>
