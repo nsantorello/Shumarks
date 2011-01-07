@@ -1,0 +1,546 @@
+/* meyer reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+:focus {
+	outline: 0;
+}
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* global */
+body { 
+	font-family: 'Droid Sans', helvetica, sans-serif; 
+	font-size: 12px; 
+	color: #666666; 
+	line-height: 1.3; 
+	background: #b6c8c1 url(../images/bgd-main.jpg) repeat-y top left;
+	margin: 10px 0;
+}
+header, section, article, nav, dialog, aside, figure, footer { 
+	display: block; 
+}
+a {
+	text-decoration: none;
+	color: #40b1db;
+	font-weight: bold;
+}
+a:visited {
+	text-decoration: none;
+	color: #40b1db;
+}
+a:hover {
+	text-decoration: underline;
+	color: #40b1db;
+}
+
+h2 {
+	font-family: 'Arvo', serif;
+	font-size: 24px;
+	font-weight: bold;
+}
+h3 {
+	font-family: 'Arvo', serif;
+	font-size: 16px;
+	font-weight: bold;
+}
+.clear-both {
+	clear: both;
+	visibility: hidden;
+	display: block;
+	font-size: 0px;
+	line-height: 0px;
+	height: 0px;
+	width: 0px;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.secondary {
+	font-size: 11px;
+	color: #999;
+}
+.style-one {
+	width: 270px;
+	padding: 15px;
+	background-color: #ffedd9;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	margin-bottom: 12px;
+}
+.style-two {
+	width: 270px;
+	padding: 15px;
+	background-color: #eaf9ff;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	margin-bottom: 12px;
+}
+.style-three {
+	background-color: #fff;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	margin-bottom: 12px;
+	padding: 15px;
+}
+.user-icon {
+	float: left;
+	margin-right: 20px;
+}
+.topic-icon {
+	float: left;
+}
+.item {
+	margin-bottom: 12px;
+}
+aside h3 {
+	margin-bottom: 12px;
+}
+
+
+/* Shumarks */
+.shumark {
+	float: left;
+	margin-right: 20px;
+	width: 438px;
+}
+.shumark h2 {
+	font-family: 'Droid Sans', helvetica, sans-serif;
+	font-size: 14px;
+	margin-bottom: 0px;
+}
+#shumarks {
+	width: 598px;
+	padding: 15px;
+	background-color: #fff;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	margin-bottom: 12px;
+}
+#shumarks h2 {
+	margin-bottom: 12px;
+}
+#shumarks .shumark h2 {
+	margin-bottom: 0px;
+}
+
+
+/* search */
+.search input.input-field {
+	width: 160px; 
+	height: 16px;
+	padding: 3px;
+	margin-right: 5px;
+	border: 1px solid #ccc;
+}
+.search input.btn {
+	vertical-align: bottom;
+}
+
+
+/* layout */
+#content {
+	width: 940px;
+	margin: auto; 
+	position: relative;
+}
+#main {
+	width: 628px;
+	margin-right: 12px;
+	float: left;
+}
+aside {
+	float: left;
+	width: 300px;
+}
+nav {
+	margin-bottom: 12px;
+}
+
+/* header */
+header {
+	margin-bottom: 12px;
+}
+header #logo {
+	float: left;	
+}
+header #login {
+	float: right;
+	margin-top: 5px;
+}
+header #login #fields {
+	float: left; 
+	margin-right: 10px;
+}
+header #login #fields input {
+	width: 169px; 
+	height: 16px;
+	padding: 3px;
+	margin-bottom: 5px;
+	border: 1px solid #ccc;
+}
+header #login .go {
+	margin-top: 15px;
+}
+header .search {
+	position: absolute;
+	left: 300px;
+	top: 3px;
+}
+#logged-in {
+ 	float: right;
+	margin-top: 5px;
+}
+#logged-in img {
+	float: left;
+	margin-right: 15px;
+}
+#logged-in .name {
+	font-size: 14px;
+	font-weight: bolder;
+}
+#logged-in .user {
+	float: left;
+}
+#logged-in .links a {
+	font-size: 11px;
+	font-weight: normal;
+}
+
+/* nav */
+nav {
+	width: 910px;
+	padding: 6px 15px;
+	font-size: 24px;
+	background-color: #eee;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	margin-bottom: 12px;
+}
+nav .left a {
+	font-family: 'Arvo', serif;
+	font-size: 16px;
+	font-weight: bold;
+	padding-right: 28px;
+}
+nav .right a {
+	font-family: 'Arvo', serif;
+	font-size: 14px;
+	padding-right: 28px;
+}
+
+/* join now */
+#join-now {
+	width: 870px;
+	padding: 38px 35px;
+	font-size: 24px;
+	background-color: #eee;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	margin-bottom: 12px;
+}
+#join-now p {
+	text-shadow: 0 2px 0 #fff;
+	line-height: 1.2;
+	margin-bottom: 18px;
+}
+#join-now .arrow {
+	font-size: 14px;
+	background: transparent url(../images/arrow-single.png) right center no-repeat;
+	padding-right: 28px;
+}
+#join-now img {
+	vertical-align: middle;}
+
+
+/*  profile */
+#profile {
+	padding-bottom: 12px;
+}
+#profile .user-icon {
+	float: left;
+	width: 60px;
+	margin-right: 12px;
+}
+#profile .name {
+	float: left;
+	padding: 15px 15px 15px 25px;
+	width:516px;
+	font-size: 24px;
+	background-color: #fff;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+}
+#profile p {
+	margin-bottom: 14px;
+}
+#profile .item {
+	float: left;
+	margin: 0 50px 0 0;
+	font-size: 14px;
+}
+#profile .item a {
+	font-size: 16px;
+	font-weight: normal;
+}
+
+
+/* pagination */
+#pagination {
+	text-align: center;
+	font-family: 'Arvo', serif;
+	font-size: 14px;
+	font-weight: bold;
+}
+#pagination a {
+	padding-right: 5px;
+}
+#pagination img {
+	vertical-align: bottom;
+}
+
+
+
+/* any widget with rank of shumarks */
+.top-ten-list section {
+	margin-bottom: 12px;
+}
+.top-ten-list .no-btm-margin {
+	margin-bottom: 0px;
+}
+.top-ten-list .item .main-link {
+	float: left;
+	width: 200px;
+	font-size: 14px;
+	margin-right: 15px;
+}
+.top-ten-list .rank {
+	float: left;
+	background-image:url(../images/rank-shoe.png);
+	background-position: top left;
+	background-repeat: no-repeat;
+	width: 35px;
+	height: 12px;
+	padding: 4px 10px;
+	color: #fff;
+	font-size: 11px;
+	text-align: center;
+}
+
+
+/* any side widgets with rows of icons */
+.icon-list .item {
+	float: left;
+	width: 60px;
+	margin: 0 10px 10px 0;
+}
+.icon-list .no-right-margin {
+	margin-right: 0px;
+}
+.icon-list .no-btm-margin {
+	margin-bottom: 0px;
+}
+
+/* footer */
+footer {
+	text-align: right;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 50px 0 20px;
+	color: #999;
+}
+footer a {
+	padding: 0 10px;
+}
+
+/* USER PROFILE PAGE */
+/* tabs */
+ul.tabs {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	height: 100%;
+}
+ul.tabs li {
+	float: left;
+	display: inline;
+	margin: 0 0 0 9.5px;
+	padding: 0;
+	width: 113px;
+	height: 50px;
+	text-align: center;
+	line-height: 1.2;
+	-moz-border-radius-topleft: 9px;
+	-webkit-border-top-left-radius: 9px;
+	-moz-border-radius-topright: 9px;
+	-webkit-border-top-right-radius: 9px;
+	border-left: none;
+	background: #ccc;
+	opacity: 0.5;
+	overflow: hidden;
+	position: relative;
+}
+ul.tabs li a {
+	text-decoration: none;
+	color: #666;
+	padding: 5px 10px;
+	display: block;
+	outline: none;
+	font-size: 14px;
+	height: 100%;
+}
+ul.tabs li a:hover {
+	background: #aeaeae;
+	-moz-border-radius-topleft: 9px;
+	-webkit-border-top-left-radius: 9px;
+	-moz-border-radius-topright: 9px;
+	-webkit-border-top-right-radius: 9px;
+}	
+html ul.tabs li.active, html ul.tabs li.active a:hover  {
+	background: #fff;
+	opacity: 1;
+}
+.tab-container {
+	border-top: none;
+	clear: both;
+	float: left; 
+	width: 100%;
+	margin-bottom: 12px;
+	background: #fff;
+	-moz-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	-webkit-border-radius: 9px;
+}
+.tab-content {
+	padding: 15px;
+}
+.tab-content .shumark {
+	width: 518px;
+}
+
+/* link landing page */
+#link .shumark h2 {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+#link .shumark .secondary {
+	padding-right: 15px;
+}
+#link #top {
+	margin-bottom: 12px;
+}
+
+#comments {
+	width: 598px;
+}
+#comments h2 {
+	font-size: 16px;
+	display: inline;
+	margin: 0 25px 12px 0;
+}
+#comments img {
+	vertical-align: top;
+}
+#comments a {
+	font-weight: normal;
+	font-size: 11px;
+}
+#comments .level-one,
+#comments .level-two,
+#comments .level-three
+ {
+	margin-bottom: 18px;
+}
+#comments .comment {
+	margin-bottom: 18px;
+	border-bottom: 1px dashed #ccc;
+}
+#comments .left {
+	width: 60px;
+}
+#comments .secondary {
+	margin: 10px 0;
+}
+#comments .arrow {
+	text-align: right;
+	float: left;
+	margin-right: 10px;
+}
+
+#comments .level-one .right {
+	width: 518px;
+}
+#comments .level-two .arrow {
+	width: 35px;
+}
+#comments .level-two .right {
+	width: 473px;
+}
+#comments .level-three .arrow {
+	width: 70px;
+}
+#comments .level-three .right {
+	width: 438px;
+}
+
+#add-comment h2 {
+	font-size: 16px;
+	margin-bottom: 12px;
+}
+#add-comment .right {
+	width: 518px;
+	text-align: right;
+}
+#add-comment a {
+	font-weight: normal;
+	font-size: 11px;
+}
+#add-comment textarea {
+	width: 506px;
+	height: 110px;
+	border: 1px solid #ccc;
+	padding: 5px;
+	overflow: auto;
+}
+#add-comment .btn {
+	margin-top: 10px;
+	text-align: right;
+	
+}
