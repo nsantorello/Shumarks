@@ -1,23 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <%= render 'layouts/header.html' %>
-    <%= yield :header %>
-  </head>
+<!DOCTYPE HTML>
+<html class="no-js">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+		<meta http-equiv="imagetoolbar" content="no" />
+		<meta name="description" content="Shumarks" />
+		<meta name="keywords" content="Bookmarks" /> 
+		
+		<title>Shumarks</title>
+		
+	    <%= render 'layouts/header.html' %>
+	    <%= yield :header %>
+	</head>
 
   <body>
+	<div id="content">
 		<div class="ad">
 			<%= render '/ads/ad'%>
 		</div>
-    <div id="container" class="all-corners">
-        <div id="header">
-					<a href="/">
-						<img src="/images/logo.png" alt="Shumarks"/>
-					</a>
-          <div id="top-right-bar" class="right">
+		<header>
+		        	<div id="logo">
+            	<a href="/"><img src="images/logo.png" alt="Shumarks" /></a>
+            </div>
             <% if logged_in? then %>
 							<%= current_user.home_page_url %> |
             	<%= link_to 'Account', edit_user_path %> |
@@ -25,10 +29,18 @@
 					  <% else %>
 							<%= render '/users/login' %>
             <% end %>
-          </div>
-					<div class="clear-both"></div>
-        </div>
-
+        </header>
+		<section id="join-now">
+		       	 	<p>Shumarks is the fastest and easiest way to <strong>share and discover content on the Internet.</strong></p>
+		            <div>
+		            	<div class="left"><a href="#" class="arrow">Find out more</a></div>
+		                <div class="right"><a href="#"><img src="images/btn-join-now.gif" alt="Join Now" class="fade" /></a></div>
+		                <div class="clear-both"></div>
+		            </div>
+		        </section>
+    <div id="container" class="all-corners">
+        
+		
 				<% if @show_welcome %>
 					<div id="welcome-div" class="clear-both all-corners">
 						<div id="welcome-message">
@@ -110,6 +122,6 @@
 		<div class="ad">
 			<%= render '/ads/ad'%>
 		</div>
-		
+	</div>
   </body>
 </html>

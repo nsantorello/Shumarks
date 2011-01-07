@@ -1,23 +1,15 @@
 <% form_for :session, :url => signup_action_path do |f| -%>
-  <div id="username-label" class="form-label">
-		<%= f.label :Username %>
-	</div>
-	<div id="username-text-input" class="form-input">
-  	<%= f.text_field :login %>
-	</div>
-  <div id="password-label" class="form-label">
-  	<%= f.label :password %>
-	</div>
-	<div id="password-text-input" class="form-input">
-  	<%= f.password_field :password %>
-  </div>
-  <div id="remember-me-label" class="form-label">
-		<label for="remember_me">Remember me:</label>
-	</div>
-	<div id="remember-me-checkbox" class="form-input">
-  	<%= check_box_tag 'remember_me' %>
-	</div>
-	<div id="login-submit" class="form-submit">
-		<%= f.submit 'Log in', :class => "small-button" %>
-	</div>
+<div id="login">
+	<form>
+    	<div id="fields">
+			<%= f.text_field :login, :type => "text", :placeholder => "Username", :required => "required" %><br />
+			<%= f.password_field :password, :type => "password", :placeholder => "Password", :required => "required" %>
+        </div>
+		<%= f.submit '', :value => "Go", :src => "images/btn-go.png", :class => "go fade", :type => "image" %>
+        <div class="clear-both"></div>
+    </form>
+</div>	<br />
+	<label for="remember_me">Remember me:</label><%= check_box_tag 'remember_me' %>
+<div class="clear-both"></div>
+
 <% end -%>
