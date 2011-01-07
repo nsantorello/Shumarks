@@ -30,90 +30,85 @@
 							<%= render '/users/login' %>
             <% end %>
         </header>
+		<% if @show_welcome %>
 		<section id="join-now">
 		       	 	<p>Shumarks is the fastest and easiest way to <strong>share and discover content on the Internet.</strong></p>
 		            <div>
-		            	<div class="left"><a href="#" class="arrow">Find out more</a></div>
+		            	<div class="left"><%= link_to 'Find out more', about_path, :class => "arrow" %></div>
 		                <div class="right"><a href="#"><img src="images/btn-join-now.gif" alt="Join Now" class="fade" /></a></div>
 		                <div class="clear-both"></div>
 		            </div>
 		        </section>
-    <div id="container" class="all-corners">
-        
+				<% else %>
+						<div id="topNav">
+		          <%= link_to 'Home', logged_in? ? user_home_path : home_path, :class => 'left'%>
+
+			        <% if logged_in? then -%>
+			        	<%= link_to 'My Shumarks', user_path(current_user.login), :class => 'left' %>
+				       	<%= link_to 'Discover!', home_path, :class => 'left' %>
+
+								<% if @show_unfollowing then %>
+										<%= link_to "Unfollow", unfollow_path(@user), :class => "small-button"%>
+								<% elsif @show_following %>
+										<%= link_to "Follow", follow_path(@user), :class => "small-button"%>
+								<% end %>
+			        <% end -%>
+
+			        <%= link_to 'About', "/about", :class => 'left' %>
+
+							<% if logged_in? then -%>
+								<span class="right">
+			          	Drag your Shumarklet into your bookmark bar
+									-&gt; <a href="<%=shumarklet_url%>" class="small-button">Shumark it</a> 
+								</span>
+							<% end -%>
+		        </div>
+					<% end %>
+		<div id="main">
+			<% if flash[:notice] then %>
+				<div class="notification ui-state-highlight ui-corner-all">
+					<span class="notification-icon ui-icon ui-icon-info"></span>
+					<%= flash[:notice] %>
+				</div>
+		  <% end %>
+	  	<% if flash[:error] then %>
+				<div class="notification ui-state-error ui-state-error ui-corner-all">
+					<span class="notification-icon ui-icon ui-icon-alert"></span>
+					<%= flash[:error] %>
+			  </div>
+			<% end %>
+			<section id="shumarks">
+				<h2><%= @header_text %></h2>
+					<%= yield %>
+			</section>
+		</div>
 		
-				<% if @show_welcome %>
-					<div id="welcome-div" class="clear-both all-corners">
-						<div id="welcome-message">
-							Shumarks is the fastest and easiest ways to share and discover content on the Internet.
-						</div>
-						<div id="welcome-subheader">
-							<%= link_to 'More info', about_path %>
-						</div>
-						<div class="right clear-both">
-							<%= link_to 'Join Today!', signup_path, :class => 'small-button' %>
-						</div>
-						<div class="clear-both"></div>
-					</div>
-	     	<% else %>
-					<div id="topNav">
-	          <%= link_to 'Home', logged_in? ? user_home_path : home_path, :class => 'left'%>
-           
-		        <% if logged_in? then -%>
-		        	<%= link_to 'My Shumarks', user_path(current_user.login), :class => 'left' %>
-			       	<%= link_to 'Discover!', home_path, :class => 'left' %>
+		<% unless @hide_sidebar then %>
+		<aside>
+			<%= render '/sidebar/search' %>
+			<%= render '/sidebar/most_viewed_bar' %>
+			<%= render '/sidebar/top_topics' %>
 			
-							<% if @show_unfollowing then %>
-									<%= link_to "Unfollow", unfollow_path(@user), :class => "small-button"%>
-							<% elsif @show_following %>
-									<%= link_to "Follow", follow_path(@user), :class => "small-button"%>
-							<% end %>
-		        <% end -%>
-	
-		        <%= link_to 'About', "/about", :class => 'left' %>
-	
-						<% if logged_in? then -%>
-							<span class="right">
-		          	Drag your Shumarklet into your bookmark bar
-								-&gt; <a href="<%=shumarklet_url%>" class="small-button">Shumark it</a> 
-							</span>
-						<% end -%>
-	        </div>
-				<% end %>
+				        </aside>
+					<% end %>
+				        <div class="clear-both"></div>
+				        <footer><a href="#">About</a> | <a href="#">Privacy Policy</a> | <a href="#">Contact</a> &copy;2010 Shumarks, LLC.</footer>
+	</div>
+    <div id="container" class="all-corners">
+     
+	     	
 			
         <div id="content">
-					<% if @header_text %>
-						<h1><%= @header_text %></h1>
-					<% end %>
 					
-					<% if flash[:notice] then %>
-						<div class="notification ui-state-highlight ui-corner-all">
-							<span class="notification-icon ui-icon ui-icon-info"></span>
-							<%= flash[:notice] %>
-						</div>
-				  <% end %>
-			  	<% if flash[:error] then %>
-						<div class="notification ui-state-error ui-state-error ui-corner-all">
-							<span class="notification-icon ui-icon ui-icon-alert"></span>
-							<%= flash[:error] %>
-					  </div>
-					<% end %>
 					
-					<div class="clear-both"></div>
-					<div id="main-content" class="left">
-						<%= yield %>
-						<div class="clear-both"></div>
-					</div>
-					<% unless @hide_sidebar then %>
 						<div id="side-bar" class="sidebar-widget right">
-							<%= render '/sidebar/user_search'%>
 							
 							<% if logged_in? then %>
 								<%= render '/sidebar/friends_bar' %>
 							<% end %>
 						
-							<%= render '/sidebar/most_viewed_bar' %>
+							
 						</div>
-					<% end %>
 					<div class="clear-both"></div>
         </div>
 

@@ -26,6 +26,13 @@ class Link < ActiveRecord::Base
     end
 	end
 	
+	# Shortens a description
+	def short_blurb(how_short = 200)
+		str = self.blurb
+		shortblurb = (str.length > how_short) ? (str[0..how_short] + " [...]") : str
+		return shortblurb
+	end
+	
 	# Shortens a name to only 60 characters
 	def short_name(how_short = 55)
 		str = self.name

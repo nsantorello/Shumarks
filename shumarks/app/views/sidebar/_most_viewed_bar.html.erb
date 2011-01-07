@@ -1,6 +1,4 @@
-<div class="section-header">
-	Most Popular
-</div>
-<div class="section">
-	<%= render '/links/index', :links => Link.most_read, :char_limit => 25 %>
-</div>
+<section class="style-two top-ten-list">
+	<h3>Top Shumarks</h3>
+	<%= render '/links/shortlink_list', :links => Link.most_read, :char_limit => 20 %>
+</section>
