@@ -1,7 +1,7 @@
 <section class="style-one icon-list">
 	<h3>Following (<%= @user.followees.count %>)</h3>
 	<section>
-	<% for followee in @user.followees.all(:limit => 3)-%>
+	<% for followee in @user.followees.all(:limit => 16)-%>
 		<div class="item"><a href="<%= user_path(followee.login) %>"><img src="<%= image_path('user-icon.gif') %>" alt="" class="fade" /></a></div>
 	<% end -%>
 		<div class="clear-both"></div>
