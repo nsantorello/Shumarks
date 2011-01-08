@@ -77,6 +77,7 @@ class UsersController < ApplicationController
       end
 
       @page_title = "Shumarks: #{@user.login}"
+      @sidebars = [SidebarHelper::FRIENDS]
       @links = @user.links.most_recent(@pager)
       @page_total = (@user.links.count.to_f / @page_size.to_f).ceil
     end
