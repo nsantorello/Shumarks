@@ -1,8 +1,13 @@
 <div class="comment">
-  <p class="comment-text">
-    <%= comment.text %>
-  </p>
-  <p class="comment-subline">
-    Added <%= time_ago(comment.created_at) %> by <%= link_to comment.user.login, user_path(comment.user.login) %>
-  </p>
+	<div class="level-one">
+		<div class="left">
+			<img src="<%= image_path('user-icon.gif') %>" alt=""><br><%= link_to comment.user.login, user_path(comment.user.login) %>
+		</div>
+		<div class="right">
+			<%= comment.text %>
+			<div class="secondary">Added <%= time_ago(comment.created_at) %></div>
+			<!--<a href="#"><img src="images/btn-reply.gif" alt="reply" /></a>-->
+		</div>
+		<div class="clear-both"></div>
+	</div>
 </div>

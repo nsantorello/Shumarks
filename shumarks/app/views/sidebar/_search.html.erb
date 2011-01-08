@@ -1,8 +1,8 @@
 <section class="style-one search">
 	<form action="<%= search_users_path %>" method="post">
-		<input type="text" id="search-text-input" name="user_name" class="input-field" placeholder="Find content!" />
+		<input type="text" id="search-text-input" name="user_name" class="input-field" placeholder="Find something!" />
 		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" />
-		<input type="image" src="images/btn-search.gif" alt="Search" value="search" class="btn fade" />
+		<input type="image" src="<%= image_path('btn-search.gif') %>" alt="Search" value="search" class="btn fade" />
 		<div class="clear-both"></div>
-	<form>
+	</form>
 </section>

@@ -146,6 +146,12 @@ aside h3 {
 	font-size: 14px;
 	margin-bottom: 0px;
 }
+.display-none {
+	display: none;
+}	
+.destructive-link, .destructive-link:hover {
+	color: #f14444;
+}
 #shumarks {
 	width: 598px;
 	padding: 15px;
@@ -260,10 +266,14 @@ nav .left a {
 	font-weight: bold;
 	padding-right: 28px;
 }
-nav .right a {
+nav .right {
 	font-family: 'Arvo', serif;
 	font-size: 14px;
-	padding-right: 28px;
+}
+
+nav .right a {
+	font-size: 24px;
+	padding-right: 10px;
 }
 
 /* join now */
@@ -450,9 +460,6 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
 }
 .tab-content {
 	padding: 15px;
-}
-.tab-content .shumark {
-	width: 518px;
 }
 
 /* link landing page */

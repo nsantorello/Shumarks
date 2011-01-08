@@ -39,7 +39,6 @@ class LinksController < ApplicationController
       redirect_to(home_path)
     else
       @page_title = "Shumarks: " + @link.name
-      @header_text = "<a href=\"#{link_redirect_path(@link)}\" target=\"_blank\">#{@link.name}</a>"
       @comments = @link.comments.all(:limit => 10, :order => 'created_at ASC')
     end
   end

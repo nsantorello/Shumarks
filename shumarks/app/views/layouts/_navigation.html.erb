@@ -1,0 +1,27 @@
+<nav>
+	<div class="left">
+		<%= link_to 'Home', logged_in? ? user_home_path : home_path %>
+		<% if logged_in? then -%>
+			<%= link_to 'My Shumarks', user_path(current_user.login) %>
+			<%= link_to 'Discover!', home_path %>
+		<% end -%>
+	</div>
+	<div class="right">
+		<% if logged_in? then -%>
+			Your Shumarker: <%= link_to "Shumark it!", shumarklet_url %>
+		<% end -%>
+	</div>
+	<div class="clear-both"></div>
+</nav>
+<div id="topNav">
+
+
+
+
+
+	
+
+
+
+
+</div>

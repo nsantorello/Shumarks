@@ -1,10 +1,40 @@
-<div>
+<section id="profile">
+	<img src="<%= image_path('user-icon.gif') %>" alt="" class="user-icon" />
+	<div class="name">
+		<p><strong><%= @user.login %></strong>
+			<% if @show_unfollowing then %>
+					<%= link_to "Unfollow", unfollow_path(@user) %>
+			<% elsif @show_following %>
+					<a href="<%= follow_path(@user) %>"><img src="<%= image_path('btn-follow.gif') %>" alt="Follow" class="fade" /></a>
+			<% end %>
+			</p>
+		<div class="item">Shumarks<br /><%= @user.links.count %></div>
+		<div class="item">Channels<br />3</div>
+		<div class="item">Following<br /><%= @user.followees.count %></div>
+		<div class="item">Followers<br /><%= @user.followers.count %></div>
+		<div class="clear-both"></div>
+	</div>
+	<div class="clear-both"></div>
+</section>
+
+<ul class="tabs">
+	<li><a href="#tab1">Name of Channel 1</a></li><li><a href="#tab2">Name of Channel 2</a></li><li><a href="#tab3">Name of Channel 3</a></li><li><a href="#tab4">Name of Channel 4</a></li><li><a href="#tab5">Name of Channel 5</a></li>
+</ul>
+<div class="tab-container">
+	<div id="tab1" class="tab-content">
 		<% if @links.length == 0 %>
-			No Shumarks... yet!
-	  <% else %>
+			<p>No Shumarks... yet!</p>
+		<% else %>
 			<%= render '/links/index', :links => @links %>
 			<%= render '/layouts/pagination', :redir_path => user_path(@user.login) %>
-	  <% end %>
+		<% end %>
+	</div>
+	<div id="tab2" class="tab-content">
+		tab 2 content				 </div>
+	<div id="tab3" class="tab-content">
+		tab 3 content				 </div>
+	<div id="tab4" class="tab-content">
+		tab 4 content				 </div>
+	 <div id="tab5" class="tab-content">
+		tab 5 content				 </div>
 </div>
-
-

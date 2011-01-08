@@ -3,8 +3,7 @@ class HomeController < ApplicationController
   before_filter :hide_sidebar, :only => [:about, :addons]
   
   def index
-    @header_text = logged_in? ? "Most Recent" : "Shumarked!"
-    
+    @header_text = "Shumarked!"
     @most_recent = Link.most_recent(@pager)
     @page_total = (Link.count.to_f / @page_size.to_f).ceil
     @show_welcome = !logged_in?

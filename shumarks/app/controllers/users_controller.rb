@@ -84,7 +84,7 @@ class UsersController < ApplicationController
   
   def home
     @page_title = "Shumarks: #{@user.login}"
-    @header_text = "Home"
+    @header_text = "Recently Shumarked"
     @links = Link.feed_of(current_user, @pager)
     @page_total = (Link.feed_of(current_user, :limit => nil).length.to_f / @page_size.to_f).ceil
   end

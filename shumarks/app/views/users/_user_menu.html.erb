@@ -1,0 +1,8 @@
+<div id="logged-in">
+	<img src="<%= image_path('user-icon.gif') %>" alt="">
+	<div class="user">
+		<div class="name"><%= link_to current_user.login, current_user.home_page_url %></div>
+		<div class="links"><%= link_to 'Account', edit_user_path %><br><%= link_to 'Logout', logout_path %></div>
+	</div>
+	<div class="clear-both"></div>
+</div>
