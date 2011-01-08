@@ -1,4 +1,4 @@
-<div class="list user-list">
+<section id="shumarks">
 	<% if @users.length == 0 %>
 		No one here...
 	<% end %>
@@ -53,5 +53,5 @@
 			</div>
 		</div>
 	<% end %>
-</div>
-<%= render 'layouts/pagination', :redir_path => search_users_path %>
+	<%= render 'layouts/pagination', :redir_path => search_users_path %>
+</section>

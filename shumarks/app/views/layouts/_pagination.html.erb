@@ -1,5 +1,5 @@
 <section id="pagination">
-	<% if @page_index != 0 then %>
+	<% if @page_index > 0 then %>
 		<%= link_to image_tag("arrow-double-left.png"), redir_path, :class => 'small-button' %>
 		<%= link_to image_tag("arrow-single-left.png"), redir_path + "?p=#{[@page_index, 1].max}", :class => 'small-button' %>
 	<% end %>
@@ -8,7 +8,7 @@
 		<%= link_to i + 1, redir_path + "?p=#{i + 1}", :class => "small-button #{@page_index == i ? 'current' : ''}" %>
 	<% end %>
 	
-	<% if @page_index != @page_total - 1 then %>
+	<% if @page_index < @page_total - 1 then %>
 		<%= link_to image_tag("arrow-single.png"), redir_path + "?p=#{[@page_index + 2, @page_total + 1].min}", :class => 'small-button' %>	
 		<%= link_to image_tag("arrow-double.png"), redir_path + "?p=#{@page_total}", :class => 'small-button'%>
 	<% end %>	
