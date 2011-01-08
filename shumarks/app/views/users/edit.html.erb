@@ -1,4 +1,6 @@
-<% form_for :user, :url => edit_user_action_path do |f| %>
+<section id="shumarks">
+	<h2>Account Settings</h2>
+	<% form_for :user, :url => edit_user_action_path do |f| %>
   <%= f.error_messages %>
 	<div id="login-info" >
 		<div class="form-label">
@@ -46,7 +48,8 @@
 		</div>
 	</div>
 		
-	<div class="form-submit clear-both">
-		<%= submit_tag 'Update info', :class => "small-button" %>
+	<div class="form-submit">
+		<%= submit_tag 'Update info' %>
 	</div>
 <% end %>
+</section>

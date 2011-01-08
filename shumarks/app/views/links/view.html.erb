@@ -22,7 +22,9 @@
 <section id="comments" class="style-three">
 	<header>
 		<h2><%= @link.comments.count %> comments</h2>
+		<% if logged_in? then %>
 		<a href="#AddAComment"><img src="<%= image_path('btn-add-one.gif') %>" alt="Add One" /></a>
+		<% end %>
 	</header>
 	<%= render @comments %>
 	<div id="new-comment"></div>
@@ -37,22 +39,23 @@
 		 <%= submit_tag 'Load More Comments' %>
 	  <% end %>
 </section>
-
-<a name="AddAComment"></a>
-<section id="add-comment" class="style-three">
-	<h2>Add a comment</h2>
-	<div class="left"><img src="<%= image_path('user-icon.gif') %>" alt=""><br><%= link_to current_user.login, user_path(current_user) %></div>
-	<div class="right">
-		<div id="comment-error"></div>
-		  <% form_remote_tag :url => comment_create_path,	
-					:update => {:success => 'new-comment', :failure => 'comment-error'}, 
-					:position => :bottom,
-					:success => 'reset_comment_text()' do 
-		   %>
-			<%= text_area 'comment', 'text', :cols => 30, :rows => 5 %>
-			<%= hidden_field 'comment', 'link_id', :value => @link.id %>
-			<%= submit_tag 'Submit', :class => 'btn fade', :src => image_path('btn-add.gif'), :type => "image", :alt => "Search" %>
-		  <% end %>
-	</div>
-	<div class="clear-both"></div>
-</section>
+<% if logged_in? then %>
+	<a name="AddAComment"></a>
+	<section id="add-comment" class="style-three">
+		<h2>Add a comment</h2>
+		<div class="left"><img src="<%= image_path('user-icon.gif') %>" alt=""><br><%= link_to current_user.login, user_path(current_user) %></div>
+		<div class="right">
+			<div id="comment-error"></div>
+			  <% form_remote_tag :url => comment_create_path,	
+						:update => {:success => 'new-comment', :failure => 'comment-error'}, 
+						:position => :bottom,
+						:success => 'reset_comment_text()' do 
+			   %>
+				<%= text_area 'comment', 'text', :cols => 30, :rows => 5 %>
+				<%= hidden_field 'comment', 'link_id', :value => @link.id %>
+				<%= submit_tag 'Submit', :class => 'btn fade', :src => image_path('btn-add.gif'), :type => "image", :alt => "Search" %>
+			  <% end %>
+		</div>
+		<div class="clear-both"></div>
+	</section>
+<% end %>
