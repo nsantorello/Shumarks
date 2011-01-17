@@ -19,14 +19,14 @@
 			<div id="logo">
 				<a href="/"><img src="<%= image_path('logo.png') %>" alt="Shumarks" /></a>
 				<%= render '/sidebar/search' %>
-            </div>
-            <% if logged_in? then %>
+      </div>
+      <% if logged_in? then %>
 				<%= render '/users/user_menu' %>
 			<% else %>
 				<%= render '/users/login' %>
-            <% end %>
+      <% end %>
 			<div class="clear-both"></div>
-        </header>
+    </header>
 		<% if @show_welcome %>
 		<section id="join-now">
 		       	 	<p>Read what your friends are reading with Shumarks.</p>
