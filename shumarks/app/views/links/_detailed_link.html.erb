@@ -1,6 +1,6 @@
 <section id="link" class="style-three">
 	<div id="top">
-		<img src="<%= image_path('user-icon.gif') %>" alt="" class="user-icon" />
+		<%= render '/users/profile_pic', :user => link.user %>
 		<div class="shumark">
 			<h2>
 				<%= link_to link.name, link_redirect_path(link), :target => "_blank" %>

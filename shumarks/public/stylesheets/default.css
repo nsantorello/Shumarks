@@ -123,6 +123,8 @@ h3 {
 .user-icon {
 	float: left;
 	margin-right: 20px;
+  width:60px;
+  height:60px;
 }
 .topic-icon {
 	float: left;

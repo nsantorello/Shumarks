@@ -1,7 +1,8 @@
 <div class="comment">
 	<div class="level-one">
 		<div class="left">
-			<img src="<%= image_path('user-icon.gif') %>" alt=""><br><%= link_to comment.user.login, user_path(comment.user.login) %>
+			<%= render '/users/profile_pic', :user => comment.user %><br>
+      <%= link_to comment.user.login, user_path(comment.user.login) %>
 		</div>
 		<div class="right">
 			<%= comment.text %>

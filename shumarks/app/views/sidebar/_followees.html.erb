@@ -2,7 +2,9 @@
 	<h3>Following (<%= @user.followees.count %>)</h3>
 	<section>
 	<% for followee in @user.followees.all(:limit => 16)-%>
-		<div class="item"><a href="<%= user_path(followee.login) %>"><img src="<%= image_path('user-icon.gif') %>" alt="" class="fade" /></a></div>
+		<div class="item">
+		  <%= render '/users/profile_pic', :user => followee %>
+    </div>
 	<% end -%>
 		<div class="clear-both"></div>
 	</section>

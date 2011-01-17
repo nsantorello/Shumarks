@@ -1,5 +1,6 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
+  include ApplicationHelper
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
@@ -63,7 +64,11 @@ class User < ActiveRecord::Base
   end
   
   def home_page_url
-    return "#{ENV['hostname']}/#{self.login}"
+    "#{ENV['hostname']}/#{self.login}"
+  end
+  
+  def profile_pic_url
+    gravatar_url_for(self.email)
   end
   
   def read(link)

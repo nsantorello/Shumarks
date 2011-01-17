@@ -1,3 +1,4 @@
+require 'digest/md5'
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   include SessionHelper
@@ -52,5 +53,9 @@ module ApplicationHelper
         |e| '<li class="form-input-error">' + attribute.to_s + ' '+ e + '</li>'
       }.join + '</ul>'
     end
+  end
+  
+  def gravatar_url_for(email, options = {})
+    "http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5.hexdigest(email)}" 
   end
 end

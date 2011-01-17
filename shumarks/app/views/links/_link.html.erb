@@ -2,7 +2,7 @@
 <% desc_limit = 150 %>
 <% last_item = false unless last_item %>
 <section class="item <%= last_item ? 'last-list-item' : '' %>" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
-	<a href="#"><img src="<%= image_path('user-icon.gif') %>" alt="" class="user-icon" /></a>
+	<%= render 'users/profile_pic', :user => link.user %>
 	<div class="shumark">
 		<h2><%= link_to link.short_name(char_limit), link_path(link) %></h2>
 		<div><%= link.short_blurb(desc_limit) %></div>

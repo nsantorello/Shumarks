@@ -9,9 +9,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20101009215134) do
-=======
 ActiveRecord::Schema.define(:version => 20101126215754) do
 
   create_table "comments", :force => true do |t|
@@ -21,7 +18,6 @@ ActiveRecord::Schema.define(:version => 20101126215754) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
->>>>>>> 095081795d3f88d8f92dac0d61c5a2c6e2d63042
 
   create_table "follows", :force => true do |t|
     t.integer  "follower_id", :null => false
@@ -46,16 +42,6 @@ ActiveRecord::Schema.define(:version => 20101126215754) do
     t.integer  "session_id"
   end
 
-<<<<<<< HEAD
-  create_table "twitter_auths", :force => true do |t|
-    t.string   "screen_name"
-    t.string   "token"
-    t.string   "secret"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-=======
   create_table "sessions", :force => true do |t|
     t.string   "ruby_session_id", :null => false
     t.integer  "user_id"
@@ -71,7 +57,14 @@ ActiveRecord::Schema.define(:version => 20101126215754) do
   add_index "sessions", ["ruby_session_id"], :name => "index_sessions_on_ruby_session_id"
   add_index "sessions", ["user_id"], :name => "index_sessions_on_user_id"
 
->>>>>>> 095081795d3f88d8f92dac0d61c5a2c6e2d63042
+  create_table "twitter_auths", :force => true do |t|
+    t.string   "screen_name"
+    t.string   "token"
+    t.string   "secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "login"
     t.string   "email"

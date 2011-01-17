@@ -1,5 +1,5 @@
 <section id="profile">
-	<img src="<%= image_path('user-icon.gif') %>" alt="" class="user-icon" />
+	<%= render '/users/profile_pic', :user => @user %>
 	<div class="name">
 		<p><strong><%= @user.login %></strong>
 			<% if @show_unfollowing then %>
