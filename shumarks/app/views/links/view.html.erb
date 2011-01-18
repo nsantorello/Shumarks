@@ -59,7 +59,7 @@
 	<section id="add-comment" class="style-three">
 		<h2>Add a comment</h2>
 		<div class="left">
-		  <%= render '/users/profile_pic', :user => comment.user %><br>
+		  <%= render '/users/profile_pic', :user => @link.user %><br>
       <%= link_to current_user.login, user_path(current_user) %>
       </div>
 		<div class="right">
