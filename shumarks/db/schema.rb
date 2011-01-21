@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101126215754) do
+ActiveRecord::Schema.define(:version => 20110118040918) do
 
   create_table "comments", :force => true do |t|
     t.string   "text"
@@ -56,6 +56,12 @@ ActiveRecord::Schema.define(:version => 20101126215754) do
   add_index "sessions", ["referrer"], :name => "index_sessions_on_referrer"
   add_index "sessions", ["ruby_session_id"], :name => "index_sessions_on_ruby_session_id"
   add_index "sessions", ["user_id"], :name => "index_sessions_on_user_id"
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "twitter_auths", :force => true do |t|
     t.string   "screen_name"

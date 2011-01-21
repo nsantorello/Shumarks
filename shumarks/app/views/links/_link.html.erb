@@ -4,9 +4,13 @@
 <section class="item <%= last_item ? 'last-list-item' : '' %>" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
 	<%= render 'users/profile_pic', :user => link.user %>
 	<div class="shumark">
-		<h2><%= link_to link.short_name(char_limit), link_path(link) %></h2>
-		<div><%= link.short_blurb(desc_limit) %></div>
-		<div class="secondary">Added by <%= link_to link.user.login, user_path(link.user.login) %> <%= time_ago(link.created_at)%>,  <%= link.comments.count %> comments, <%= pluralize(link.readers.count, 'view') %>.
+		<h2><%= link_to h(link.short_name(char_limit)), link_path(link) %></h2>
+		<div><%= h(link.short_blurb(desc_limit))%></div>
+		<div class="secondary">
+		  Added by <%= link_to link.user.login, user_path(link.user.login) %>
+      <%= time_ago(link.created_at)%>, 
+      <%= link.comments.count %> comments,
+      <%= pluralize(link.readers.count, 'view') %>.
 			<%= 
 				if @show_delete then
 					link_to 'Remove link.', delete_link_path(link), 
@@ -16,6 +20,8 @@
 			%>
 		</div>
 	</div>
-	<a href="#"><img src="<%= image_path('topic-icon.gif') %>" alt="" class="topic-icon fade" /></a>
+	<a href="#">
+	  <img src="<%= image_path('topic-icon.gif') %>" alt="" class="topic-icon fade" />
+  </a>
 	<div class="clear-both"></div>
 </section>

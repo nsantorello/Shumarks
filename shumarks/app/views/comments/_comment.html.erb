@@ -5,7 +5,7 @@
       <%= link_to comment.user.login, user_path(comment.user.login) %>
 		</div>
 		<div class="right">
-			<%= comment.text %>
+			<%=h comment.text %>
 			<div class="secondary">Added <%= time_ago(comment.created_at) %></div>
 			<!--<a href="#"><img src="images/btn-reply.gif" alt="reply" /></a>-->
 		</div>

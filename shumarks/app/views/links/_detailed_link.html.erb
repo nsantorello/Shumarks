@@ -3,7 +3,7 @@
 		<%= render '/users/profile_pic', :user => link.user %>
 		<div class="shumark">
 			<h2>
-				<%= link_to link.name, link_redirect_path(link), :target => "_blank" %>
+				<%= link_to h(link.name), link_redirect_path(link), :target => "_blank" %>
 			</h2>
 			<span class="secondary">Added by <%= link_to link.user.login, user_path(link.user.login) %> <%= time_ago(link.created_at)%></span>
 			<span class="secondary">Source: <a href="#">123.com</a></span>
@@ -12,6 +12,6 @@
 		<div class="clear-both"></div>
 	</div>
 	<div id="summary">
-		<strong>Summary: </strong><%= link.blurb %>
+		<strong>Summary: </strong><%=h link.blurb %>
 	</div>
 </section>

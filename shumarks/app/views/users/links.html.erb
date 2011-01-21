@@ -1,13 +1,17 @@
 <section id="profile">
 	<%= render '/users/profile_pic', :user => @user %>
 	<div class="name">
-		<p><strong><%= @user.login %></strong>
+		<p>
+		  <strong><%= @user.login %></strong>
 			<% if @show_unfollowing then %>
 					<%= link_to "Unfollow", unfollow_path(@user) %>
 			<% elsif @show_following %>
 					<a href="<%= follow_path(@user) %>"><img src="<%= image_path('btn-follow.gif') %>" alt="Follow" class="fade" /></a>
 			<% end %>
-			</p>
+		</p>
+    <p>
+      <%= h @user.bio %>
+    </p>
 		<div class="item">Shumarks<br /><%= @user.links.count %></div>
 		<div class="item">Channels<br />1</div>
 		<div class="item">Following<br /><%= @user.followees.count %></div>
