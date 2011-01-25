@@ -26,6 +26,11 @@
   <div class="form-input">
   	<%= f.text_area :blurb, :class => 'top-corners bottom-corners', :value => @link.blurb %>
   </div>
+  <div class="form-input">
+	<div id="social-login-text"></div>
+	<div id="fb-login"></div>
+	<!--<div id="twitter-login"></div>-->
+  </div>
 	<div class="form-input">
 		<p id="fb-integrationpoint"></p>
 		<div id="fb-root"></div>
@@ -98,7 +103,7 @@
 			function showFBLogin()
 			{
 				clearFBIntegration();
-				jQuery('#fb-integrationpoint').prepend('<div style="font-weight:bold">You must log into Facebook to enable Shumarks integration.</div><div style="font-size:10px">(Shumarks will <strong>NEVER</strong> post <strong>ANYTHING</strong> to Facebook without asking you.)<fb:login-button autologoutlink="true" perms="publish_stream"></fb:login-button>');
+				jQuery('#fb-integrationpoint').prepend('<div style="font-weight:bold">You must log into Facebook to enable Shumarks integration.</div><div style="font-size:10px">(Shumarks will <strong>NEVER</strong> post <strong>ANYTHING</strong> to Facebook without asking you.)</div><fb:login-button autologoutlink="true" perms="publish_stream"></fb:login-button>');
 				parseFBElement();
 			}
 	
@@ -122,6 +127,59 @@
 			});
 	      };
 	    </script>
+	</div>
+	<div class="form-input">
+		<span id="twitter-integrationpoint"></span>
+		<script type="text/javascript">
+		
+		var twitter_user;
+		
+		function clearTwitterIntegration()
+		{
+			jQuery('#twitter-integrationpoint').empty();
+		}
+		
+		function showTwitterLogin()
+		{
+			clearTwitterIntegration();
+			jQuery('#twitter-integrationpoint').prepend('<div style="font-weight:bold">Log into your social networks to enable Shumarks integration.</div><div style="font-size:10px">(Shumarks will <strong>NEVER</strong> post <strong>ANYTHING</strong> without asking you.)</div><div id="twitter-login"></div>');
+			twttr.anywhere(function (T) {
+				T("#twitter-login").connectButton();
+			});
+		}
+		
+		function showTwitterIntegration()
+		{
+			clearTwitterIntegration();
+			currentUser = twitter_user;
+			screenName = currentUser.data('name');
+			profileImage = currentUser.data('profile_image_url');
+			profileImageTag = "<img src='" + profileImage + "' width='24' height='24'/>";
+			jQuery('#twitter-integrationpoint').append('<input type="checkbox" name="post_fb" id="post-twitter-checkbox" value="true" checked /> Post this link on Twitter as <strong>' + screenName + '</strong> ' + profileImageTag + ' <span style="font-size:10px">(<a href="javascript:twttr.anywhere.signOut();">Not you?</a>)</span>');
+		}
+
+		twttr.anywhere(function (T) {
+			T.bind("authComplete", function (e, user) {
+			      // triggered when auth completed successfully
+				  twitter_user = user;
+				  showTwitterIntegration();
+			    });
+
+			    T.bind("signOut", function (e) {
+			      // triggered when user logs out
+			      showTwitterLogin();
+			    });
+			
+			if (T.isConnected()) {
+				twitter_user = T.currentUser;
+				showTwitterIntegration();
+			} else {
+				showTwitterLogin();
+			};
+  
+		});
+
+		</script>
 	</div>
 	<br />
 	<div class="form-submit clear-both">
