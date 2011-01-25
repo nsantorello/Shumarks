@@ -26,6 +26,12 @@ class Link < ActiveRecord::Base
     end
 	end
 	
+	def short_url(how_short = 30)
+	  str = self.url
+		shortlink = (str.length > how_short) ? (str[0..how_short] + " ...") : str
+		return shortlink
+	end
+	
 	# Shortens a description
 	def short_blurb(how_short = 200)
 		str = self.blurb
