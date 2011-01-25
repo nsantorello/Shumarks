@@ -30,16 +30,44 @@
 		<p id="fb-integrationpoint"></p>
 		<div id="fb-root"></div>
 	    <script>
+		var fb_appid = '160338477351298';
+		jQuery.cookie = function(name) {
+		    var cookieValue = null;
+	        if (document.cookie && document.cookie != '') {
+	            var cookies = document.cookie.split(';');
+	            for (var i = 0; i < cookies.length; i++) {
+	                var cookie = jQuery.trim(cookies[i]);
+	                // Does this cookie string begin with the name we want?
+	                if (cookie.substring(0, name.length) == name) {
+	                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+	                    break;
+	                }
+	            }
+	        }
+	        return cookieValue;
+		};
+
 	      window.fbAsyncInit = function() {
 			// Initialize Facebook JavaScript SDK.
-	        FB.init({appId: '160338477351298', status: true, cookie: true, xfbml: true});
+	        FB.init({appId: fb_appid, status: true, cookie: true, xfbml: true});
+	
+			function getFBAccessToken(cookie_string)
+			{
+				return cookie_string.substring(cookie_string.indexOf('=') + 1, cookie_string.indexOf('&'));
+			}
+	
+			function parseFBElement()
+			{
+				FB.XFBML.parse(document.getElementById('fb-integrationpoint'));
+			}
 	
 			function showFBIntegration()
 			{
 				FB.api('/me', function(response) {
 				  	jQuery('#fb-integrationpoint').empty();
-					jQuery('#fb-integrationpoint').append('<input type="checkbox" name="post-fb" value="true" checked /> Post this link on Facebook as <strong>' + response.name + '</strong> <fb:profile-pic uid="' + response.id + '" linked="false" size="t" width="25" height="25"></fb:profile-pic> <span style="font-size:10px">(<a href="javascript:FB.logout();">Not you?</a>)</span>');
-					FB.XFBML.parse(document.getElementById('fb-integrationpoint'));
+					var cookie = jQuery.cookie('fbs_' + fb_appid);
+					jQuery('#fb-integrationpoint').append('<input type="checkbox" name="post_fb" value="' + response.id + '&' + getFBAccessToken(cookie) + '" checked /> Post this link on Facebook as <strong>' + response.name + '</strong> <fb:profile-pic uid="' + response.id + '" linked="false" size="t" width="25" height="25"></fb:profile-pic> <span style="font-size:10px">(<a href="javascript:FB.logout();">Not you?</a>)</span>');
+					parseFBElement();
 				});
 			}
 			
@@ -47,7 +75,7 @@
 			{
 				jQuery('#fb-integrationpoint').empty();
 				jQuery('#fb-integrationpoint').prepend('<div style="font-weight:bold">You must log into Facebook to enable Shumarks integration.</div><div style="font-size:10px">(Shumarks will <strong>NEVER</strong> post <strong>ANYTHING</strong> to Facebook without asking you.)<fb:login-button autologoutlink="true" perms="publish_stream"></fb:login-button>');
-				FB.XFBML.parse(document.getElementById('fb-integrationpoint'));
+				parseFBElement();
 			}
 	
 			// If user is logged in, display the option to post to FB.  Otherwise display the login button.
@@ -70,9 +98,6 @@
 			});
 	      };
 	    </script>
-		<script>
-		
-		</script>
 	</div>
 	<br />
 	<div class="form-submit clear-both">

@@ -1,10 +1,32 @@
+require "net/http"
+require "uri"
+
 class LinksController < ApplicationController
   before_filter :login_required, :only => [:delete, :save, :create]
   before_filter :hide_sidebar, :only => []
   
+  def post_url_to_facebook(fb_post_params, link)
+    fb_params = fb_post_params.split('&')
+    user_id = fb_params[0]
+    access_token = fb_params[1]
+    
+    # Make post to FB
+    uri = URI.parse(URI.encode("https://graph.facebook.com/" + user_id + "/feed"))
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request.set_form_data({"access_token" => access_token, "link" => link.url, "name" => link.name, "caption" => link.blurb})
+    response = http.request(request)
+  end
+  
   def save
     @link = current_user.links.build(params[:link])
     @link.save()     
+    
+    # Post to FB if the user wishes
+    if (params[:post_fb] != nil)
+      post_url_to_facebook(params[:post_fb], @link)
+    end
     
     if @link.errors.empty?
       @page_title = 'Success!'
