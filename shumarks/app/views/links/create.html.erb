@@ -47,15 +47,34 @@
 				FB.api('/me/feed', 'post', { link : sm_link, name : sm_name, caption : sm_caption, description: sm_description }, function(response) {
 				  if (!response || response.error) {
 					// An error occurred...
+					showFBFail();
 				  } else {
-				    jQuery('#shumark-form').submit();
+				    showFBSuccess();
 				  }
+				  jQuery('#shumark-form').submit();
 				});
 			}
 			else
 			{
 				jQuery('#shumark-form').submit();
 			}
+		}
+		
+		function showFBSuccess()
+		{
+			clearFBIntegration();
+			jQuery('#fb-integrationpoint').append('<div style="color:#008500; font-weight:bold">Success posting to Facebook.</div>');
+		}
+		
+		function showFBFail()
+		{
+			clearFBIntegration();
+			jQuery('#fb-integrationpoint').append('<div style="color:#850000; font-weight:bold">Could not post to Facebook.</div>');
+		}
+		
+		function clearFBIntegration()
+		{
+			jQuery('#fb-integrationpoint').empty();
 		}
 
 	      window.fbAsyncInit = function() {
@@ -70,7 +89,7 @@
 			function showFBIntegration()
 			{
 				FB.api('/me', function(response) {
-				  	jQuery('#fb-integrationpoint').empty();
+				  	clearFBIntegration();
 					jQuery('#fb-integrationpoint').append('<input type="checkbox" name="post_fb" id="post-fb-checkbox" value="true" checked /> Post this link on Facebook as <strong>' + response.name + '</strong> <fb:profile-pic uid="' + response.id + '" linked="false" size="t" width="25" height="25"></fb:profile-pic> <span style="font-size:10px">(<a href="javascript:FB.logout();">Not you?</a>)</span>');
 					parseFBElement();
 				});
@@ -78,7 +97,7 @@
 			
 			function showFBLogin()
 			{
-				jQuery('#fb-integrationpoint').empty();
+				clearFBIntegration();
 				jQuery('#fb-integrationpoint').prepend('<div style="font-weight:bold">You must log into Facebook to enable Shumarks integration.</div><div style="font-size:10px">(Shumarks will <strong>NEVER</strong> post <strong>ANYTHING</strong> to Facebook without asking you.)<fb:login-button autologoutlink="true" perms="publish_stream"></fb:login-button>');
 				parseFBElement();
 			}
