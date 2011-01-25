@@ -1,4 +1,4 @@
-<% form_for :link, :url => link_save_url, :method => 'POST' do |f| -%>
+<% form_for :link, :url => link_save_url, :html => { :id => 'shumark-form' }, :method => 'POST' do |f| -%>
 	<div class="form-label">
 		<label for="url">Url: </label>
 	</div>
@@ -31,30 +31,36 @@
 		<div id="fb-root"></div>
 	    <script>
 		var fb_appid = '160338477351298';
-		jQuery.cookie = function(name) {
-		    var cookieValue = null;
-	        if (document.cookie && document.cookie != '') {
-	            var cookies = document.cookie.split(';');
-	            for (var i = 0; i < cookies.length; i++) {
-	                var cookie = jQuery.trim(cookies[i]);
-	                // Does this cookie string begin with the name we want?
-	                if (cookie.substring(0, name.length) == name) {
-	                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-	                    break;
-	                }
-	            }
-	        }
-	        return cookieValue;
-		};
+		
+		function shumarkIt()
+		{
+			var shumarkButton = jQuery('#shumark-submit');
+			shumarkButton.val('Shumarking...');
+			shumarkButton.attr('disabled', true);
+			
+			if (jQuery('#post-fb-checkbox').is(':checked'))
+			{
+				var sm_link = jQuery('#link_url').val();
+				var sm_name = jQuery('#link_name').val();
+				var sm_caption = sm_link.length > 30 ? (sm_link.substr(0, 30) + "...") : sm_link;
+				var sm_description = jQuery('#link_blurb').val();
+				FB.api('/me/feed', 'post', { link : sm_link, name : sm_name, caption : sm_caption, description: sm_description }, function(response) {
+				  if (!response || response.error) {
+					// An error occurred...
+				  } else {
+				    jQuery('#shumark-form').submit();
+				  }
+				});
+			}
+			else
+			{
+				jQuery('#shumark-form').submit();
+			}
+		}
 
 	      window.fbAsyncInit = function() {
 			// Initialize Facebook JavaScript SDK.
 	        FB.init({appId: fb_appid, status: true, cookie: true, xfbml: true});
-	
-			function getFBAccessToken(cookie_string)
-			{
-				return cookie_string.substring(cookie_string.indexOf('=') + 1, cookie_string.indexOf('&'));
-			}
 	
 			function parseFBElement()
 			{
@@ -65,8 +71,7 @@
 			{
 				FB.api('/me', function(response) {
 				  	jQuery('#fb-integrationpoint').empty();
-					var cookie = jQuery.cookie('fbs_' + fb_appid);
-					jQuery('#fb-integrationpoint').append('<input type="checkbox" name="post_fb" value="' + response.id + '&' + getFBAccessToken(cookie) + '" checked /> Post this link on Facebook as <strong>' + response.name + '</strong> <fb:profile-pic uid="' + response.id + '" linked="false" size="t" width="25" height="25"></fb:profile-pic> <span style="font-size:10px">(<a href="javascript:FB.logout();">Not you?</a>)</span>');
+					jQuery('#fb-integrationpoint').append('<input type="checkbox" name="post_fb" id="post-fb-checkbox" value="true" checked /> Post this link on Facebook as <strong>' + response.name + '</strong> <fb:profile-pic uid="' + response.id + '" linked="false" size="t" width="25" height="25"></fb:profile-pic> <span style="font-size:10px">(<a href="javascript:FB.logout();">Not you?</a>)</span>');
 					parseFBElement();
 				});
 			}
@@ -101,6 +106,6 @@
 	</div>
 	<br />
 	<div class="form-submit clear-both">
-		<%= submit_tag 'Shumark it!', :class => "small-button" %>
+		<input id="shumark-submit" type="button" value="Shumark it!" class="small-button" onclick="javascript:shumarkIt();" />
 	</div>
 <% end %>
