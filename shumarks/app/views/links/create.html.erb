@@ -1,4 +1,4 @@
-<% form_for :link, :url => link_save_url, :html => { :id => 'shumark-form' }, :method => 'POST' do |f| -%>
+<% form_for :link, :url => link_save_url, :method => 'POST' do |f| -%>
 	<div class="form-label">
 		<label for="url">Url: </label>
 	</div>
@@ -38,9 +38,7 @@
 	<div class="form-input">
 		<p id="fb-integrationpoint"></p>
 		<div id="fb-root"></div>
-	    <script>
-		var fb_appid = '160338477351298';
-		
+	    <script type="text/javascript">
 		var fb_loggedin = false;
 		var twitter_loggedin = false;
 		
@@ -59,77 +57,21 @@
 				jQuery('#social-login-text').empty();
 			}
 		}
-		
-		function shumarkIt()
-		{
-			var shumarkButton = jQuery('#shumark-submit');
-			shumarkButton.val('Shumarking...');
-			shumarkButton.attr('disabled', true);
-			
-			/*if (jQuery('#post-twitter-checkbox').is(':checked'))
-			{
-				var sm_link = jQuery('#link_url').val();
-				var sm_name = jQuery('#link_name').val();
-				var sm_caption = sm_link.length > 30 ? (sm_link.substr(0, 30) + "...") : sm_link;
-				var sm_description = jQuery('#link_blurb').val();
-				twttr.anywhere(function (T) {
-					if (T.isConnected()) {
-					        
-						T.Status.update(sm_name);
-
-					      } else {
-					        alert("lol...");
-					      }
-				});
-			}*/
-			
-			if (jQuery('#post-fb-checkbox').is(':checked'))
-			{
-				var sm_link = jQuery('#link_url').val();
-				var sm_name = jQuery('#link_name').val();
-				var sm_caption = sm_link.length > 30 ? (sm_link.substr(0, 30) + "...") : sm_link;
-				var sm_description = jQuery('#link_blurb').val();
-				FB.api('/me/feed', 'post', { link : sm_link, name : sm_name, caption : sm_caption, description: sm_description }, function(response) {
-				  if (!response || response.error) {
-					// An error occurred...
-					showFBFail();
-				  } else {
-				    showFBSuccess();
-				  }
-				  jQuery('#shumark-form').submit();
-				});
-			}
-			else
-			{
-				jQuery('#shumark-form').submit();
-			}
-		}
-		
-		function showFBSuccess()
-		{
-			clearFBIntegration();
-			jQuery('#fb-integrationpoint').append('<div style="color:#008500; font-weight:bold">Success posting to Facebook.</div>');
-		}
-		
-		function showFBFail()
-		{
-			clearFBIntegration();
-			jQuery('#fb-integrationpoint').append('<div style="color:#850000; font-weight:bold">Could not post to Facebook.</div>');
-		}
-		
-		function clearFBIntegration()
-		{
-			jQuery('#fb-integrationpoint').empty();
-			jQuery('#fb-login-button').empty();
-		}
 
 	      window.fbAsyncInit = function() {
 			// Initialize Facebook JavaScript SDK.
+			var fb_appid = '160338477351298';
 	        FB.init({appId: fb_appid, status: true, cookie: true, xfbml: true});
 	
 			function parseFBElement(node_name)
 			{
 				FB.XFBML.parse(document.getElementById(node_name));
+			}
+			
+			function clearFBIntegration()
+			{
+				jQuery('#fb-integrationpoint').empty();
+				jQuery('#fb-login-button').empty();
 			}
 	
 			function showFBIntegration()
@@ -159,18 +101,18 @@
 			  } else {
 				// No user session data available, so show login button.
 				fb_loggedin = false;
-			    showFBLogin();
+				showFBLogin();
 			  }
 			});
 			
 			FB.Event.subscribe('auth.login', function(response) {
 				fb_loggedin = true;
-			  showFBIntegration();
+				showFBIntegration();
 			});
 			
 			FB.Event.subscribe('auth.logout', function(response) {
-			  fb_loggedin = false;
-			  showFBLogin();
+				fb_loggedin = false;
+				showFBLogin();
 			});
 	      };
 	    </script>
@@ -230,11 +172,10 @@
 			};
   
 		});
-
 		</script>
 	</div>
 	<br />
 	<div class="form-submit clear-both">
-		<input id="shumark-submit" type="button" value="Shumark it!" class="small-button" onclick="javascript:shumarkIt();" />
+		<%= submit_tag "Shumark it!", :class => "small-button" %>
 	</div>
 <% end %>

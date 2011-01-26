@@ -8,6 +8,9 @@ class LinksController < ApplicationController
     
     if @link.errors.empty?
       @page_title = 'Success!'
+      @post_to_fb = params[:post_fb] != nil
+      @post_to_twitter = params[:post_twitter] != nil
+      @link_redirect = 'http://shumark.it' + link_redirect_path(@link)
       render 'create_success', :layout => 'bookmarklet_frame'
     else
       @page_title = 'Shumark this page!'

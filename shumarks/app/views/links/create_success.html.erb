@@ -1,1 +1,9 @@
-<p>The Shumark was successfully added.</p>
+<p>Posting to Shumarks... <span style="color: #008500; font-weight: bold">done!</span></p>
+
+<% if @post_to_fb %>
+	<%= render 'links/bookmarklet_facebook' %>
+<% end %>
+
+<% if @post_to_twitter %>
+	<%= render 'links/bookmarklet_twitter' %>
+<% end %>
