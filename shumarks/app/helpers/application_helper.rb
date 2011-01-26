@@ -37,8 +37,16 @@ module ApplicationHelper
         "a day"
       when minutes < 2880
         "about a day"
-      else
+      when minutes < 43200
         "#{(minutes / 1440).round} days"
+      when minutes < 86400
+        "about a month"
+      when minutes < 525600
+        "#{(minutes / 43200).round} months"
+      when minutes < 1000000
+        "about a year"
+      else
+        "#{(minutes / 525600).round} years"
     end
   end
   
