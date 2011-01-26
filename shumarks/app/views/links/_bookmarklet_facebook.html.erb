@@ -15,7 +15,7 @@ var sm_name = "<%= js_encode_quotestrings(@link.name, '"') %>";
 <% caption = URI.parse(@link.url).host %>
 var sm_caption = "<%= (!caption.start_with?("www.") && caption) || caption[4 .. caption.length] %>"
 var sm_description = "<%= js_encode_quotestrings(@link.blurb, '"') %>";
-FB.api('/me/feed', 'post', { link : sm_link, name : sm_name, caption : sm_caption, description: sm_description }, function(response) {
+FB.api('/me/feed', 'post', { link : sm_link, name : sm_name, caption : sm_caption, description: sm_description, message : "Shared via Shumarks" }, function(response) {
   if (!response || response.error) {
 	// An error occurred...
 	var error_notice = (response.error.message.indexOf("#341") != -1) ? "you've reached the daily limit Facebook allows you to post through Shumarks" : "you may be logged out of Shumarks through Facebook";

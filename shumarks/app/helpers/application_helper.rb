@@ -20,7 +20,7 @@ module ApplicationHelper
   end
   
   def js_encode_quotestrings(str, quote_type)
-    return str.gsub(quote_type, "\\" + quote_type)
+    return str.gsub(quote_type, "\\" + quote_type).gsub('\\', '\\\\')
   end
    
   def distance_of_time_in_words(minutes)
