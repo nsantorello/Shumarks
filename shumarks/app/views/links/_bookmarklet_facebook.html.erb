@@ -4,25 +4,24 @@
 <div id="fb-root"></div> 
 
 <script type="text/javascript">
-window.fbAsyncInit = function() {
-	var fb_appid = '160338477351298';
-	FB.init({appId: fb_appid, status: true, cookie: true, xfbml: false});
+var fb_appid = '160338477351298';
+FB.init({appId: fb_appid, status: true, cookie: true, xfbml: false});
 
-	var fb_notice = jQuery('#fb-notice');
-	fb_notice.append('Posting to Facebook... ');
+var fb_notice = jQuery('#fb-notice');
+fb_notice.append('Posting to Facebook... ');
 
-	var sm_link = "<%= @link_redirect %>";
-	var sm_name = "<%= @link.name %>";
-	<% caption = URI.parse(@link.url).host %>
-	var sm_caption = "<%= (!caption.start_with?("www.") && caption) || caption[4 .. caption.length] %>"
-	var sm_description = "<%= @link.blurb %>";
-	FB.api('/me/feed', 'post', { link : sm_link, name : sm_name, caption : sm_caption, description: sm_description }, function(response) {
-	  if (!response || response.error) {
-		// An error occurred...
-		fb_notice.append('<span style="color: #850000; font-weight: bold">failed!</span> (you\'re no longer logged into Facebook via Shumarks)');
-	  } else {
-		fb_notice.append('<span style="color: #008500; font-weight: bold">done!</span>');
-	  }
-	});
-}
+var sm_link = "<%= @link_redirect %>";
+var sm_name = "<%= js_encode_quotestrings(@link.name, '"') %>";
+<% caption = URI.parse(@link.url).host %>
+var sm_caption = "<%= (!caption.start_with?("www.") && caption) || caption[4 .. caption.length] %>"
+var sm_description = "<%= js_encode_quotestrings(@link.blurb, '"') %>";
+FB.api('/me/feed', 'post', { link : sm_link, name : sm_name, caption : sm_caption, description: sm_description }, function(response) {
+  if (!response || response.error) {
+	// An error occurred...
+	var error_notice = (response.error.message.indexOf("#341") != -1) ? "you've reached the daily limit Facebook allows you to post through Shumarks" : "you may be logged out of Shumarks through Facebook";
+	fb_notice.append('<span style="color: #850000; font-weight: bold">failed!</span> (' + error_notice + ')');
+  } else {
+	fb_notice.append('<span style="color: #008500; font-weight: bold">done!</span>');
+  }
+});
 </script>

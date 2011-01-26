@@ -5,7 +5,7 @@
 	twitter_notice.append('Posting to Twitter... ');
 
 	var sm_link = "<%= @link_redirect %>";
-	var sm_title = "<%= @link.short_name(100) %>";
+	var sm_title = "<%= js_encode_quotestrings(@link.short_name(100), '"') %>";
 
 	twttr.anywhere(function (T) {
 		if (T.isConnected()) {

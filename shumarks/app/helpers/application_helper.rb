@@ -18,6 +18,10 @@ module ApplicationHelper
       return "on #{DateTime.now.to_formatted_s(date_format)}"
     end
   end
+  
+  def js_encode_quotestrings(str, quote_type)
+    return str.gsub(quote_type, "\\" + quote_type)
+  end
    
   def distance_of_time_in_words(minutes)
     case
