@@ -6,7 +6,9 @@
 				<%= link_to h(link.name), link_redirect_path(link), :target => "_blank" %>
 			</h2>
 			<span class="secondary">Added by <%= link_to link.user.login, user_path(link.user.login) %> <%= time_ago(link.created_at)%></span>
-			<span class="secondary">Source: <a href="#">123.com</a></span>
+			<% source_domain = URI.parse(@link.url).host
+			source_domain = (!source_domain.start_with?("www.") && source_domain) || source_domain[4 .. source_domain.length] %>
+			<span class="secondary">Source: <a href="<%= 'http://' + source_domain %>"><%= source_domain %></a></span>
 		</div>
 		<img src="<%= image_path('topic-icon.gif') %>" alt="" class="topic-icon" />
 		<div class="clear-both"></div>
