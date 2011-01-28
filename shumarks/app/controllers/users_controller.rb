@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Thanks for signing up!"
       
       cookies[:user_id] = {:value => @user.id}
-      redirect_to user_home_path
+      redirect_to tutorial_start_path
     else
       @header_text = 'Create an Account'
       render :partial => 'users/signup', :layout => 'application'

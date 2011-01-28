@@ -10,12 +10,12 @@ class LinksController < ApplicationController
       create_tutorial_example()
     else
       @link.save()
+      @post_to_fb = params[:post_fb] != nil
+      @post_to_twitter = params[:post_twitter] != nil
     end
     
     if @link.errors.empty?
       @page_title = 'Success!'
-      @post_to_fb = params[:post_fb] != nil
-      @post_to_twitter = params[:post_twitter] != nil
       @link_redirect = 'http://' + ENV['hostname'] + link_redirect_path(@link)
       render 'create_success', :layout => 'bookmarklet_frame'
     else
