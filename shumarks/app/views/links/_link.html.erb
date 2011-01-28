@@ -1,5 +1,5 @@
 <% char_limit = 70 unless char_limit %>
-<% desc_limit = 150 %>
+<% desc_limit = 130 %>
 <% last_item = false unless last_item %>
 <section class="item <%= last_item ? 'last-list-item' : '' %>" onmouseover="showRemoveLink(<%= link.id %>)" onmouseout="hideRemoveLink(<%= link.id %>)">
 	<%= render 'users/profile_pic', :user => link.user %>
