@@ -1,4 +1,10 @@
 <section id="shumarks">
-	<h2>Start Shumarking!</h2>
-	Now that you know how to Shumark things
+	<h2>That's it!</h2>
+	<h4>Go 
+	<% if current_user.followees.empty? %>
+		<%= link_to 'add some friends', friend_finder_path %>
+	<% else %>
+		read some stories <%= link_to 'posted by your friends', home_path %>
+	<% end %>
+	or <%= link_to 'discover some new content', discover_index_path %>.</h4>
 </section>

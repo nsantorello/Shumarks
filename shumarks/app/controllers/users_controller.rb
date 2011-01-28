@@ -47,6 +47,10 @@ class UsersController < ApplicationController
     render :partial => 'signup', :layout => 'application'
   end
   
+  def friend_finder
+    
+  end
+  
   # Show user queue
   def links
     # Get the user by id

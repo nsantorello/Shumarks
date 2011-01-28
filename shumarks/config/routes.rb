@@ -63,12 +63,16 @@ ActionController::Routing::Routes.draw do |map|
   map.tutorial_completed '/tutorial/completed', :controller => 'tutorial', :action => 'completed'
   map.tutorial_example '/tutorial/example', :controller => 'tutorial', :action => 'example'
   
+  # Discover
+  map.discover_index '/discover', :controller => 'discover', :action => 'index'
+  
   # User pages
   map.edit_user '/account', :controller => 'users', :action => 'edit'
   map.remote_login '/remote-login/', :controller => 'users', :action => 'remote_get_salt'
   map.remote_list '/remote-list/', :controller => 'users', :action => 'remote_get_list'
   map.remote_create '/remote-create/', :controller => 'bookmarklet', :action => 'old_bookmarklet_landing'
   map.remote_result '/remote-result/', :controller => 'users', :action => 'remote_result'
+  map.friend_finder '/friend-finder', :controller => 'users', :action => 'friend_finder'
   
   map.create_user_action '/user/create',
     :controller => 'users', 
