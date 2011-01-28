@@ -9,7 +9,7 @@
 		<div class="secondary">
 		  Added by <%= link_to link.user.login, user_path(link.user.login) %>
       <%= time_ago(link.created_at)%>, 
-      <%= link.comments.count %> comments,
+      <%= pluralize(link.comments.count, 'comment') %>,
       <%= pluralize(link.readers.count, 'view') %>.
 			<%= 
 				if @show_delete then
