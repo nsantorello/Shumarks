@@ -1,4 +1,3 @@
-require 'oauth/oauth/consumer'
 require 'net/http'
 class UsersController < ApplicationController
   before_filter :login_required, :set_user, :only => [:edit, :update, :follow, :unfollow, :follow_list, :follower_list, :home]

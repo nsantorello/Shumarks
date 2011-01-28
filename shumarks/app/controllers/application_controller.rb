@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   include SslRequirement
   
   before_filter :set_timezone
+  
+  filter_parameter_logging :fb_sig_friends
 
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details

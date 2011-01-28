@@ -4,18 +4,29 @@ class LinksController < ApplicationController
   
   def save
     @link = current_user.links.build(params[:link])
-    @link.save()     
+    
+    # This is to see if the link that was Shumarked is the URL of the page in the tutorial.
+    if @link.url.include?(url_for(:controller => 'tutorial', :action => 'step1'))
+      create_tutorial_example()
+    else
+      @link.save()
+    end
     
     if @link.errors.empty?
       @page_title = 'Success!'
       @post_to_fb = params[:post_fb] != nil
       @post_to_twitter = params[:post_twitter] != nil
-      @link_redirect = 'http://shumark.it' + link_redirect_path(@link)
+      @link_redirect = 'http://' + ENV['hostname'] + link_redirect_path(@link)
       render 'create_success', :layout => 'bookmarklet_frame'
     else
       @page_title = 'Shumark this page!'
       render 'create', :layout => 'bookmarklet_frame'
     end
+  end
+  
+  def create_tutorial_example
+    example = TutorialExample.new(:username => current_user.login)
+    example.save()
   end
   
   def create

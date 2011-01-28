@@ -27,7 +27,11 @@
 <div class="tab-container">
 	<div id="tab1" class="tab-content">
 		<% if @links.length == 0 %>
-			<p>No Shumarks... yet!</p>
+			<p style="font-size: 22px">No Shumarks... yet!</p>
+			<% if @show_delete %>
+				<br />
+				<p style="font-size: 14px">Start Shumarking, or if you're confused, see the <%= link_to 'tutorial', tutorial_step1_path %>.</p>
+			<% end %>
 		<% else %>
 			<%= render '/links/index', :links => @links %>
 			<%= render '/layouts/pagination', :redir_path => user_path(@user.login) %>
