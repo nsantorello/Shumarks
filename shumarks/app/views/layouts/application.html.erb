@@ -28,17 +28,21 @@
 			<div class="clear-both"></div>
     </header>
 		<% if @show_welcome %>
-		<section id="join-now">
-		       	 	<p>Read what your friends are reading with Shumarks.</p>
-		            <div>
-		            	<div class="left"><%= link_to 'Find out more', about_path, :class => "arrow" %></div>
-		                <div class="right"><a href="#"><img src="/images/btn-join-now.gif" alt="Join Now" class="fade" /></a></div>
-		                <div class="clear-both"></div>
-		            </div>
-		        </section>
-				<% else %>
-					<%= render 'layouts/navigation'%>
-				<% end %>
+  		<section id="join-now">
+     	 	<p>Read what your friends are reading with Shumarks.</p>
+        <div>
+        	<div class="left"><%= link_to 'Find out more', about_path, :class => "arrow" %></div>
+          <div class="right">
+            <a href="/signup">
+              <img src="/images/btn-join-now.gif" alt="Join Now" class="fade" />
+            </a>
+          </div>
+          <div class="clear-both"></div>
+        </div>
+      </section>
+  	<% else %>
+	  	<%= render 'layouts/navigation'%>
+	  <% end %>
 		<div id="main">
 			<% if flash[:notice] then %>
 				<div class="notification ui-state-highlight ui-corner-all">

@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   attr_accessor :password
 
   validates_inclusion_of    :is_registered, :in => [true, false]
-  validates_presence_of     :email, :login, :salt,        :if => :registering?
   validates_presence_of     :password,                    :if => :password_required?
   validates_presence_of     :password_confirmation,       :if => :password_required?
   validates_length_of       :password, :within => 4..40,  :if => :password_required?

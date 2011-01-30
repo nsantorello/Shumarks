@@ -1,14 +1,17 @@
 <% form_for :session, :url => signup_action_path do |f| -%>
 <div id="login">
-	<form>
   	<div id="fields">
-			<%= f.text_field :login, :type => "text", :placeholder => "Username", :required => "required" %><br />
-			<%= f.password_field :password, :type => "password", :placeholder => "Password", :required => "required" %>
+  	  <div class="input-field">
+  			<%= f.text_field :login, :type => "text", :placeholder => "Username", :required => "required" %>
+  	  </div>
+      <div class="input-field">
+  			<%= f.password_field :password, :type => "password", :placeholder => "Password", :required => "required" %>
+      </div>
     </div>
+    
 	  <%= f.submit '', :value => "Go", :src => image_path("btn-go.png"), :class => "go fade", :type => "image" %>
     <div class="clear-both"></div>
     <label for="remember_me">Remember me:</label><%= check_box_tag 'remember_me' %>
-  </form>
 </div>
 <div class="clear-both"></div>
 

@@ -59,10 +59,10 @@ module ApplicationHelper
   end
   
   def errors_for(object, attribute)
-    if errors = object.errors.on(attribute)
+    if object and errors = object.errors.on(attribute)
       errors = [errors] unless errors.is_a?(Array)
-      return '<ul class="form-input-error-list">' + errors.map {
-        |e| '<li class="form-input-error">' + attribute.to_s + ' '+ e + '</li>'
+      return '<ul class="input-field-error-list">' + errors.map {
+        |e| '<li class="input-field-error">' + attribute.to_s + ' '+ e + '</li>'
       }.join + '</ul>'
     end
   end

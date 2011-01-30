@@ -35,7 +35,9 @@
 	<header>
 		<h2>Comments</h2>
 		<% if logged_in? then %>
-		<a href="#AddAComment"><img src="<%= image_path('btn-add-one.gif') %>" alt="Add One" /></a>
+		  <a href="#AddAComment">
+		    <img src="<%= image_path('btn-add-one.gif') %>" alt="Add One" />
+      </a>
 		<% end %>
 	</header>
   <div class="comments">

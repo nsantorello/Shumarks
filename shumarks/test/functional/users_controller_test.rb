@@ -47,9 +47,9 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
   
-  test "should redirect after create" do
+  test "should redirect to tutorial after create" do
     create_user
-    assert_redirected_to user_home_path
+    assert_redirected_to tutorial_start_path
   end
   
   test "should fail creation and go signup page" do

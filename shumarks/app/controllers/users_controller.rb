@@ -35,8 +35,6 @@ class UsersController < ApplicationController
   def login
     @page_title = "Login"
     @header_text = "Login"
-
-    render :partial => 'login', :layout => 'application'
   end
   
   # Sign up
