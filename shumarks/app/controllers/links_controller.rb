@@ -4,6 +4,7 @@ class LinksController < ApplicationController
   
   def save
     @link = current_user.links.build(params[:link])
+    @link.tags = Tag.create_all(@link.tags_to_add)
     
     # This is to see if the link that was Shumarked is the URL of the page in the tutorial.
     if @link.url.include?(url_for(:controller => 'tutorial', :action => 'step1'))

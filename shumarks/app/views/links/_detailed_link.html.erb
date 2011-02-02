@@ -8,12 +8,21 @@
 			<span class="secondary">Added by <%= link_to link.user.login, user_path(link.user.login) %> <%= time_ago(link.created_at)%></span>
 			<% source_domain = URI.parse(@link.url).host
 			source_domain = (!source_domain.start_with?("www.") && source_domain) || source_domain[4 .. source_domain.length] %>
-			<span class="secondary">Source: <a href="<%= 'http://' + source_domain %>"><%= source_domain %></a></span>
+			<span class="secondary">
+			  Source: 
+        <a href="<%= 'http://' + source_domain %>"><%= source_domain %></a>
+      </span>
 		</div>
 		<img src="<%= image_path('topic-icon.gif') %>" alt="" class="topic-icon" />
 		<div class="clear-both"></div>
 	</div>
-	<div id="summary">
+	<div id="summary" class="sub-section">
 		<strong>Summary: </strong><%=h link.blurb %>
 	</div>
+  <div id="tags" class="sub-section">
+	  <strong>Tags:</strong> 
+    <% for t in @link.tags %>
+      <%= render t %>
+    <% end %>
+  </div>
 </section>

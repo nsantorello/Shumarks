@@ -7,7 +7,7 @@
 		<%= errors_for(@link, :url) %>
 	</div>
   <div class="form-input">
-  	<%= f.text_field :url, :class => 'top-corners bottom-corners', :value => @link.url %>
+  	<%= f.text_field :url, :class => 'top-corners bottom-corners', :value => @link.url%>
   </div>
 	<div class="form-label">
 		<label for="name">Title: </label>
@@ -17,6 +17,15 @@
 	</div>
   <div class="form-input">
   	<%= f.text_field :name, :class => 'top-corners bottom-corners', :value => @link.name %>
+  </div>
+  <div class="form-label">
+		<label for="name">Tags: </label>
+	</div>
+	<div class="form-input-error-list">
+		<%= errors_for(@link, :tags) %>
+	</div>
+  <div class="form-input">
+  	<%= f.text_field :tags_to_add, :class => 'top-corners bottom-corners' %>
   </div>
 	<div class="form-label">
 		<label for="blurb">Blurb: </label>

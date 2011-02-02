@@ -63,7 +63,7 @@
 		<div class="left">
 		  <%= render '/users/profile_pic', :user => current_user %><br>
       <%= link_to current_user.login, user_path(current_user) %>
-      </div>
+    </div>
 		<div class="right">
 			<div id="comment-error"></div>
 			  <% form_remote_tag :url => comment_create_path,	

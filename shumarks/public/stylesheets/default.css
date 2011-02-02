@@ -162,6 +162,20 @@ ul.input-field-error-list {
 }
 li.input-field-error {
 }
+span.tag {
+  
+  margin: 4px 2px 2px 2px;
+}
+span.tag a {
+  background-color: #fa9727;
+  font-weight: normal;
+  color: #fff;
+  padding:2px 4px;
+}
+span.tag a:hover {
+  background-color: #fca838;
+  text-decoration: none;
+}
 
 
 /* Shumarks */
@@ -499,8 +513,9 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
 #link .shumark .secondary {
 	padding-right: 15px;
 }
-#link #top {
-	margin-bottom: 12px;
+
+div.sub-section {
+  margin-top: 10px;
 }
 
 #comments {

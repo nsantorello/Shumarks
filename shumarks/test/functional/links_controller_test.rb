@@ -77,4 +77,17 @@ class LinksControllerTest < ActionController::TestCase
     assert assigns :comments
   end
   
+  test "save should create link" do
+    session[:user_id] = users(:bob)
+    post :save, :link => {:url => 'www.ask.com', :name => 'ask', :blurb => 'blargh'}
+    assert users(:bob).links.find_by_name('ask')
+  end
+  
+  test "save should tag link" do
+    session[:user_id] = users(:bob)
+    tags = 'search engine'
+    post :save, :link => {:url => 'www.ask.com', :name => 'ask', :blurb => 'blargh', :tags_to_add => tags}
+    assert Link.find_by_name('ask').tags.include?(Tag.find_by_name('search engine'))
+  end
+  
 end
