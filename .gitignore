@@ -5,4 +5,5 @@ shumarks/config/database.yml
 .loadpath
 .project
 .tmp*
+shumarks/public/.htaccess
 
