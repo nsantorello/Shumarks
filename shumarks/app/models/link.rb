@@ -1,6 +1,5 @@
 include ActionView::Helpers::TextHelper
 class Link < ActiveRecord::Base
-  
 	belongs_to :user
 	validates_presence_of :url, :user_id, :name
 	validates_format_of :url, :with => /^(http|https):\/\/[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?.*$/ix
@@ -10,7 +9,9 @@ class Link < ActiveRecord::Base
   has_many :read_receipts
 	has_many :readers, :through => :read_receipts, :source => :reader
   has_many :comments
-	
+  has_and_belongs_to_many :tags
+  
+  attr_accessor :tags_to_add
 	
 	# If the url doesn't have http:// or https://, add it
 	def fix_url

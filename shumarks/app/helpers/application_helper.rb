@@ -20,7 +20,7 @@ module ApplicationHelper
   end
   
   def js_encode_quotestrings(str, quote_type)
-    return str.gsub(quote_type, "\\" + quote_type).gsub('\\', '\\\\')
+    return str.gsub(quote_type, "\\" + quote_type).gsub('\\', '\\\\').gsub('\r', '\\r').gsub('\n', '\\n')
   end
    
   def distance_of_time_in_words(minutes)
@@ -59,10 +59,10 @@ module ApplicationHelper
   end
   
   def errors_for(object, attribute)
-    if errors = object.errors.on(attribute)
+    if object and errors = object.errors.on(attribute)
       errors = [errors] unless errors.is_a?(Array)
-      return '<ul class="form-input-error-list">' + errors.map {
-        |e| '<li class="form-input-error">' + attribute.to_s + ' '+ e + '</li>'
+      return '<ul class="input-field-error-list">' + errors.map {
+        |e| '<li class="input-field-error">' + attribute.to_s + ' '+ e + '</li>'
       }.join + '</ul>'
     end
   end

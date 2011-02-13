@@ -1,0 +1,37 @@
+<section id="shumarks">
+	<h2>Shumarking is easy.</h2>
+	<p>Drag the <span id="shumarklet_url2"><%= link_to "Shumark it!", shumarklet_url %></span> link into your bookmarks bar to save it.</p>
+	<script type="text/javascript">
+		jQuery("#shumarklet_url2").tooltip({
+			delay: 0,
+			bodyHandler: function() {
+				return 'Drag this to your bookmarks bar!';
+			},
+			showURL: false
+		});
+	</script>
+	<div align="center" style="margin: 20px"><img src="<%= image_path('bookmark-me.jpg') %>" /></div>
+	<p>When you're browsing a page you want to Shumark, simply click the button on your bookmarks bar.</p>
+	<br />
+	<p>Give it a test try here&mdash;Shumark this page!  Don't worry, it won't show up in your feed.</p>
+	<br />
+	<div id="example-done" style="display:none">
+		<p><h4>See?  Shumarks makes it easy to share web content with your friends.</h4></p>
+		<br />
+		<div align="center"><h2><%= link_to 'Continue', tutorial_step2_path %></h2></div>
+	</div>
+	<script type="text/javascript">
+	var interval_id = setInterval("checkExample()", 3000);
+	function checkExample()
+	{
+		jQuery.getJSON('<%= tutorial_example_path %>', function(data) {
+			if (data)
+			{
+				jQuery('#example-done').fadeIn('slow');
+				clearInterval(interval_id);
+			}
+		});
+	}
+	</script>
+	
+</section>

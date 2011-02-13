@@ -56,13 +56,15 @@ ActionController::Routing::Routes.draw do |map|
   map.comment_create '/comments/create', :controller => 'comments', :action => 'create', :conditions => {:method => :post}
   map.comment_show   '/comments/:link_id/', :controller => 'comments', :action => 'show', :conditions => {:method => :get}
   
-  # Twitter API urls
-  map.save 'twitter-auth', :controller => 'users', :action => 'twitter_create'
-  map.save 'twitter-callback', :controller => 'users', :action => 'twitter_callback'
+  # Tutorial
+  map.tutorial_start '/tutorial/start', :controller => 'tutorial', :action => 'start'
+  map.tutorial_step1 '/tutorial/step1', :controller => 'tutorial', :action => 'step1'
+  map.tutorial_step2 '/tutorial/step2', :controller => 'tutorial', :action => 'step2'
+  map.tutorial_completed '/tutorial/completed', :controller => 'tutorial', :action => 'completed'
+  map.tutorial_example '/tutorial/example', :controller => 'tutorial', :action => 'example'
   
-  # Facebook API urls
-  map.save 'facebook-auth', :controller => 'users', :action => 'facebook_create'
-  map.save 'facebook-callback', :controller => 'users', :action => 'facebook_callback'
+  # Discover
+  map.discover_index '/discover', :controller => 'discover', :action => 'index'
   
   # User pages
   map.edit_user '/account', :controller => 'users', :action => 'edit'
@@ -70,6 +72,7 @@ ActionController::Routing::Routes.draw do |map|
   map.remote_list '/remote-list/', :controller => 'users', :action => 'remote_get_list'
   map.remote_create '/remote-create/', :controller => 'bookmarklet', :action => 'old_bookmarklet_landing'
   map.remote_result '/remote-result/', :controller => 'users', :action => 'remote_result'
+  map.friend_finder '/friend-finder', :controller => 'users', :action => 'friend_finder'
   
   map.create_user_action '/user/create',
     :controller => 'users', 

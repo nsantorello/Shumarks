@@ -1,10 +1,10 @@
 <section id="shumarks">
 	<h2><%= @header_text %></h2>
 	<% if @links.length == 0 then %>
-		<div>Nothing here... Find your friends!</div>
+		<div>Nothing here... <%= link_to 'find your friends', friend_finder_path %>!</div>
 	<% else %>
 		<%= render '/links/index', :links => @links %>
 		<%= render '/layouts/pagination', :redir_path => user_home_path %>
-	<% end %>	
+	<% end %>
 </section>
 
