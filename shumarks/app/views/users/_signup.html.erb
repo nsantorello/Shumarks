@@ -1,58 +1,68 @@
-<% form_for :user, :url => create_user_action_path do |f| -%>
-  <%= f.error_messages %>
-	<div id="login-info" >
-		<div class="form-label">
-			<label for="login">Login</label>
-		</div>
-		<div class="form-input">
-			<%= f.text_field :login %>
-		</div>
-		<div class="form-label">
-			<label for="email">Email</label>
-		</div>
-		<div class="form-input">
-			<%= f.text_field :email %>
-		</div>
-	
-		<div class="form-label">
-			<label for="password">Password</label>
-		</div>
-		<div class="form-input">
-			<%= f.password_field :password %>
-		</div>
-	
-		<div class="form-label">
-			<label for="password_confirmation">Confirm Password</label>
-		</div>
-		<div class="form-input">
-			<%= f.password_field :password_confirmation %>
-		</div>
-	</div>
-	
-	<div id="profile-info">
-		<div class="form-label">
-			<label for="first_name">First Name</label>
-		</div>
-		<div class="form-input">
-			<%= f.text_field :first_name %>
-		</div>
-	
-		<div class="form-label">
-			<label for="password_confirmation">Last Name</label>
-		</div>
-		<div class="form-input">
-			<%= f.text_field :last_name %>
-		</div>
-	
-		<div class="form-label">
-			<label for="password_confirmation">About Me</label>
-		</div>
-		<div class="form-input">
-			<%= f.text_area :bio %>
-		</div>
-	</div>
-		
-	<div class="form-submit clear-both">
-		<%= submit_tag 'Sign up', :class => "small-button" %>
-	</div>
-<% end -%>
+<section id="signup" class="style-three">
+  <% form_for :user, :url => create_user_action_path do |f| -%>
+  	<div id="login-info" >
+  		<div class="input-label">
+  			<label for="login">Login</label>
+  		</div>
+  		<div class="input-field">
+  			<%= f.text_field :login, :class => "input-field" %>
+        <%= errors_for(@user, :login) %>
+  		</div>
+      <div class="clear-both"></div>
+  		<div class="input-label">
+  			<label for="email">Email</label>
+  		</div>
+  		<div class="input-field">
+  			<%= f.text_field :email, :class => "input-field" %>
+        <%= errors_for(@user, :email) %>
+  		</div>
+  	  <div class="clear-both"></div>
+  		<div class="input-label">
+  			<label for="password">Password</label>
+  		</div>
+  		<div class="input-field">
+  			<%= f.password_field :password, :class => "input-field" %>
+        <%= errors_for(@user, :passward) %>
+  		</div>
+  	  <div class="clear-both"></div>
+  		<div class="input-label">
+  			<label for="password_confirmation">Confirm Password</label>
+  		</div>
+  		<div class="input-field">
+  			<%= f.password_field :password_confirmation, :class => "input-field" %>
+        <%= errors_for(@user, :password_confirmation) %>
+  		</div>
+  	</div>
+  	
+  	<div id="profile-info">
+  	  <div class="clear-both"></div>
+  		<div class="input-label">
+  			<label for="first_name">First Name</label>
+  		</div>
+  		<div class="input-field">
+  			<%= f.text_field :first_name, :class => "input-field"  %>
+        <%= errors_for(@user, :first_name) %>
+  		</div>
+  	  <div class="clear-both"></div>
+  		<div class="input-label">
+  			<label for="password_confirmation">Last Name</label>
+  		</div>
+  		<div class="input-field">
+  			<%= f.text_field :last_name, :class => "input-field"  %>
+        <%= errors_for(@user, :last_name) %>
+  		</div>
+  	  <div class="clear-both"></div>
+  		<div class="input-label">
+  			<label for="password_confirmation">About Me</label>
+  		</div>
+  		<div class="input-field">
+  			<%= f.text_area :bio, :class => "input-field" %>
+        <%= errors_for(@user, :bio) %>
+  		</div>
+  	</div>
+  	<div class="clear-both"></div>
+  	<div class="form-submit">
+  		<%= submit_tag 'Sign up', :class => "small-button" %>
+  	</div>
+  <% end -%>
+</section>
