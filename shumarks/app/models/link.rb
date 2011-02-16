@@ -95,6 +95,16 @@ class Link < ActiveRecord::Base
     }.merge(options))
   end
   
+  def self.most_read_last_week(options = {})
+    Link.all({
+      :joins => 'LEFT JOIN read_receipts ON links.id = read_receipts.link_id', 
+      :group => :id, 
+      :order => 'COUNT(*) DESC',
+      :conditions => ['links.created_at > ?', 7.day.ago],
+      :limit => 10
+    }.merge(options))
+  end
+  
   def self.most_recent(options = {})
     Link.all({
       :order => 'created_at DESC', 
