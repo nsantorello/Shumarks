@@ -8,7 +8,16 @@
 	</div>
 	<div class="right">
 		<% if logged_in? then -%>
-			Your Shumarker: <%= link_to "Shumark it!", shumarklet_url %>
+			Your Shumarker: <span id="shumarklet_url"><%= link_to "Shumark it!", shumarklet_url %></span>
+			<script type="text/javascript">
+				jQuery("#shumarklet_url").tooltip({
+					delay: 0,
+					bodyHandler: function() {
+						return 'Drag this to your bookmarks bar!<br /><div align="center" style="margin: 5px"><img src="<%= image_path('bookmark-me.jpg') %></div>" />';
+					},
+					showURL: false
+				});
+			</script>
 		<% end -%>
 	</div>
 	<div class="clear-both"></div>

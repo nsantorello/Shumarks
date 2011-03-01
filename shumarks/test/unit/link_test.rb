@@ -141,6 +141,36 @@ class LinkTest < ActiveSupport::TestCase
     assert_equal most_read[4], links(:yahoo)
   end
   
+  test "most read links last week" do
+    links(:google).readers << users(:bob)
+    links(:google).readers << users(:charlie)
+    links(:google).readers << users(:dave)
+    links(:google).readers << users(:ellen)
+    links(:google).readers << users(:greg) 
+    
+    links(:microsoft).readers << users(:charlie) 
+    links(:microsoft).readers << users(:ellen) 
+    links(:microsoft).readers << users(:greg) 
+    links(:microsoft).readers << users(:isabelle) 
+    
+    links(:oracle).readers << users(:dave) 
+    links(:oracle).readers << users(:fred) 
+    links(:oracle).readers << users(:harry) 
+    
+    links(:apple).readers << users(:isabelle) 
+    links(:apple).readers << users(:jack) 
+
+    links(:yahoo).readers << users(:charlie)
+    
+    most_read = Link.most_read_last_week
+    
+    assert_equal 3, most_read.length
+    
+    assert_equal most_read[0], links(:oracle)
+    assert_equal most_read[1], links(:apple)
+    assert_equal most_read[2], links(:yahoo)
+  end
+  
   test "most recent links" do
     newly_created = create_link
     most_recent = Link.most_recent

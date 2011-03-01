@@ -1,6 +1,5 @@
 include ActionView::Helpers::TextHelper
 class Link < ActiveRecord::Base
-  
 	belongs_to :user
 	validates_presence_of :url, :user_id, :name
 	validates_format_of :url, :with => /^(http|https):\/\/[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?.*$/ix
@@ -10,7 +9,9 @@ class Link < ActiveRecord::Base
   has_many :read_receipts
 	has_many :readers, :through => :read_receipts, :source => :reader
   has_many :comments
-	
+  has_and_belongs_to_many :tags
+  
+  attr_accessor :tags_to_add
 	
 	# If the url doesn't have http:// or https://, add it
 	def fix_url
@@ -90,6 +91,16 @@ class Link < ActiveRecord::Base
       :joins => 'LEFT JOIN read_receipts ON links.id = read_receipts.link_id', 
       :group => :id, 
       :order => 'COUNT(*) DESC',
+      :limit => 10
+    }.merge(options))
+  end
+  
+  def self.most_read_last_week(options = {})
+    Link.all({
+      :joins => 'LEFT JOIN read_receipts ON links.id = read_receipts.link_id', 
+      :group => :id, 
+      :order => 'COUNT(*) DESC',
+      :conditions => ['links.created_at > ?', 7.day.ago],
       :limit => 10
     }.merge(options))
   end

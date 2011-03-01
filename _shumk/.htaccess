@@ -1,0 +1,3 @@
+RewriteEngine on
+
+RewriteRule ^([0-9]+) http://shumark.it/v/$1

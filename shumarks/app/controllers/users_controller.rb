@@ -1,4 +1,3 @@
-require 'oauth/oauth/consumer'
 require 'net/http'
 class UsersController < ApplicationController
   before_filter :login_required, :set_user, :only => [:edit, :update, :follow, :unfollow, :follow_list, :follower_list, :home]
@@ -25,7 +24,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Thanks for signing up!"
       
       cookies[:user_id] = {:value => @user.id}
-      redirect_to user_home_path
+      redirect_to tutorial_start_path
     else
       @header_text = 'Create an Account'
       render :partial => 'users/signup', :layout => 'application'
@@ -44,6 +43,10 @@ class UsersController < ApplicationController
     @header_text = "Create an Account"
 
     render :partial => 'signup', :layout => 'application'
+  end
+  
+  def friend_finder
+    
   end
   
   # Show user queue
@@ -203,117 +206,6 @@ class UsersController < ApplicationController
     @user = current_user
     if @user
       @links = @user.links.most_recent(:limit => @page_size, :offset => @page_size * @page_index)
-    end
-  end
-  
-  def self.twitter_consumer
-    OAuth::Consumer.new("Wroi8LmryIx1y526fDiDQ", "qRwhATxBcKNedK0pEGm0DeTGrc6kTiHZ9xWEb70Miw",{ :site=>"http://twitter.com" })
-  end
-  
-  public
-  def twitter_create
-    # Get the user by id
-    @user = current_user
-    
-    if logged_in?
-      @request_token = UsersController.twitter_consumer.get_request_token({:oauth_callback => "http://shumark.it/twitter-callback"})
-      session[:request_token] = @request_token.token
-      session[:request_token_secret] = @request_token.secret
-      session[:twitter_request_user] = @user.login
-      # Send to twitter.com to authorize
-      redirect_to @request_token.authorize_url
-      return
-    else
-      flash[:notice] = 'You must be logged in to authenticate with Twitter.'
-      redirect_to :action => :home
-      return
-    end
-  end
-  
-  def twitter_callback
-    unless session[:request_token] && session[:request_token_secret] && session[:twitter_request_user]
-      flash[:notice] = 'No authentication information was found in the session. Please try again.' 
-      redirect_to :action => :home
-      return
-    end
-
-    unless params[:oauth_token].blank? || session[:request_token] ==  params[:oauth_token]
-      flash[:notice] = 'Authentication information does not match session information. Please try again.'
-      redirect_to :action => :home
-      return
-    end
-
-    @request_token = OAuth::RequestToken.new(UsersController.twitter_consumer, session[:request_token], session[:request_token_secret])
-
-    oauth_verifier = params["oauth_verifier"]
-    @access_token = @request_token.get_access_token(:oauth_verifier => oauth_verifier)
-    
-    @twitteruser = TwitterAuth.new({ :screen_name => session[:twitter_request_user],:token => @access_token.token,:secret => @access_token.secret })
-    @twitteruser.save!
-    
-    # The request token has been invalidated
-    # so we nullify it in the session.
-    session[:request_token] = nil
-    session[:request_token_secret] = nil
-    session[:twitter_request_user] = nil
-    
-    # Redirect to the show page
-    flash[:notice] = 'Twitter has been authenticated!'
-    redirect_to :action => :home
-  end
-  
-  protected 
-  def twitter_post
-    @user = login_from_salt
-    # Make sure status isn't blank and less than 140 chars
-    status_update = params[:status]
-    # Make sure user has authenticated Twitter.  If they have, retrieve it and enter it below.
-    access_token = OAuth::AccessToken.new(UsersController.twitter_consumer, 'access token', 'access secret')
-    access_token.post('/statuses/update.json', { :status => status_update_text })
-  end
-  
-  protected
-  def facebook_clientid
-    "161595543858409"
-  end
-  
-  def facebook_clientsecret
-    "d24272f2121e17b1315b9e87733036ed"
-  end
-  
-  def facebook_redirecturi
-    "http://shumark.it/facebook-callback"
-  end
-  
-  def facebook_url
-    "https://graph.facebook.com"
-  end
-  
-  def facebook_oauthurl
-    "/oauth/authorize"
-  end
-  
-  def self.facebook_consumer
-    OAuth::Consumer.new(facebook_clientid, facebook_clientsecret, {:site => facebook_url})
-  end
-  
-  public
-  def facebook_create
-    # Get the user by id
-    @user = current_user
-    
-    if logged_in?
-      @request_token = UsersController.twitter_consumer.get_request_token({:oauth_callback => facebook_redirecturi})
-      session[:request_token] = @request_token.token
-      session[:request_token_secret] = @request_token.secret
-      session[:facebook_request_user] = @user.login
-      # Send to twitter.com to authorize
-      redirect_to facebook_url + facebook_oauthurl + "?client_id=" + facebook_clientid + "&redirect_uri=" + facebook_redirecturi + "&scope=publish_stream"
-      return
-    else
-      flash[:notice] = 'You must be logged in to authenticate with Facebook.'
-      redirect_to :action => :home
-      return
     end
   end
 end
