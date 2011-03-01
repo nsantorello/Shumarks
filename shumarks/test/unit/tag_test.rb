@@ -64,7 +64,6 @@ class TagTest < ActiveSupport::TestCase
   end
   
   
-  
 protected
   def create_tag(options={})
     tag = Tag.new({
