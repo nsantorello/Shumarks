@@ -63,7 +63,6 @@ class TagTest < ActiveSupport::TestCase
     assert tags.empty?
   end
   
-  
 protected
   def create_tag(options={})
     tag = Tag.new({
