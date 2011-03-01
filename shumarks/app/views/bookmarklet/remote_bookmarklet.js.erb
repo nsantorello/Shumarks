@@ -44,7 +44,7 @@ include_css('/stylesheets/remote-bookmarklet-overlay.css', 'shumarks-overlay-css
 
 jQuery('body').append(jQuery('<div>', {className: 'shumarks', id: 'shumarks-bookmarklet'}));
 jQuery('#shumarks-bookmarklet').append(jQuery('<iframe>', {src: shumarks_url, className: 'shumarks', scrolling: 'no'}));
-jQuery('#shumarks-bookmarklet').append(jQuery('<img>', {src: server + '/images/close.png', id: 'shumarks-close'}).attr('frameBorder', '0'));
+jQuery('#shumarks-bookmarklet').append(jQuery('<img>', {src: server + '/images/close-light-blue.png', id: 'shumarks-close'}).attr('frameBorder', '0'));
 jQuery('#shumarks-close').unbind().bind('click', clean_up);
 
 var scrollingDiv = jQuery('#shumarks-bookmarklet');

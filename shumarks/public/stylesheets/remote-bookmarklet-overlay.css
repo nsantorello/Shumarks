@@ -8,12 +8,12 @@ div.shumarks {
 	z-index:10000;
 
 	/* styling */
-	background-color:#D4CCB0;
+	background-color:#ccc;
 
 	width:475px;	
 	min-height:200px;
 	height: 500px;
-	border:1px solid #D4CCB0;
+	border:1px solid #ccc;
 	padding:5px;
 
 	/* CSS3 styling for latest browsers */
