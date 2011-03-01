@@ -170,14 +170,17 @@ ul.input-field-error-list {
 li.input-field-error {
 }
 span.tag {
-  
   margin: 4px 2px 2px 2px;
 }
 span.tag a {
+  -moz-border-radius-topleft: 6px;  -webkit-border-top-left-radius: 6px; border-top-left-radius:6px; 
+	-moz-border-radius-topright: 6px; -webkit-border-top-right-radius: 6px; border-top-right-radius:6px;
+	-moz-border-radius-bottomleft: 6px;  -webkit-border-bottom-left-radius: 6px; border-bottom-left-radius:6px; 
+	-moz-border-radius-bottomright: 6px; -webkit-border-bottom-right-radius: 6px; border-bottom-right-radius:6px;
   background-color: #fa9727;
   font-weight: normal;
   color: #fff;
-  padding:2px 4px;
+  padding:2px 6px;
 }
 span.tag a:hover {
   background-color: #fca838;
