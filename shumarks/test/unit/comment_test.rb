@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
+  
   test "create should require use_id" do
     assert_no_difference "Comment.count" do
       create_comment(:user_id => nil)
@@ -30,6 +31,7 @@ class CommentTest < ActiveSupport::TestCase
       create_comment();
     end
   end
+
   
 protected
   def create_comment(options = {})

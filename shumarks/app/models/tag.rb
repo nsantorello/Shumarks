@@ -1,9 +1,10 @@
 class Tag < ActiveRecord::Base
   validates_presence_of :name
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :case_sensitive => false
   validates_length_of :name, :maximum => 20
   
   has_and_belongs_to_many :links
+  has_and_belongs_to_many :channels
   
   before_validation :trim_name
   

@@ -1,0 +1,13 @@
+<div id="signup-or-login">
+  <h1>Please login or sign up!</h1>
+  <div class="login left">
+    <%= render 'users/login' %>
+  </div>
+  <div id="signup-btn" class="right">
+    <%= link_to image_tag('/images/btn-join-now.png'), signup_path %>
+  </div>
+  <div id="big-or" class="right">
+    - OR -
+  </div>
+  <div class="clear-both"/>
+</div>

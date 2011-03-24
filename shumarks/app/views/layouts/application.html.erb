@@ -43,7 +43,7 @@
   	<% else %>
 	  	<%= render 'layouts/navigation'%>
 	  <% end %>
-		<div id="main">
+		<div id="main" class="<%= @hide_sidebar ? 'main-wide' : 'main' %>">
 			<% if flash[:notice] then %>
 				<div class="notification ui-state-highlight ui-corner-all">
 					<span class="notification-icon ui-icon ui-icon-info"></span>
@@ -61,21 +61,20 @@
 		</div>
 		
 		<% unless @hide_sidebar then %>
-		<aside>
-			<% if @sidebars.nil? then %>
-				<%= render_sidebar(SidebarHelper::MOST_VIEWED) %>
-				<%= render_sidebar(SidebarHelper::TOP_TOPICS) %>
-			<% else %>
-				<% for bar_part in @sidebars %>
-					<%= render_sidebar(bar_part) %>
-				<% end %>
-			<% end %>
-		</aside>
+  		<aside>
+  			<% if @sidebars.nil? then %>
+  				<%= render_sidebar(SidebarHelper::MOST_VIEWED) %>
+  				<%= render_sidebar(SidebarHelper::TOP_TOPICS) %>
+  			<% else %>
+  				<% for bar_part in @sidebars %>
+  					<%= render_sidebar(bar_part) %>
+  				<% end %>
+  			<% end %>
+  		</aside>
 		<% end %>
 		
 		<div class="clear-both"></div>
 		<footer><%= link_to 'About', about_path %> &copy;2010 Shumarks, LLC.</footer>
-	</div>
 	</div>
   </body>
 </html>

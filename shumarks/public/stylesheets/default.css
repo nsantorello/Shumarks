@@ -259,8 +259,13 @@ input[type='submit'].small-button:hover {
 	margin: auto; 
 	position: relative;
 }
-#main {
+div.main {
 	width: 628px;
+	margin-right: 12px;
+	float: left;
+}
+div.main-wide {
+	width: 940px;
 	margin-right: 12px;
 	float: left;
 }
@@ -283,18 +288,18 @@ header #login {
 	float: right;
 	margin-top: 5px;
 }
-header #login #fields {
+header #login #fields, .login #fields {
 	float: left; 
 	margin-right: 10px;
 }
-header #login #fields input {
+header #login #fields input, .login #fields input {
 	width: 169px; 
 	height: 16px;
 	padding: 3px;
 	margin-bottom: 5px;
 	border: 1px solid #ccc;
 }
-header #login .go {
+header #login .go, .login .go {
 	margin-top: 15px;
 }
 header .search {
@@ -369,7 +374,23 @@ nav .right a {
 	padding-right: 28px;
 }
 #join-now img {
-	vertical-align: middle;}
+	vertical-align: middle;
+}
+
+#signup-or-login h1 {
+  padding-bottom:20px;
+}
+#signup-or-login {
+  width: 600px;
+  padding-left: 160px;
+}
+#signup-or-login #big-or {
+  font-family: 'arvo', serif;
+  font-size: 16px;
+  vertical-align:middle;
+  color: #40b1db;
+  padding: 23px 90px 0px 0px;
+}
 
 
 /*  profile */

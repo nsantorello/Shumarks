@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   before_validation :generate_salt
   
   has_many :links
+  has_many :channels
   
   has_many :follows_as_follower,  :foreign_key => 'follower_id',    :class_name => 'Follow'
   has_many :follows_as_followee,  :foreign_key => 'followee_id',    :class_name => 'Follow'

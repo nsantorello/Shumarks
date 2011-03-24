@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+technology:
   user_id: 1
-  name: MyString
+  name: Technology
 
-two:
-  user_id: 1
-  name: MyString
+funny:
+  user_id: 2
+  name: Funny

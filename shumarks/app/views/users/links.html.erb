@@ -24,6 +24,9 @@
 <ul class="tabs">
 	<li><a href="#tab1">Untagged Shumarks</a></li>
 </ul>
+<ul class="tabs">
+  <li><a href="#add-channel-tab">Add a Channel</a></li>
+</ul>
 <div class="tab-container">
 	<div id="tab1" class="tab-content">
 		<% if @links.length == 0 %>
@@ -37,6 +40,10 @@
 			<%= render '/layouts/pagination', :redir_path => user_path(@user.login) %>
 		<% end %>
 	</div>
+
+  <div id="add-channel-tab" class="tab-content">
+    <%= render '/channels/create' %>
+  </div>
 	<!-- In the future, add more tabs to the ul.tabs element above, and their respective content goes down here (remember to change the href link!)
 	<div id="tab2" class="tab-content">
 		tab 2 content				 </div>

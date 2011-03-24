@@ -261,6 +261,11 @@ class UserTest < ActiveSupport::TestCase
     assert_not_nil users(:alice).remember_token_expires_at
     assert users(:alice).remember_token_expires_at.between?(before, after)
   end
+  
+  test "should be able to add channel" do
+    users(:alice).channels << channels(:technology)
+    assert_equal(channels(:technology), users(:alice).channels[0])
+  end
 
 
 protected

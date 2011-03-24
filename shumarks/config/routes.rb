@@ -63,6 +63,9 @@ ActionController::Routing::Routes.draw do |map|
   map.tutorial_completed '/tutorial/completed', :controller => 'tutorial', :action => 'completed'
   map.tutorial_example '/tutorial/example', :controller => 'tutorial', :action => 'example'
   
+  # Channels
+  map.create_channel_action '/channels/create', :controller => 'channels', :action => 'create'
+  
   # Discover
   map.discover_index '/discover', :controller => 'discover', :action => 'index'
   

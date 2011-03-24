@@ -25,9 +25,9 @@ class TagTest < ActiveSupport::TestCase
     assert_equal("abcd", tag.name)
   end
   
-  test "names should be unique" do
+  test "names should be unique ignore case" do
     assert_no_difference "Tag.count" do
-      create_tag(:name => tags(:cs).name)
+      create_tag(:name => 'ComPuteR SciEncE')
     end
   end
   

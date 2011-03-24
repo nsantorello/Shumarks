@@ -3,47 +3,47 @@
 	<% form_for :user, :url => edit_user_action_path do |f| %>
   <%= f.error_messages %>
 	<div id="login-info" >
-		<div class="form-label">
+		<div class="input-label">
 			<label for="email">Email</label>
 		</div>
-		<div class="form-input">
+		<div class="input-field">
 			<%= f.text_field :email, :class => 'top-corners bottom-corners' %>
 		</div>
 	
-		<div class="form-label">
+		<div class="input-label">
 			<label for="password">Password</label>
 		</div>
-		<div class="form-input">
+		<div class="input-field">
 			<%= f.password_field :password, :class => 'top-corners bottom-corners' %>
 		</div>
 	
-		<div class="form-label">
+		<div class="input-label">
 			<label for="password_confirmation">Confirm Password</label>
 		</div>
-		<div class="form-input">
+		<div class="input-field">
 			<%= f.password_field :password_confirmation, :class => 'top-corners bottom-corners' %>
 		</div>
 	</div>
 	
 	<div id="profile-info">
-		<div class="form-label">
+		<div class="input-label">
 			<label for="first_name">First Name</label>
 		</div>
-		<div class="form-input">
+		<div class="input-field">
 			<%= f.text_field :first_name, :class => 'top-corners bottom-corners' %>
 		</div>
 	
-		<div class="form-label">
+		<div class="input-label">
 			<label for="password_confirmation">Last Name</label>
 		</div>
-		<div class="form-input">
+		<div class="input-field">
 			<%= f.text_field :last_name, :class => 'top-corners bottom-corners' %>
 		</div>
 	
-		<div class="form-label">
+		<div class="input-label">
 			<label for="password_confirmation">About Me</label>
 		</div>
-		<div class="form-input">
+		<div class="input-field">
 			<%= f.text_area :bio, :class => 'top-corners bottom-corners' %>
 		</div>
 	</div>
